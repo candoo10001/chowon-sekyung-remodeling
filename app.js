@@ -1,6 +1,6 @@
 /**
- * THE SHARP PARK AVENUE 138 // GALAXY LUXURY WHITE
- * Architectural Application Engine with Celestial Stardust Canvas
+ * THE SHARP PARK AVENUE 138 // MODERN LUXURY WHITE
+ * Architectural Application Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,108 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Init Components
-  initGalaxyCanvas();
   initMobileMenu();
   initHeaderScroll();
   initComparisonSlider();
   initFloorPlans();
   initCalculator();
-
-  // Astra Motion Engine
-  initAstraCore();
-  initAstra3DTilt();
-  initAstraMagneticButtons();
 });
-
-/* ==========================================================================
-   0. GALAXY STARDUST INTERACTIVE CANVAS
-   ========================================================================== */
-function initGalaxyCanvas() {
-  const canvas = document.getElementById('galaxy-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
-
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-
-  // Stardust Particle Model
-  const particles = [];
-  const particleCount = Math.min(Math.floor(window.innerWidth / 18), 75);
-  const colors = [
-    'rgba(168, 85, 247, ', // Cosmic Violet
-    'rgba(56, 189, 248, ',  // Starlight Cyan
-    'rgba(212, 175, 55, ',  // Celestial Gold
-    'rgba(244, 63, 94, '    // Rose Quartz
-  ];
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      radius: Math.random() * 2 + 0.8,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: -Math.random() * 0.3 - 0.1,
-      alpha: Math.random() * 0.5 + 0.2,
-      pulseSpeed: Math.random() * 0.02 + 0.01,
-      pulseVal: Math.random() * Math.PI
-    });
-  }
-
-  let mouseX = -1000;
-  let mouseY = -1000;
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-
-      p.x += p.vx;
-      p.y += p.vy;
-      p.pulseVal += p.pulseSpeed;
-
-      // Mouse gentle repulsion
-      const dx = p.x - mouseX;
-      const dy = p.y - mouseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
-        p.x += (dx / dist) * 1.2;
-        p.y += (dy / dist) * 1.2;
-      }
-
-      // Wrap around screen
-      if (p.x < 0) p.x = width;
-      if (p.x > width) p.x = 0;
-      if (p.y < 0) p.y = height;
-      if (p.y > height) p.y = 0;
-
-      // Twinkling effect
-      const currentAlpha = p.alpha * (0.6 + 0.4 * Math.sin(p.pulseVal));
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + currentAlpha + ')';
-      ctx.shadowBlur = p.radius * 3;
-      ctx.shadowColor = p.color + '0.6)';
-      ctx.fill();
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  requestAnimationFrame(animate);
-}
 
 /* ==========================================================================
    1. MOBILE MENU & HEADER SCROLL
@@ -150,7 +54,7 @@ function initHeaderScroll() {
 }
 
 /* ==========================================================================
-   2. BEFORE & AFTER GALAXY LUXURY COMPARISON SLIDER
+   2. BEFORE & AFTER MODERN LUXURY COMPARISON SLIDER
    ========================================================================== */
 function initComparisonSlider() {
   const container = document.getElementById('comparison-container');
@@ -259,8 +163,8 @@ const floorPlanData = {
     svg: `
       <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="380" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-        <rect x="22" y="22" width="376" height="35" fill="rgba(124, 58, 237, 0.08)" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="210" y="44" class="blueprint-text" fill="#7c3aed">발코니 서비스 면적 확장 구간 (+21.5㎡ 실사용 공간 확보)</text>
+        <rect x="22" y="22" width="376" height="35" fill="rgba(2, 132, 199, 0.08)" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <text x="210" y="44" class="blueprint-text" fill="#0284c7">발코니 서비스 면적 확장 구간 (+21.5㎡ 실사용 공간 확보)</text>
         
         <rect x="25" y="60" width="100" height="150" class="blueprint-room" />
         <text x="75" y="125" class="blueprint-text">침실 2 (자녀방)</text>
@@ -274,8 +178,8 @@ const floorPlanData = {
         <text x="342" y="125" class="blueprint-text">침실 1 (안방)</text>
         <text x="342" y="142" class="blueprint-area">MASTER BEDROOM</text>
         
-        <rect x="290" y="60" width="105" height="45" fill="#faf5ff" stroke="#a855f7" stroke-width="1"/>
-        <text x="342" y="85" class="blueprint-text" fill="#7c3aed">드레스룸 / 부부욕실</text>
+        <rect x="290" y="60" width="105" height="45" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+        <text x="342" y="85" class="blueprint-text" fill="#0f172a">드레스룸 / 부부욕실</text>
 
         <rect x="25" y="215" width="100" height="60" class="blueprint-room" />
         <text x="75" y="245" class="blueprint-text">침실 3 (서재/다목적)</text>
@@ -311,8 +215,8 @@ const floorPlanData = {
     svg: `
       <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="380" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-        <rect x="22" y="22" width="376" height="35" fill="rgba(124, 58, 237, 0.08)" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="210" y="44" class="blueprint-text" fill="#7c3aed">와이드 발코니 확장 구간 (+21.5㎡)</text>
+        <rect x="22" y="22" width="376" height="35" fill="rgba(2, 132, 199, 0.08)" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <text x="210" y="44" class="blueprint-text" fill="#0284c7">와이드 발코니 확장 구간 (+21.5㎡)</text>
 
         <rect x="25" y="60" width="220" height="150" class="blueprint-room" />
         <text x="135" y="125" class="blueprint-text">4.2m 와이드 파노라마 거실</text>
@@ -322,8 +226,8 @@ const floorPlanData = {
         <text x="322" y="125" class="blueprint-text">침실 1 (안방)</text>
         <text x="322" y="142" class="blueprint-area">MASTER BEDROOM</text>
         
-        <rect x="250" y="60" width="145" height="45" fill="#faf5ff" stroke="#a855f7" stroke-width="1"/>
-        <text x="322" y="85" class="blueprint-text" fill="#7c3aed">초대형 드레스룸 & 부부욕실</text>
+        <rect x="250" y="60" width="145" height="45" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+        <text x="322" y="85" class="blueprint-text" fill="#0f172a">초대형 드레스룸 & 부부욕실</text>
 
         <rect x="25" y="215" width="125" height="60" class="blueprint-room" />
         <text x="87" y="245" class="blueprint-text">대형 아일랜드 다이닝</text>
@@ -427,7 +331,7 @@ window.switchPlan = function(type) {
   if (featuresList) {
     featuresList.innerHTML = data.features.map(f => `
       <li class="flex items-start gap-2.5 text-slate-600 text-xs sm:text-sm font-medium">
-        <i data-lucide="sparkle" class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0"></i>
+        <i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i>
         <span>${f}</span>
       </li>
     `).join('');
@@ -436,7 +340,7 @@ window.switchPlan = function(type) {
 };
 
 /* ==========================================================================
-   4. INTERACTIVE MAP FILTER
+   4. INTERACTIVE MAP & LOCATION FILTER (FIXED LAYOUT)
    ========================================================================== */
 window.filterMap = function(category, e) {
   const filters = document.querySelectorAll('.map-filter');
@@ -455,7 +359,7 @@ window.filterMap = function(category, e) {
   const points = document.querySelectorAll('.map-point');
   points.forEach(point => {
     if (category === 'all' || point.classList.contains(category)) {
-      point.style.display = 'flex';
+      point.style.display = 'block'; // FIXED: was flex, preserving natural block card flow
     } else {
       point.style.display = 'none';
     }
@@ -566,113 +470,3 @@ window.addEventListener('keydown', (e) => {
     closeLightbox();
   }
 });
-
-
-/* ==========================================================================
-   7. ASTRA INTERACTIVE MOTION ENGINE
-   ========================================================================== */
-
-function initAstraCore() {
-  const astraCore = document.getElementById('astra-core-orb');
-  const astraStatus = document.getElementById('astra-status-text');
-  const waveBars = document.querySelectorAll('.astra-wave-bar');
-  if (!astraCore) return;
-
-  const statusMessages = [
-    'ASTRA CORE: 775세대 하이엔드 랜드마크 분석 완료',
-    'ASTRA CORE: 지하 4층 1.31대 자주식 주차 최적화',
-    'ASTRA CORE: 안양시 건축심의 조건부 의결 통과 완료',
-    'ASTRA CORE: 전세대 100% 신축 59㎡ 평면 매핑 완료',
-    'ASTRA CORE: 평촌 중앙공원 그린 조망권 100% 확보'
-  ];
-  let msgIdx = 0;
-
-  // Interactivity on Core Click / Hover
-  astraCore.addEventListener('click', () => {
-    msgIdx = (msgIdx + 1) % statusMessages.length;
-    if (astraStatus) {
-      astraStatus.style.opacity = '0';
-      setTimeout(() => {
-        astraStatus.textContent = statusMessages[msgIdx];
-        astraStatus.style.opacity = '1';
-      }, 150);
-    }
-
-    // Dynamic wave spike on click
-    waveBars.forEach((bar) => {
-      bar.style.transform = `scaleY(${Math.random() * 1.5 + 1.2})`;
-      setTimeout(() => {
-        bar.style.transform = '';
-      }, 400);
-    });
-  });
-
-  // Dynamic subtle wave fluctuation
-  setInterval(() => {
-    waveBars.forEach((bar) => {
-      const scale = 0.5 + Math.random() * 0.9;
-      bar.style.transform = `scaleY(${scale.toFixed(2)})`;
-    });
-  }, 350);
-}
-
-function initAstra3DTilt() {
-  const tiltCards = document.querySelectorAll('.astra-tilt');
-  if (!tiltCards.length) return;
-
-  tiltCards.forEach((card) => {
-    if (!card.querySelector('.astra-glaze')) {
-      const glaze = document.createElement('div');
-      glaze.className = 'astra-glaze';
-      card.appendChild(glaze);
-    }
-
-    let bounds;
-
-    function onMouseEnter() {
-      bounds = card.getBoundingClientRect();
-    }
-
-    function onMouseMove(e) {
-      if (!bounds) bounds = card.getBoundingClientRect();
-      const mouseX = e.clientX - bounds.left;
-      const mouseY = e.clientY - bounds.top;
-
-      const xPercent = mouseX / bounds.width - 0.5;
-      const yPercent = mouseY / bounds.height - 0.5;
-
-      const rotateX = (-yPercent * 10).toFixed(2);
-      const rotateY = (xPercent * 10).toFixed(2);
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      card.style.setProperty('--mouse-x', `${mouseX}px`);
-      card.style.setProperty('--mouse-y', `${mouseY}px`);
-    }
-
-    function onMouseLeave() {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    }
-
-    card.addEventListener('mouseenter', onMouseEnter);
-    card.addEventListener('mousemove', onMouseMove);
-    card.addEventListener('mouseleave', onMouseLeave);
-  });
-}
-
-function initAstraMagneticButtons() {
-  const magneticBtns = document.querySelectorAll('.astra-magnetic');
-  if (!magneticBtns.length) return;
-
-  magneticBtns.forEach((btn) => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translate(0px, 0px)';
-    });
-  });
-}
