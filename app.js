@@ -1,6 +1,6 @@
 /**
- * THE SHARP PARK AVENUE 138 // MODERN LUXURY WHITE
- * Architectural Application Engine
+ * THE SHARP PARK AVENUE 138 // GALAXY LUXURY WHITE
+ * Architectural Application Engine with Celestial Stardust Canvas
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,12 +10,103 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Init Components
+  initGalaxyCanvas();
   initMobileMenu();
   initHeaderScroll();
   initComparisonSlider();
   initFloorPlans();
   initCalculator();
 });
+
+/* ==========================================================================
+   0. GALAXY STARDUST INTERACTIVE CANVAS
+   ========================================================================== */
+function initGalaxyCanvas() {
+  const canvas = document.getElementById('galaxy-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // Stardust Particle Model
+  const particles = [];
+  const particleCount = Math.min(Math.floor(window.innerWidth / 18), 75);
+  const colors = [
+    'rgba(168, 85, 247, ', // Cosmic Violet
+    'rgba(56, 189, 248, ',  // Starlight Cyan
+    'rgba(212, 175, 55, ',  // Celestial Gold
+    'rgba(244, 63, 94, '    // Rose Quartz
+  ];
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 2 + 0.8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: -Math.random() * 0.3 - 0.1,
+      alpha: Math.random() * 0.5 + 0.2,
+      pulseSpeed: Math.random() * 0.02 + 0.01,
+      pulseVal: Math.random() * Math.PI
+    });
+  }
+
+  let mouseX = -1000;
+  let mouseY = -1000;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.pulseVal += p.pulseSpeed;
+
+      // Mouse gentle repulsion
+      const dx = p.x - mouseX;
+      const dy = p.y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        p.x += (dx / dist) * 1.2;
+        p.y += (dy / dist) * 1.2;
+      }
+
+      // Wrap around screen
+      if (p.x < 0) p.x = width;
+      if (p.x > width) p.x = 0;
+      if (p.y < 0) p.y = height;
+      if (p.y > height) p.y = 0;
+
+      // Twinkling effect
+      const currentAlpha = p.alpha * (0.6 + 0.4 * Math.sin(p.pulseVal));
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + currentAlpha + ')';
+      ctx.shadowBlur = p.radius * 3;
+      ctx.shadowColor = p.color + '0.6)';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+}
 
 /* ==========================================================================
    1. MOBILE MENU & HEADER SCROLL
@@ -45,16 +136,16 @@ function initHeaderScroll() {
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) {
       header.classList.add('shadow-md', 'bg-white/95');
-      header.classList.remove('bg-white/80');
+      header.classList.remove('bg-white/85');
     } else {
       header.classList.remove('shadow-md', 'bg-white/95');
-      header.classList.add('bg-white/80');
+      header.classList.add('bg-white/85');
     }
   });
 }
 
 /* ==========================================================================
-   2. BEFORE & AFTER LUXURY COMPARISON SLIDER
+   2. BEFORE & AFTER GALAXY LUXURY COMPARISON SLIDER
    ========================================================================== */
 function initComparisonSlider() {
   const container = document.getElementById('comparison-container');
@@ -141,7 +232,7 @@ function initComparisonSlider() {
 }
 
 /* ==========================================================================
-   3. ARCHITECTURAL WHITE PAPER CAD (59㎡ FLOOR PLAN ENGINE)
+   3. ARCHITECTURAL FLOOR PLAN ENGINE (59㎡)
    ========================================================================== */
 const floorPlanData = {
   type59A: {
@@ -162,46 +253,35 @@ const floorPlanData = {
     ],
     svg: `
       <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer Boundaries -->
         <rect x="20" y="20" width="380" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+        <rect x="22" y="22" width="376" height="35" fill="rgba(124, 58, 237, 0.08)" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <text x="210" y="44" class="blueprint-text" fill="#7c3aed">발코니 서비스 면적 확장 구간 (+21.5㎡ 실사용 공간 확보)</text>
         
-        <!-- Expanded Balcony Extension Marker (Top) -->
-        <rect x="22" y="22" width="376" height="35" fill="rgba(16, 185, 129, 0.08)" stroke="#059669" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="210" y="44" class="blueprint-text" fill="#059669">발코니 서비스 면적 확장 구간 (+21.5㎡ 실사용 공간 확보)</text>
-        
-        <!-- 3-Bay Front: Bedroom 2, Living, Master -->
         <rect x="25" y="60" width="100" height="150" class="blueprint-room" />
         <text x="75" y="125" class="blueprint-text">침실 2 (자녀방)</text>
         <text x="75" y="142" class="blueprint-area">3.0m × 3.3m</text>
 
-        <!-- Main Living Room (Center) -->
         <rect x="130" y="60" width="155" height="150" class="blueprint-room" />
         <text x="207" y="125" class="blueprint-text">거 실 (3.8m 광폭)</text>
         <text x="207" y="142" class="blueprint-area">LIVING ROOM (맞통풍)</text>
 
-        <!-- Master Bedroom (Right) -->
         <rect x="290" y="60" width="105" height="150" class="blueprint-room" />
         <text x="342" y="125" class="blueprint-text">침실 1 (안방)</text>
         <text x="342" y="142" class="blueprint-area">MASTER BEDROOM</text>
         
-        <!-- Walk-in Dressroom & Master Bath inside Master (Top Right) -->
-        <rect x="290" y="60" width="105" height="45" fill="#fefce8" stroke="#d4af37" stroke-width="1"/>
-        <text x="342" y="85" class="blueprint-text" fill="#bfa15f">드레스룸 / 부부욕실</text>
+        <rect x="290" y="60" width="105" height="45" fill="#faf5ff" stroke="#a855f7" stroke-width="1"/>
+        <text x="342" y="85" class="blueprint-text" fill="#7c3aed">드레스룸 / 부부욕실</text>
 
-        <!-- Back row: Bedroom 3, Kitchen, Common Bath, Entry -->
         <rect x="25" y="215" width="100" height="60" class="blueprint-room" />
         <text x="75" y="245" class="blueprint-text">침실 3 (서재/다목적)</text>
 
-        <!-- Kitchen & Dining (Center Bottom) -->
         <rect x="130" y="215" width="95" height="60" class="blueprint-room" />
         <text x="177" y="245" class="blueprint-text">주방 / 식당 (ㄷ자형)</text>
         <text x="177" y="260" class="blueprint-area">대면형 아일랜드</text>
 
-        <!-- Common Bath -->
         <rect x="230" y="215" width="55" height="60" class="blueprint-room" />
         <text x="257" y="245" class="blueprint-text">욕실 2 (욕조)</text>
         
-        <!-- Entrance & Pantry -->
         <rect x="290" y="215" width="105" height="60" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
         <text x="342" y="245" class="blueprint-text" fill="#475569">현관 / 클린팬트리</text>
       </svg>
@@ -226,35 +306,29 @@ const floorPlanData = {
     svg: `
       <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="380" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-        <rect x="22" y="22" width="376" height="35" fill="rgba(16, 185, 129, 0.08)" stroke="#059669" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="210" y="44" class="blueprint-text" fill="#059669">와이드 발코니 확장 구간 (+21.5㎡)</text>
+        <rect x="22" y="22" width="376" height="35" fill="rgba(124, 58, 237, 0.08)" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <text x="210" y="44" class="blueprint-text" fill="#7c3aed">와이드 발코니 확장 구간 (+21.5㎡)</text>
 
-        <!-- Wide Living Room (4.2m) -->
         <rect x="25" y="60" width="220" height="150" class="blueprint-room" />
         <text x="135" y="125" class="blueprint-text">4.2m 와이드 파노라마 거실</text>
         <text x="135" y="142" class="blueprint-area">OPEN LIVING (30평형급 공간감)</text>
 
-        <!-- Master Bedroom (Right) -->
         <rect x="250" y="60" width="145" height="150" class="blueprint-room" />
         <text x="322" y="125" class="blueprint-text">침실 1 (안방)</text>
         <text x="322" y="142" class="blueprint-area">MASTER BEDROOM</text>
         
-        <rect x="250" y="60" width="145" height="45" fill="#fefce8" stroke="#d4af37" stroke-width="1"/>
-        <text x="322" y="85" class="blueprint-text" fill="#bfa15f">초대형 드레스룸 & 부부욕실</text>
+        <rect x="250" y="60" width="145" height="45" fill="#faf5ff" stroke="#a855f7" stroke-width="1"/>
+        <text x="322" y="85" class="blueprint-text" fill="#7c3aed">초대형 드레스룸 & 부부욕실</text>
 
-        <!-- Kitchen & Dining (Left Bottom) -->
         <rect x="25" y="215" width="125" height="60" class="blueprint-room" />
         <text x="87" y="245" class="blueprint-text">대형 아일랜드 다이닝</text>
 
-        <!-- Bedroom 2 (Center Bottom) -->
         <rect x="155" y="215" width="90" height="60" class="blueprint-room" />
         <text x="200" y="245" class="blueprint-text">침실 2</text>
 
-        <!-- Common Bath -->
         <rect x="250" y="215" width="65" height="60" class="blueprint-room" />
         <text x="282" y="245" class="blueprint-text">공용욕실</text>
 
-        <!-- Entrance & Pantry -->
         <rect x="320" y="215" width="75" height="60" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
         <text x="357" y="245" class="blueprint-text" fill="#475569">현관/팬트리</text>
       </svg>
@@ -348,7 +422,7 @@ window.switchPlan = function(type) {
   if (featuresList) {
     featuresList.innerHTML = data.features.map(f => `
       <li class="flex items-start gap-2.5 text-slate-600 text-xs sm:text-sm font-medium">
-        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+        <i data-lucide="sparkle" class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0"></i>
         <span>${f}</span>
       </li>
     `).join('');
@@ -482,7 +556,6 @@ window.closeLightbox = function() {
   document.body.style.overflow = '';
 };
 
-// Keyboard escape to close modal
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeLightbox();

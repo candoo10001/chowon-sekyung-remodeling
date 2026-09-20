@@ -1,6 +1,6 @@
 /* ==========================================================================
-   THE SHARP PARK AVENUE 138 // MODERN LUXURY WHITE
-   Aesthetic: Architectural Digest x Apple x High-End Residential Gallery
+   THE SHARP PARK AVENUE 138 // GALAXY LUXURY WHITE
+   Aesthetic: Cosmic Pearl & Iridescent Starlight x Modern High-End Luxury
    ========================================================================== */
 
 /* Custom Smooth Scrolling & Base */
@@ -20,6 +20,24 @@ body {
   overflow-x: hidden;
 }
 
+/* Galaxy Nebula Ambient Lighting Overlays */
+.galaxy-nebula-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  animation: floatNebula 20s ease-in-out infinite alternate;
+}
+
+@keyframes floatNebula {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+  100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
 /* Elegant Slim Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
@@ -32,50 +50,71 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #bfa15f;
+  background: linear-gradient(to bottom, #a855f7, #38bdf8);
 }
 
 /* Typography Enhancements */
 .font-display {
   font-family: 'Montserrat', 'Pretendard', sans-serif;
 }
-.font-serif-luxury {
-  font-family: 'Cinzel', 'Cormorant Garamond', serif;
+.font-galaxy {
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
 }
 
-/* Modern Luxury Card System */
-.white-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+/* Galaxy Iridescent Text */
+.galaxy-title-gradient {
+  background: linear-gradient(135deg, #0f172a 20%, #4338ca 50%, #7c3aed 75%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.galaxy-shimmer-text {
+  background: linear-gradient(90deg, #7c3aed 0%, #0284c7 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Galaxy Pearlescent Glass Cards (Opal Glassmorphism) */
+.galaxy-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.06), 0 1px 3px rgba(0,0,0,0.02);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
-.white-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.09);
-  transform: translateY(-2px);
+.galaxy-card:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 20px 45px -12px rgba(124, 58, 237, 0.12), 0 0 25px -5px rgba(56, 189, 248, 0.15);
+  transform: translateY(-3px);
 }
 
-.white-card-gold {
+/* Pearlescent Rainbow Border Highlight */
+.galaxy-border-glow {
+  position: relative;
   background: #ffffff;
-  border: 1px solid rgba(191, 161, 95, 0.4);
-  box-shadow: 0 12px 35px -10px rgba(191, 161, 95, 0.12);
+  border-radius: 1rem;
+}
+.galaxy-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.6), rgba(56, 189, 248, 0.6), rgba(244, 63, 94, 0.4), rgba(212, 175, 55, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
-/* Keyframe Subtle Animations */
+/* Subtle Zoom Animation */
 @keyframes subtleZoom {
-  0% {
-    transform: scale(1.0);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-  100% {
-    transform: scale(1.0);
-  }
+  0% { transform: scale(1.0); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1.0); }
 }
 
 .animate-subtle-zoom {
@@ -83,19 +122,20 @@ body {
 }
 
 /* ==========================================================================
-   BEFORE & AFTER LUXURY COMPARISON SLIDER
+   BEFORE & AFTER GALAXY COMPARISON SLIDER
    ========================================================================== */
 #comparison-container {
   touch-action: pan-y;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
-  background-color: #f1f5f9;
+  background-color: #f8fafc;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12);
 }
 
 #before-wrapper {
   will-change: width;
-  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 4px 0 35px rgba(0, 0, 0, 0.2);
 }
 
 #slider-handle {
@@ -109,32 +149,32 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #ffffff;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #a855f7, #ffffff, #38bdf8);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
 /* ==========================================================================
-   ARCHITECTURAL WHITE PAPER CAD (59㎡ FLOOR PLAN)
+   GALAXY ARCHITECTURAL FLOOR PLAN (59㎡)
    ========================================================================== */
 .blueprint-paper-grid {
-  background-color: #f8fafc;
+  background-color: #fbfcfe;
   background-image: 
-    linear-gradient(to right, rgba(226, 232, 240, 0.8) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.8) 1px, transparent 1px);
+    linear-gradient(to right, rgba(226, 232, 240, 0.7) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.7) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
 .blueprint-wall {
-  stroke: #1e293b;
+  stroke: #0f172a;
   stroke-width: 2.5;
   fill: none;
 }
 
 .blueprint-ext-wall {
-  stroke: #059669;
+  stroke: #0284c7;
   stroke-width: 2.5;
   stroke-dasharray: 4 2;
-  fill: rgba(16, 185, 129, 0.08);
+  fill: rgba(2, 132, 199, 0.08);
 }
 
 .blueprint-room {
@@ -145,8 +185,8 @@ body {
 }
 
 .blueprint-room:hover {
-  fill: #f0fdf4;
-  stroke: #059669;
+  fill: #faf5ff;
+  stroke: #7c3aed;
 }
 
 .blueprint-text {
@@ -168,10 +208,10 @@ body {
 
 /* Floor Plan Tabs Active State */
 .plan-tab.active {
-  background-color: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #2e1065);
   color: #ffffff;
-  border-color: #0f172a;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
+  border-color: #7c3aed;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
   font-weight: 700;
 }
 
@@ -179,10 +219,10 @@ body {
    MAP & LOCATION FILTER
    ========================================================================== */
 .map-filter.active {
-  background-color: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #1e1b4b);
   color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
 .map-point {
@@ -190,18 +230,18 @@ body {
 }
 
 .map-point:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.02);
 }
 
 /* ==========================================================================
    VALUATION CALCULATOR BUTTONS
    ========================================================================== */
 .calc-curr-btn.active, .calc-targ-btn.active, .calc-type-btn.active, .calc-balcony-btn.active, .calc-floor-btn.active {
-  border-color: #0f172a !important;
-  background-color: #0f172a !important;
+  border-color: #7c3aed !important;
+  background: linear-gradient(135deg, #0f172a, #1e1b4b) !important;
   color: #ffffff !important;
   font-weight: 700 !important;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
 }
 
 /* Responsive adjustments */

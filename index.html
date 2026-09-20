@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>더샵 파크에비뉴 138 | 평촌 초원세경 리모델링 정보 안내</title>
-  <meta name="description" content="평촌의 중심, 중앙공원을 품은 25층 하이엔드 랜드마크. 평촌 초원세경아파트 리모델링(더샵 파크에비뉴 138) 사업 정보 안내. 최고 25층, 775세대, 단일 전용 59㎡ 혁신 평면, 100% 지상공원화." />
+  <meta name="description" content="평촌의 중심, 은하수를 품은 25층 하이엔드 랜드마크. 평촌 초원세경아파트 리모델링(더샵 파크에비뉴 138) 사업 정보 안내. 최고 25층, 775세대, 단일 전용 59㎡ 혁신 평면, 100% 지상공원화." />
   
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>">
 
-  <!-- Modern Luxury Google Fonts & Pretendard -->
+  <!-- Modern Luxury & Galaxy Fonts & Pretendard -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-  <!-- Tailwind CSS via CDN with Modern Luxury White Theme -->
+  <!-- Tailwind CSS via CDN with Galaxy Luxury Palette -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -23,22 +23,22 @@
       theme: {
         extend: {
           colors: {
-            luxury: {
-              gold: '#bfa15f',
-              goldLight: '#e4cf9f',
-              goldDark: '#8f7236',
-              charcoal: '#0f172a',
+            galaxy: {
+              purple: '#7c3aed',
+              purpleLight: '#c084fc',
+              blue: '#0284c7',
+              blueLight: '#38bdf8',
+              gold: '#d4af37',
+              goldLight: '#fde047',
+              charcoal: '#0a0f1d',
               slate: '#475569',
-              muted: '#94a3b8',
-              surface: '#ffffff',
-              subtle: '#f8fafc',
-              border: '#e2e8f0'
+              muted: '#94a3b8'
             }
           },
           fontFamily: {
             sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             display: ['Montserrat', 'Pretendard', 'sans-serif'],
-            brand: ['Plus Jakarta Sans', 'sans-serif']
+            galaxy: ['Plus Jakarta Sans', 'sans-serif']
           }
         }
       }
@@ -51,36 +51,44 @@
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-white text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-slate-900 selection:text-white">
+<body class="bg-white text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-purple-600 selection:text-white">
+
+  <!-- Interactive Galaxy Stardust Particle Canvas -->
+  <canvas id="galaxy-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Soft Ambient Nebula Glow Blobs -->
+  <div class="galaxy-nebula-glow w-[550px] h-[550px] bg-purple-200/40 top-12 left-1/4"></div>
+  <div class="galaxy-nebula-glow w-[650px] h-[650px] bg-sky-200/40 top-1/3 right-10"></div>
+  <div class="galaxy-nebula-glow w-[500px] h-[500px] bg-amber-100/40 bottom-1/4 left-10"></div>
 
   <!-- ================= TOP NOTICE BANNER ================= -->
-  <aside aria-label="건축심의 공식 안내" class="bg-slate-900 text-white py-2.5 px-4 text-xs font-medium text-center relative z-50">
+  <aside aria-label="건축심의 공식 안내" class="bg-[#0b1021] text-white py-2.5 px-4 text-xs font-medium text-center relative z-50 border-b border-purple-500/20">
     <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 md:gap-4 flex-wrap">
-      <span class="inline-flex items-center gap-1.5 bg-[#bfa15f] text-slate-950 font-bold px-2.5 py-0.5 rounded-full text-[11px] tracking-wider uppercase">
+      <span class="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-500 to-sky-400 text-white font-bold px-2.5 py-0.5 rounded-full text-[11px] tracking-wider uppercase shadow-sm">
         <i data-lucide="sparkles" class="w-3 h-3"></i> 심의 통과
       </span>
       <span class="text-slate-200">
         <strong>[안양시 공식]</strong> 초원세경 리모델링 <strong>건축심의 조건부 의결 통과 완료!</strong> (평촌 1기 신도시 최초 용적률 301.49% 완화 적용)
       </span>
-      <a href="#timeline" class="inline-flex items-center text-[#e4cf9f] hover:underline font-semibold transition-colors">
+      <a href="#timeline" class="inline-flex items-center text-sky-300 hover:text-white hover:underline font-semibold transition-colors">
         추진 로드맵 보기 <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-0.5"></i>
       </a>
     </div>
   </aside>
 
-  <!-- ================= GLOBAL FLOATING WHITE HEADER ================= -->
+  <!-- ================= GLOBAL FLOATING GALAXY HEADER ================= -->
   <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 backdrop-blur-xl bg-white/85 border-b border-slate-200/80 mt-[37px]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative z-10">
       
-      <!-- Brand Logo -->
+      <!-- Brand Logo with Cosmic Shimmer -->
       <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-md shadow-slate-900/10 group-hover:bg-[#bfa15f] transition-colors">
-          <span class="font-display font-black text-white text-base tracking-tighter">138</span>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 flex items-center justify-center shadow-md shadow-purple-900/10 group-hover:scale-105 transition-transform border border-purple-400/30">
+          <span class="font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-sky-200 to-purple-300 text-base tracking-tighter">138</span>
         </div>
         <div>
           <div class="flex items-center gap-2">
             <span class="font-display font-extrabold tracking-widest text-slate-900 text-sm md:text-base">THE SHARP</span>
-            <span class="text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200 px-1.5 py-0.5 rounded">포스코이앤씨</span>
+            <span class="text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200 px-1.5 py-0.5 rounded">포스코이앤씨</span>
           </div>
           <div class="text-[11px] md:text-xs font-medium text-slate-500">
             더샵 파크에비뉴 138 <span class="text-slate-400 font-normal">(초원세경)</span>
@@ -88,22 +96,22 @@
         </div>
       </a>
 
-      <!-- Desktop Nav with Clean Modern Titles -->
+      <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <a href="#transformation" class="hover:text-slate-950 transition-colors">변화 스토리</a>
-        <a href="#gallery" class="hover:text-slate-950 text-slate-950 font-bold transition-colors">공식 조감도</a>
-        <a href="#premiums" class="hover:text-slate-950 transition-colors">6대 프리미엄</a>
-        <a href="#floorplans" class="hover:text-slate-950 transition-colors">혁신 59㎡ 평면</a>
-        <a href="#community" class="hover:text-slate-950 transition-colors">클럽 더샵</a>
-        <a href="#location" class="hover:text-slate-950 transition-colors">입지 환경</a>
-        <a href="#timeline" class="hover:text-slate-950 transition-colors">추진 일정</a>
-        <a href="#calculator" class="hover:text-slate-950 transition-colors">가치 계산기</a>
+        <a href="#transformation" class="hover:text-purple-700 transition-colors">변화 스토리</a>
+        <a href="#gallery" class="hover:text-purple-700 text-slate-900 font-bold transition-colors">공식 조감도</a>
+        <a href="#premiums" class="hover:text-purple-700 transition-colors">6대 프리미엄</a>
+        <a href="#floorplans" class="hover:text-purple-700 transition-colors">혁신 59㎡ 평면</a>
+        <a href="#community" class="hover:text-purple-700 transition-colors">클럽 더샵</a>
+        <a href="#location" class="hover:text-purple-700 transition-colors">입지 환경</a>
+        <a href="#timeline" class="hover:text-purple-700 transition-colors">추진 일정</a>
+        <a href="#calculator" class="hover:text-purple-700 transition-colors">가치 계산기</a>
       </nav>
 
-      <!-- Action Button -->
+      <!-- Action Button with Starlight Glow -->
       <div class="hidden sm:flex items-center gap-3">
-        <a href="#gallery" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-slate-800 transition-all shadow-md flex items-center gap-2">
-          <i data-lucide="image" class="w-3.5 h-3.5 text-[#e4cf9f]"></i>
+        <a href="#gallery" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-gradient-to-r hover:from-purple-900 hover:to-slate-900 transition-all shadow-md flex items-center gap-2 border border-purple-400/20">
+          <i data-lucide="sparkle" class="w-3.5 h-3.5 text-sky-300"></i>
           <span>공식 조감도 갤러리</span>
         </a>
       </div>
@@ -117,27 +125,26 @@
     <!-- Mobile Nav Dropdown -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 px-6 py-6 transition-all shadow-xl font-medium text-slate-700">
       <div class="flex flex-col gap-4 text-sm">
-        <a href="#transformation" class="mobile-nav-link py-1 hover:text-black">변화 스토리 (Before & After)</a>
+        <a href="#transformation" class="mobile-nav-link py-1 hover:text-purple-700">변화 스토리 (Before & After)</a>
         <a href="#gallery" class="mobile-nav-link py-1 text-slate-950 font-bold">공식 조감도 & 실사 갤러리</a>
-        <a href="#premiums" class="mobile-nav-link py-1 hover:text-black">6대 프리미엄</a>
-        <a href="#floorplans" class="mobile-nav-link py-1 hover:text-black">혁신 59㎡ 평면</a>
-        <a href="#community" class="mobile-nav-link py-1 hover:text-black">클럽 더샵 커뮤니티</a>
-        <a href="#location" class="mobile-nav-link py-1 hover:text-black">입지 & 생활 인프라</a>
-        <a href="#timeline" class="mobile-nav-link py-1 hover:text-black">사업 추진 현황</a>
-        <a href="#calculator" class="mobile-nav-link py-1 hover:text-black">가치 상승 시뮬레이터</a>
+        <a href="#premiums" class="mobile-nav-link py-1 hover:text-purple-700">6대 프리미엄</a>
+        <a href="#floorplans" class="mobile-nav-link py-1 hover:text-purple-700">혁신 59㎡ 평면</a>
+        <a href="#community" class="mobile-nav-link py-1 hover:text-purple-700">클럽 더샵 커뮤니티</a>
+        <a href="#location" class="mobile-nav-link py-1 hover:text-purple-700">입지 & 생활 인프라</a>
+        <a href="#timeline" class="mobile-nav-link py-1 hover:text-purple-700">사업 추진 현황</a>
+        <a href="#calculator" class="mobile-nav-link py-1 hover:text-purple-700">가치 상승 시뮬레이터</a>
       </div>
     </div>
   </header>
 
-  <!-- ================= HERO SECTION (MODERN LUXURY EDITORIAL) ================= -->
+  <!-- ================= HERO SECTION (GALAXY LUXURY WHITE) ================= -->
   <section id="hero" class="relative min-h-[92vh] flex items-center justify-center pt-36 pb-24 overflow-hidden bg-white">
     
-    <!-- Background Image with Clean Natural Light Vignette -->
+    <!-- Background Architectural Rendering with Ethereal Starlight Lighting -->
     <div class="absolute inset-0 z-0 pointer-events-none">
       <img src="assets/the_sharp_138_rendering.jpg" 
            alt="더샵 파크에비뉴 138 공식 조감도" 
-           class="w-full h-full object-cover object-center filter brightness-90 contrast-105 scale-100 animate-subtle-zoom opacity-90" />
-      <!-- Soft White Luxury Gradients -->
+           class="w-full h-full object-cover object-center filter brightness-95 contrast-105 scale-100 animate-subtle-zoom opacity-90" />
       <div class="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
       <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/50 to-white/90"></div>
     </div>
@@ -145,49 +152,49 @@
     <!-- Hero Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
-      <!-- Luxury Badge -->
-      <div class="inline-flex items-center gap-2 p-1.5 px-4 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-[#bfa15f]"></span>
-        <span>평촌 1기 신도시 리모델링의 새로운 기준</span>
+      <!-- Galaxy Starlight Pill Badge -->
+      <div class="inline-flex items-center gap-2 p-1.5 px-4 rounded-full bg-white/90 backdrop-blur-md border border-purple-200 text-slate-700 text-xs font-semibold mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-sky-400 animate-pulse"></span>
+        <span class="text-purple-900 font-bold">✦ GALAXY HORIZON 138 ✦</span>
         <span class="text-slate-300">|</span>
-        <span class="text-slate-900 font-bold">포스코이앤씨 더샵</span>
+        <span class="text-slate-900 font-bold">포스코이앤씨 하이엔드</span>
       </div>
 
-      <!-- Main Titles -->
+      <!-- Main Headline with Galaxy Prismatic Gradient Text -->
       <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
         평촌 중앙공원을 품은<br/>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-slate-800 to-[#bfa15f]">
+        <span class="galaxy-title-gradient">
           25층 하이엔드 랜드마크
         </span>
       </h1>
 
       <!-- English Subtitle -->
-      <p class="font-display text-sm sm:text-base font-semibold text-[#bfa15f] tracking-widest uppercase mb-4">
+      <p class="font-display text-sm sm:text-base font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-sky-600 to-amber-500 tracking-widest uppercase mb-4">
         THE SHARP PARK AVENUE 138
       </p>
 
       <p class="text-slate-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed font-normal">
-        초원세경아파트의 30년 가치를 넘어, 평촌역 초역세권과 중앙공원의 힐링 라이프를 완성하는 압도적 혁신이 시작됩니다.
+        초원세경아파트의 30년 가치를 넘어, 평촌역 초역세권과 중앙공원의 그린 라이프를 완성하는 압도적 혁신이 시작됩니다.
       </p>
 
-      <!-- Key Metrics Strip: Pure White Cards -->
+      <!-- Key Metrics Strip: Pearlescent Glass Cards -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
-        <div class="white-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">단지 규모 혁신</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">775 <span class="text-xs font-normal text-slate-500">세대</span></div>
           <div class="text-[11px] text-slate-500 mt-1">기존 709세대 → +66세대 일반분양</div>
         </div>
-        <div class="white-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">주차대수 대확충</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">1.31 <span class="text-xs font-normal text-slate-500">대/세대</span></div>
           <div class="text-[11px] text-slate-500 mt-1">기존 0.58대 → 총 1,019대 (지하4층)</div>
         </div>
-        <div class="white-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">단일 평형 혁신</div>
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-[#bfa15f]">59.90 <span class="text-xs font-normal text-slate-500">㎡</span></div>
+          <div class="text-2xl sm:text-3xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-sky-500">59.90 <span class="text-xs font-normal text-slate-500">㎡</span></div>
           <div class="text-[11px] text-slate-500 mt-1">전 조합원 100% 신축 25평형 배정</div>
         </div>
-        <div class="white-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">최고 랜드마크</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">25 <span class="text-xs font-normal text-slate-500">층</span></div>
           <div class="text-[11px] text-slate-500 mt-1">포스맥 커튼월룩 & 지상공원화</div>
@@ -196,12 +203,12 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#transformation" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-slate-900/15 hover:bg-slate-800 transition-all text-sm">
-          <i data-lucide="split-square-vertical" class="w-4 h-4 text-[#e4cf9f]"></i>
+        <a href="#transformation" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-purple-900/15 hover:shadow-purple-900/25 hover:scale-105 transition-all text-sm border border-purple-500/20">
+          <i data-lucide="split-square-vertical" class="w-4 h-4 text-sky-300"></i>
           Before & After 전·후 비교
         </a>
-        <a href="#gallery" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
-          <i data-lucide="image" class="w-4 h-4 text-slate-500"></i>
+        <a href="#gallery" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
+          <i data-lucide="image" class="w-4 h-4 text-purple-600"></i>
           공식 조감도 & 단지 둘러보기
         </a>
       </div>
@@ -211,21 +218,21 @@
     <!-- Scroll Indicator -->
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-400 flex flex-col items-center gap-1 text-[11px] tracking-widest uppercase font-medium">
       <span>SCROLL</span>
-      <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 animate-bounce"></i>
+      <i data-lucide="chevron-down" class="w-4 h-4 text-purple-500 animate-bounce"></i>
     </div>
   </section>
 
   <!-- ================= SECTION: BEFORE & AFTER TRANSFORMATION ================= -->
-  <section id="transformation" class="py-24 bg-slate-50 border-t border-slate-200/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="transformation" class="py-24 bg-[#fbfcfe] border-t border-slate-200/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          TRANSFORMATION STORY
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ TRANSFORMATION STORY ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          1996년 초원세경에서 2028년 <span class="text-[#bfa15f]">더샵 파크에비뉴 138</span>로
+          1996년 초원세경에서 2028년 <span class="galaxy-shimmer-text">더샵 파크에비뉴 138</span>로
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           30년 된 복도식 노후 단지가 포스코이앤씨의 혁신 기술력을 만나 평촌을 대표하는 최고급 주거 명작으로 거듭납니다. 
@@ -250,7 +257,7 @@
                  class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" />
           </div>
 
-          <!-- FIXED OVERLAY BADGES (Pure White Frosted Cards) -->
+          <!-- FIXED OVERLAY BADGES (Opal Pearlescent Cards) -->
           <div id="before-badge" class="absolute top-4 left-4 z-20 pointer-events-none transition-opacity duration-200">
             <div class="bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-200 shadow-md whitespace-nowrap">
               <span class="text-rose-600 font-bold text-xs flex items-center gap-1.5">
@@ -261,19 +268,19 @@
           </div>
 
           <div id="after-badge" class="absolute top-4 right-4 z-20 pointer-events-none transition-opacity duration-200">
-            <div class="bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-200 shadow-md whitespace-nowrap">
+            <div class="bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-purple-200 shadow-md whitespace-nowrap">
               <span class="text-slate-900 font-bold text-xs flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#bfa15f]"></i> 2028년 더샵 138 (리모델링 후)
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-600"></i> 2028년 더샵 138 (리모델링 후)
               </span>
               <span class="text-[11px] text-slate-500 block font-medium">계단식 25층 · 포스맥 아트월 · 주차 1.31대</span>
             </div>
           </div>
 
-          <!-- MINIMALIST GOLD & WHITE SLIDER HANDLE -->
+          <!-- SLIDER HANDLE WITH COSMIC SHIMMER LINE -->
           <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 z-30 flex items-center justify-center pointer-events-none transition-none">
             <div class="slider-divider-line"></div>
-            <div class="w-9 h-9 rounded-full bg-white text-slate-800 flex items-center justify-center shadow-lg border border-slate-300 pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
-              <i data-lucide="chevrons-left-right" class="w-4 h-4 text-[#bfa15f]"></i>
+            <div class="w-9 h-9 rounded-full bg-white text-slate-800 flex items-center justify-center shadow-lg border border-purple-200 pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
+              <i data-lucide="chevrons-left-right" class="w-4 h-4 text-purple-600"></i>
             </div>
           </div>
 
@@ -282,9 +289,9 @@
       </div>
 
       <!-- Comparison Matrix Table -->
-      <div class="max-w-4xl mx-auto white-card rounded-2xl p-6 sm:p-8 border border-slate-200">
+      <div class="max-w-4xl mx-auto galaxy-card rounded-2xl p-6 sm:p-8 border border-slate-200">
         <h4 class="font-display font-bold text-slate-900 text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
-          <i data-lucide="layers" class="w-4 h-4 text-[#bfa15f]"></i> 주요 항목별 세부 비교 제원표
+          <i data-lucide="sparkles" class="w-4 h-4 text-purple-600"></i> 주요 항목별 세부 비교 제원표
         </h4>
         <div class="overflow-x-auto">
           <table class="w-full text-xs sm:text-sm text-left">
@@ -292,19 +299,19 @@
               <tr>
                 <th class="pb-3">비교 항목</th>
                 <th class="pb-3 text-rose-600">1996년 초원세경 (현재)</th>
-                <th class="pb-3 text-slate-900 font-bold">2028년 더샵 파크에비뉴 138 (리모델링)</th>
+                <th class="pb-3 text-purple-900 font-bold">2028년 더샵 파크에비뉴 138 (리모델링)</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
               <tr>
                 <td class="py-3 font-medium text-slate-900">단지 층수 및 동수</td>
                 <td class="py-3 text-slate-500">지하 1층 ~ 지상 21층 (8개동)</td>
-                <td class="py-3 text-slate-900 font-semibold">지하 4층 ~ 지상 25층 (8개동)</td>
+                <td class="py-3 text-purple-900 font-semibold">지하 4층 ~ 지상 25층 (8개동)</td>
               </tr>
               <tr>
                 <td class="py-3 font-medium text-slate-900">총 공급 세대수</td>
                 <td class="py-3 text-slate-500">709세대 (기존 세대)</td>
-                <td class="py-3 text-slate-900 font-semibold">775세대 (+66세대 일반분양)</td>
+                <td class="py-3 text-purple-900 font-semibold">775세대 (+66세대 일반분양)</td>
               </tr>
               <tr>
                 <td class="py-3 font-medium text-slate-900">전용 면적 규격</td>
@@ -314,12 +321,12 @@
               <tr>
                 <td class="py-3 font-medium text-slate-900">주동 진입 방식</td>
                 <td class="py-3 text-rose-600">2Bay 편복도식 (소음·사생활 간섭)</td>
-                <td class="py-3 text-slate-900 font-semibold">3Bay 계단식 맞통풍 (층당 2세대 EV 홀)</td>
+                <td class="py-3 text-purple-900 font-semibold">3Bay 계단식 맞통풍 (층당 2세대 EV 홀)</td>
               </tr>
               <tr>
                 <td class="py-3 font-medium text-slate-900">주차 수용 능력</td>
                 <td class="py-3 text-slate-500">세대당 0.58대 (총 412대)</td>
-                <td class="py-3 text-slate-900 font-semibold">세대당 1.31대 (총 1,019대 / 지하 4개층 직통)</td>
+                <td class="py-3 text-purple-900 font-semibold">세대당 1.31대 (총 1,019대 / 지하 4개층 직통)</td>
               </tr>
               <tr>
                 <td class="py-3 font-medium text-slate-900">단지 지상 환경</td>
@@ -329,7 +336,7 @@
               <tr>
                 <td class="py-3 font-medium text-slate-900">외관 마감 특화</td>
                 <td class="py-3 text-slate-500">일반 도색 페인트 외벽</td>
-                <td class="py-3 text-slate-900 font-semibold">포스맥(PosMAC) 프리미엄 스틸아트월 & 커튼월룩</td>
+                <td class="py-3 text-purple-900 font-semibold">포스맥(PosMAC) 프리미엄 스틸아트월 & 커튼월룩</td>
               </tr>
             </tbody>
           </table>
@@ -341,14 +348,14 @@
 
   <!-- ================= SECTION: OFFICIAL MASTERPIECE GALLERY ================= -->
   <section id="gallery" class="py-24 bg-white relative border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          OFFICIAL ARCHITECTURAL GALLERY
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ OFFICIAL ARCHITECTURAL GALLERY ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          포스코이앤씨 공식 조감도 및 <span class="text-[#bfa15f]">단지 실사 아카이브</span>
+          포스코이앤씨 공식 조감도 및 <span class="galaxy-shimmer-text">단지 실사 아카이브</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           안양시 건축심의를 정식 통과한 포스코이앤씨 고화질 조감도와 현장 실사입니다. 
@@ -359,22 +366,22 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         
         <!-- Card 1 -->
-        <div class="white-card rounded-2xl overflow-hidden group cursor-pointer"
+        <div class="galaxy-card rounded-2xl overflow-hidden group cursor-pointer"
              onclick="openLightbox('assets/the_sharp_138_rendering.jpg', '더샵 파크에비뉴 138 공식 조감도 (메인 투시도)', '시공사 포스코이앤씨 / 최고 25층 스카이라인, 커튼월룩 입면, 포스맥 강판 스틸아트월 특화')">
           <div class="relative h-64 overflow-hidden bg-slate-100">
             <img src="assets/the_sharp_138_rendering.jpg" 
                  alt="더샵 파크에비뉴 138 공식 조감도 메인" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-slate-900 font-semibold px-3 py-1 rounded-lg text-xs shadow-sm">
+            <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-slate-900 font-semibold px-3 py-1 rounded-lg text-xs shadow-sm border border-purple-200">
               공식 투시도
             </div>
-            <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-lg text-slate-800 group-hover:bg-slate-900 group-hover:text-white transition-colors shadow-sm">
+            <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-lg text-slate-800 group-hover:bg-purple-900 group-hover:text-white transition-colors shadow-sm">
               <i data-lucide="maximize-2" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-display font-bold text-slate-900 text-base mb-1 group-hover:text-[#bfa15f] transition-colors">
+            <h3 class="font-display font-bold text-slate-900 text-base mb-1 group-hover:text-purple-700 transition-colors">
               공식 조감도 (포스코이앤씨)
             </h3>
             <p class="text-xs text-slate-500 leading-relaxed">
@@ -384,22 +391,22 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="white-card rounded-2xl overflow-hidden group cursor-pointer"
+        <div class="galaxy-card rounded-2xl overflow-hidden group cursor-pointer"
              onclick="openLightbox('assets/rendering_detail.png', '더샵 파크에비뉴 138 단지 마스터플랜 조감도', '100% 지상공원화 테마파크 & 보차분리 순환 동선')">
           <div class="relative h-64 overflow-hidden bg-slate-100">
             <img src="assets/rendering_detail.png" 
                  alt="단지 마스터플랜 조감도" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-slate-900 font-semibold px-3 py-1 rounded-lg text-xs shadow-sm">
+            <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-slate-900 font-semibold px-3 py-1 rounded-lg text-xs shadow-sm border border-sky-200">
               마스터플랜
             </div>
-            <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-lg text-slate-800 group-hover:bg-slate-900 group-hover:text-white transition-colors shadow-sm">
+            <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-lg text-slate-800 group-hover:bg-purple-900 group-hover:text-white transition-colors shadow-sm">
               <i data-lucide="maximize-2" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-display font-bold text-slate-900 text-base mb-1 group-hover:text-[#bfa15f] transition-colors">
+            <h3 class="font-display font-bold text-slate-900 text-base mb-1 group-hover:text-purple-700 transition-colors">
               단지 마스터플랜 조감도
             </h3>
             <p class="text-xs text-slate-500 leading-relaxed">
@@ -409,17 +416,17 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="white-card rounded-2xl overflow-hidden group cursor-pointer"
+        <div class="galaxy-card rounded-2xl overflow-hidden group cursor-pointer"
              onclick="openLightbox('assets/chowon_before.png', '초원세경 805·806동 전경 실사', '1996년 준공 당시 21층 복도식 709세대 원본 현장 기록')">
           <div class="relative h-64 overflow-hidden bg-slate-100">
             <img src="assets/chowon_before.png" 
                  alt="초원세경 805·806동 전경 실사" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-rose-700 font-semibold px-3 py-1 rounded-lg text-xs shadow-sm">
+            <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-rose-700 font-semibold px-3 py-1 rounded-lg text-xs shadow-sm border border-rose-200">
               초원세경 실사
             </div>
-            <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-lg text-slate-800 group-hover:bg-slate-900 group-hover:text-white transition-colors shadow-sm">
+            <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-lg text-slate-800 group-hover:bg-purple-900 group-hover:text-white transition-colors shadow-sm">
               <i data-lucide="maximize-2" class="w-4 h-4"></i>
             </div>
           </div>
@@ -438,16 +445,16 @@
     </div>
   </section>
 
-  <!-- ================= SECTION: 6 CORE PREMIUMS ================= -->
-  <section id="premiums" class="py-24 bg-slate-50 border-t border-slate-200/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- ================= SECTION: 6 CORE PREMIUMS (THE STELLAR 6) ================= -->
+  <section id="premiums" class="py-24 bg-[#fbfcfe] border-t border-slate-200/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          THE 6 PILLARS OF LUXURY
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ THE 6 STELLAR PILLARS ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          포스코이앤씨가 선사하는 <span class="text-[#bfa15f]">6대 핵심 프리미엄</span>
+          포스코이앤씨가 선사하는 <span class="galaxy-shimmer-text">6대 프리미엄 가치</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           평촌 1기 신도시 리모델링의 새로운 주거 기준을 정립하는 압도적 기술력입니다.
@@ -457,11 +464,11 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Pillar 1 -->
-        <div class="white-card rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#bfa15f] flex items-center justify-center mb-6">
+        <div class="galaxy-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6 shadow-sm border border-purple-100">
             <i data-lucide="shield-check" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#bfa15f] uppercase tracking-wider block mb-1">01. FAÇADE DESIGN</span>
+          <span class="text-xs font-display font-bold text-purple-700 uppercase tracking-wider block mb-1">01. FAÇADE DESIGN</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             포스맥 스틸아트월 & 커튼월룩
           </h3>
@@ -471,11 +478,11 @@
         </div>
 
         <!-- Pillar 2 -->
-        <div class="white-card rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6">
+        <div class="galaxy-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-6 shadow-sm border border-sky-100">
             <i data-lucide="car" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-slate-500 uppercase tracking-wider block mb-1">02. PARKING SYSTEM</span>
+          <span class="text-xs font-display font-bold text-sky-700 uppercase tracking-wider block mb-1">02. PARKING SYSTEM</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             지하 4개층 직통 EV & 1.31대 주차
           </h3>
@@ -485,11 +492,11 @@
         </div>
 
         <!-- Pillar 3 -->
-        <div class="white-card rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-6">
+        <div class="galaxy-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 shadow-sm border border-emerald-100">
             <i data-lucide="trees" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-emerald-600 uppercase tracking-wider block mb-1">03. BIOPHILIC LANDSCAPE</span>
+          <span class="text-xs font-display font-bold text-emerald-700 uppercase tracking-wider block mb-1">03. BIOPHILIC LANDSCAPE</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             100% 지상공원화 테마 가든
           </h3>
@@ -499,11 +506,11 @@
         </div>
 
         <!-- Pillar 4 -->
-        <div class="white-card rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#bfa15f] flex items-center justify-center mb-6">
+        <div class="galaxy-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6 shadow-sm border border-purple-100">
             <i data-lucide="layout-grid" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#bfa15f] uppercase tracking-wider block mb-1">04. INNOVATION 59㎡</span>
+          <span class="text-xs font-display font-bold text-purple-700 uppercase tracking-wider block mb-1">04. INNOVATION 59㎡</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             전 세대 100% 59㎡ 계단식 배정
           </h3>
@@ -513,11 +520,11 @@
         </div>
 
         <!-- Pillar 5 -->
-        <div class="white-card rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6">
+        <div class="galaxy-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 shadow-sm border border-amber-100">
             <i data-lucide="coffee" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-slate-500 uppercase tracking-wider block mb-1">05. CLUB THE SHARP</span>
+          <span class="text-xs font-display font-bold text-amber-700 uppercase tracking-wider block mb-1">05. CLUB THE SHARP</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             원스톱 하이엔드 커뮤니티
           </h3>
@@ -527,11 +534,11 @@
         </div>
 
         <!-- Pillar 6 -->
-        <div class="white-card rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-6">
+        <div class="galaxy-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-6 shadow-sm border border-sky-100">
             <i data-lucide="navigation" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-emerald-600 uppercase tracking-wider block mb-1">06. GOLDEN LOCATION</span>
+          <span class="text-xs font-display font-bold text-sky-700 uppercase tracking-wider block mb-1">06. GOLDEN LOCATION</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             평촌역 4분 & 중앙공원 3분
           </h3>
@@ -547,14 +554,14 @@
 
   <!-- ================= SECTION: INNOVATION 59㎡ FLOOR PLANS ================= -->
   <section id="floorplans" class="py-24 bg-white relative border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          ARCHITECTURAL FLOOR PLAN
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ STELLAR ARCHITECTURAL PLAN ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          혁신 신평면 <span class="text-[#bfa15f]">59㎡ 설계 뷰어</span>
+          혁신 신평면 <span class="galaxy-shimmer-text">59㎡ 설계 뷰어</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           초원세경 709세대 전 조합원을 위한 100% 동일 공급 전용 59.90㎡ 신평면의 상세 도면입니다.
@@ -576,15 +583,15 @@
         </div>
       </div>
 
-      <!-- White Paper CAD Display -->
-      <div class="white-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
+      <!-- Plan Display -->
+      <div class="galaxy-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <!-- Left: SVG Plan Canvas -->
           <div class="lg:col-span-7 bg-slate-50 p-4 rounded-xl border border-slate-200 blueprint-paper-grid relative">
             <div class="flex items-center justify-between text-xs font-medium text-slate-600 pb-2 mb-2 border-b border-slate-200">
               <span id="plan-code" class="font-display font-semibold">THE SHARP 59A SIGNATURE UNIT</span>
-              <span class="text-[#059669] flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> 3Bay 맞통풍</span>
+              <span class="text-purple-700 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-600"></span> 3Bay 맞통풍</span>
             </div>
             <div id="plan-svg-container" class="w-full flex items-center justify-center">
               <!-- Dynamically rendered -->
@@ -595,7 +602,7 @@
           <div class="lg:col-span-5 space-y-6">
             <div>
               <div class="flex items-center gap-2 mb-2">
-                <span id="plan-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-[#bfa15f] border border-amber-200">
+                <span id="plan-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200">
                   3Bay 맞통풍 판상형 시그니처
                 </span>
                 <span id="plan-ratio" class="text-xs font-semibold text-emerald-700">
@@ -618,7 +625,7 @@
               </div>
               <div class="flex justify-between pb-1.5 border-b border-slate-200">
                 <span class="text-slate-500">리모델링 신축 규격</span>
-                <span id="plan-spec-new" class="text-slate-900 font-bold">59.90㎡ (공급 25평형, 계단식)</span>
+                <span id="plan-spec-new" class="text-purple-900 font-bold">59.90㎡ (공급 25평형, 계단식)</span>
               </div>
               <div class="flex justify-between pb-1.5 border-b border-slate-200">
                 <span class="text-slate-500">전용 면적 순증가</span>
@@ -626,7 +633,7 @@
               </div>
               <div class="flex justify-between">
                 <span class="text-slate-500">발코니 확장 실체감</span>
-                <span id="plan-spec-balcony" class="text-[#bfa15f] font-bold">약 81.4㎡ (25평형 체감 공간)</span>
+                <span id="plan-spec-balcony" class="text-purple-700 font-bold">약 81.4㎡ (25평형 체감 공간)</span>
               </div>
             </div>
 
@@ -647,15 +654,15 @@
   </section>
 
   <!-- ================= SECTION: CLUB THE SHARP (COMMUNITY) ================= -->
-  <section id="community" class="py-24 bg-slate-50 border-t border-slate-200/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="community" class="py-24 bg-[#fbfcfe] border-t border-slate-200/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          CLUB THE SHARP COMMUNITY
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ CLUB THE SHARP AMENITIES ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          호텔 수준의 <span class="text-[#bfa15f]">하이엔드 커뮤니티 라이프</span>
+          호텔 수준의 <span class="galaxy-shimmer-text">하이엔드 커뮤니티 라이프</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           피트니스부터 호텔식 사우나, 스크린골프, 오픈 스터디카페까지 입주민의 품격 있는 일상을 위한 포스코이앤씨의 차별화된 시설입니다.
@@ -663,49 +670,49 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="white-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
-            <i data-lucide="dumbbell" class="w-5 h-5 text-[#bfa15f]"></i>
+        <div class="galaxy-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
+            <i data-lucide="dumbbell" class="w-5 h-5"></i>
           </div>
           <h4 class="font-display text-lg font-bold text-slate-900 mb-1">피트니스 & GX 스튜디오</h4>
           <p class="text-xs text-slate-500 leading-relaxed">최고급 테크노짐 웨이트 머신 및 요가·필라테스 룸 구성.</p>
         </div>
 
-        <div class="white-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
-            <i data-lucide="flag" class="w-5 h-5 text-[#bfa15f]"></i>
+        <div class="galaxy-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 border border-sky-100">
+            <i data-lucide="flag" class="w-5 h-5"></i>
           </div>
           <h4 class="font-display text-lg font-bold text-slate-900 mb-1">GDR 스크린 실내 골프클럽</h4>
           <p class="text-xs text-slate-500 leading-relaxed">전 타석 GDR 스윙 분석기 및 프라이빗 퍼팅존 완비.</p>
         </div>
 
-        <div class="white-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
-            <i data-lucide="waves" class="w-5 h-5 text-[#bfa15f]"></i>
+        <div class="galaxy-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
+            <i data-lucide="waves" class="w-5 h-5"></i>
           </div>
           <h4 class="font-display text-lg font-bold text-slate-900 mb-1">호텔식 건·습식 사우나</h4>
           <p class="text-xs text-slate-500 leading-relaxed">온탕, 냉탕 및 편백나무 건식 사우나로 완성되는 데일리 릴랙스.</p>
         </div>
 
-        <div class="white-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
-            <i data-lucide="book-open" class="w-5 h-5 text-[#bfa15f]"></i>
+        <div class="galaxy-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 border border-sky-100">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
           </div>
           <h4 class="font-display text-lg font-bold text-slate-900 mb-1">북카페 & 오픈 스터디라운지</h4>
           <p class="text-xs text-slate-500 leading-relaxed">학습과 재택근무를 지원하는 조용한 집중 독서실 및 노트북 존.</p>
         </div>
 
-        <div class="white-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
-            <i data-lucide="home" class="w-5 h-5 text-[#bfa15f]"></i>
+        <div class="galaxy-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 border border-amber-100">
+            <i data-lucide="home" class="w-5 h-5"></i>
           </div>
           <h4 class="font-display text-lg font-bold text-slate-900 mb-1">프리미엄 게스트하우스</h4>
           <p class="text-xs text-slate-500 leading-relaxed">방문객을 위한 호텔 스위트룸 수준의 프라이빗 숙박 공간.</p>
         </div>
 
-        <div class="white-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
-            <i data-lucide="smile" class="w-5 h-5 text-[#bfa15f]"></i>
+        <div class="galaxy-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
+            <i data-lucide="smile" class="w-5 h-5"></i>
           </div>
           <h4 class="font-display text-lg font-bold text-slate-900 mb-1">키즈라운지 & 맘스카페</h4>
           <p class="text-xs text-slate-500 leading-relaxed">어린 자녀들이 안전하게 뛰어놀 수 있는 실내 친환경 놀이 공간.</p>
@@ -717,14 +724,14 @@
 
   <!-- ================= SECTION: LOCATION & INFRASTRUCTURE ================= -->
   <section id="location" class="py-24 bg-white relative border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          LOCATION & LIFE INFRASTRUCTURE
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ LOCATION & INFRASTRUCTURE ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          평촌 최중심 <span class="text-[#bfa15f]">골든 트라이앵글 입지</span>
+          평촌 최중심 <span class="galaxy-shimmer-text">골든 트라이앵글 입지</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           지하철 4호선 평촌역 도보 4분, 평촌 중앙공원 도보 3분, 명문 평촌 학원가와 한림대병원까지 원스톱 라이프.
@@ -753,7 +760,7 @@
       </div>
 
       <!-- Location Point Cards -->
-      <div class="white-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto">
+      <div class="galaxy-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           
           <div class="map-point transit bg-slate-50 p-5 rounded-xl border border-slate-200">
@@ -777,7 +784,7 @@
           <div class="map-point edu bg-slate-50 p-5 rounded-xl border border-slate-200">
             <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
               <span class="font-display font-semibold">교육 특구</span>
-              <span class="text-[11px] bg-[#bfa15f] text-slate-950 px-2 py-0.5 rounded font-bold">직결 권역</span>
+              <span class="text-[11px] bg-purple-700 text-white px-2 py-0.5 rounded font-bold">직결 권역</span>
             </div>
             <h4 class="font-display font-bold text-slate-900 text-base mb-1">평촌 명문 학원가</h4>
             <p class="text-xs text-slate-500 leading-relaxed">수도권 3대 학원가 및 귀인초, 평촌중 우수 학군.</p>
@@ -799,15 +806,15 @@
   </section>
 
   <!-- ================= SECTION: PROJECT TIMELINE & ROADMAP ================= -->
-  <section id="timeline" class="py-24 bg-slate-50 border-t border-slate-200/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="timeline" class="py-24 bg-[#fbfcfe] border-t border-slate-200/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          PROJECT TIMELINE & STATUS
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ PROJECT STATUS ROADMAP ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          투명하고 신속한 <span class="text-[#bfa15f]">사업 추진 현황</span>
+          투명하고 신속한 <span class="galaxy-shimmer-text">사업 추진 현황</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           평촌 1기 신도시 최초 용적률 301.49% 완화 기준 건축심의 통과 완료. 연내 사업계획승인을 향해 순항 중입니다.
@@ -816,7 +823,7 @@
 
       <div class="max-w-4xl mx-auto space-y-4">
         
-        <div class="white-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
           <div>
             <div class="text-xs text-emerald-700 font-bold mb-1">STEP 01 · 완료</div>
             <h4 class="font-display font-bold text-slate-900 text-base">리모델링 주택조합 설립인가</h4>
@@ -825,7 +832,7 @@
           <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold hidden sm:block">인가 완료</span>
         </div>
 
-        <div class="white-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
           <div>
             <div class="text-xs text-emerald-700 font-bold mb-1">STEP 02 · 완료</div>
             <h4 class="font-display font-bold text-slate-900 text-base">시공사 선정: 포스코이앤씨 (THE SHARP)</h4>
@@ -834,7 +841,7 @@
           <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold hidden sm:block">선정 완료</span>
         </div>
 
-        <div class="white-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
           <div>
             <div class="text-xs text-emerald-700 font-bold mb-1">STEP 03 · 완료</div>
             <h4 class="font-display font-bold text-slate-900 text-base">1차 안전진단 통과 (C등급 확보)</h4>
@@ -843,16 +850,16 @@
           <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold hidden sm:block">통과 완료</span>
         </div>
 
-        <div class="white-card-gold p-6 rounded-2xl border-l-4 border-l-[#bfa15f] flex items-center justify-between shadow-md">
+        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-purple-600 flex items-center justify-between shadow-md">
           <div>
-            <div class="text-xs text-[#8f7236] font-bold mb-1">STEP 04 · 최신 승인 현황</div>
+            <div class="text-xs text-purple-700 font-bold mb-1">STEP 04 · 최신 승인 현황</div>
             <h4 class="font-display font-bold text-slate-900 text-base">안양시 건축심의 조건부 의결 통과</h4>
             <p class="text-xs text-slate-600 mt-0.5">평촌 최초 용적률 301.49% 완화 적용, 최고 25층 8개동 공식 승인</p>
           </div>
-          <span class="text-xs bg-amber-50 text-[#8f7236] border border-amber-200 px-3 py-1 rounded-full font-bold hidden sm:block">심의 통과</span>
+          <span class="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1 rounded-full font-bold hidden sm:block">심의 통과</span>
         </div>
 
-        <div class="white-card p-6 rounded-2xl border-l-4 border-l-slate-300 flex items-center justify-between opacity-80">
+        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-slate-300 flex items-center justify-between opacity-80">
           <div>
             <div class="text-xs text-slate-500 font-bold mb-1">STEP 05 · 준비 중</div>
             <h4 class="font-display font-bold text-slate-800 text-base">사업계획승인 신청 (연내 목표)</h4>
@@ -868,21 +875,21 @@
 
   <!-- ================= SECTION: SMART 59㎡ VALUE CALCULATOR ================= -->
   <section id="calculator" class="py-24 bg-white relative border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          SMART 59㎡ VALUE SIMULATOR
-        </span>
+        <div class="inline-flex items-center gap-2 text-purple-700 text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+          ✦ SMART 59㎡ GALAXY SIMULATOR ✦
+        </div>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          스마트 59㎡ <span class="text-[#bfa15f]">가치 상승 시뮬레이터</span>
+          스마트 59㎡ <span class="galaxy-shimmer-text">가치 상승 시뮬레이터</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           초원세경 709세대 전 조합원을 위한 100% 59.90㎡ 배정에 맞춘 실사용 면적 및 가치 상승 추정 시뮬레이터입니다.
         </p>
       </div>
 
-      <div class="white-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
+      <div class="galaxy-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           <!-- Controls (7 cols) -->
@@ -894,8 +901,8 @@
                 1. 희망 평면 타입 선택
               </label>
               <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="setCalcPlanType('59A')" id="calc-type-59A" class="calc-type-btn active p-3.5 rounded-xl border border-slate-900 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
-                  59A 판상형<br/><span class="text-[11px] font-normal text-slate-300">3Bay 맞통풍 드레스룸</span>
+                <button type="button" onclick="setCalcPlanType('59A')" id="calc-type-59A" class="calc-type-btn active p-3.5 rounded-xl border border-purple-600 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
+                  59A 판상형<br/><span class="text-[11px] font-normal text-purple-200">3Bay 맞통풍 드레스룸</span>
                 </button>
                 <button type="button" onclick="setCalcPlanType('59B')" id="calc-type-59B" class="calc-type-btn p-3.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm text-center hover:border-slate-400 transition-all">
                   59B 와이드형<br/><span class="text-[11px] font-normal text-slate-500">4.2m 광폭 LDK 오픈형</span>
@@ -909,7 +916,7 @@
                 2. 발코니 확장 여부 (무상 제공)
               </label>
               <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="setCalcBalcony('expanded')" id="calc-balcony-expanded" class="calc-balcony-btn active p-3.5 rounded-xl border border-slate-900 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
+                <button type="button" onclick="setCalcBalcony('expanded')" id="calc-balcony-expanded" class="calc-balcony-btn active p-3.5 rounded-xl border border-purple-600 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
                   발코니 확장형 (추천)<br/><span class="text-[11px] font-normal text-emerald-300">+21.5㎡ 서비스 면적</span>
                 </button>
                 <button type="button" onclick="setCalcBalcony('standard')" id="calc-balcony-standard" class="calc-balcony-btn p-3.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm text-center hover:border-slate-400 transition-all">
@@ -924,8 +931,8 @@
                 3. 배정 희망 층수 구간
               </label>
               <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="setCalcFloor('royal')" id="calc-floor-royal" class="calc-floor-btn active p-3.5 rounded-xl border border-slate-900 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
-                  로얄층 (10~25F)<br/><span class="text-[11px] font-normal text-slate-300">중앙공원 파노라마 뷰</span>
+                <button type="button" onclick="setCalcFloor('royal')" id="calc-floor-royal" class="calc-floor-btn active p-3.5 rounded-xl border border-purple-600 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
+                  로얄층 (10~25F)<br/><span class="text-[11px] font-normal text-sky-200">중앙공원 파노라마 뷰</span>
                 </button>
                 <button type="button" onclick="setCalcFloor('mid')" id="calc-floor-mid" class="calc-floor-btn p-3.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm text-center hover:border-slate-400 transition-all">
                   중저층 (2~9F)<br/><span class="text-[11px] font-normal text-slate-500">테마가든 녹지 조망</span>
@@ -946,10 +953,10 @@
           </div>
 
           <!-- Live Output Console (5 cols) -->
-          <div class="lg:col-span-5 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+          <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 via-[#130f26] to-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl border border-purple-500/20">
             <div>
-              <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-semibold text-[#e4cf9f] mb-5">
-                <span>실시간 시뮬레이션 산출 결과</span>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-semibold text-sky-300 mb-5">
+                <span class="flex items-center gap-1.5"><i data-lucide="sparkle" class="w-3.5 h-3.5 text-purple-400"></i> 실시간 가치 산출 결과</span>
                 <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 계산 완료</span>
               </div>
 
@@ -970,7 +977,7 @@
 
                 <div>
                   <span class="text-xs text-slate-400 block">최종 실체감 주거 공간</span>
-                  <div id="res-usable" class="text-2xl font-display font-extrabold text-[#e4cf9f] mt-0.5">
+                  <div id="res-usable" class="text-2xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-sky-200 to-white mt-0.5">
                     약 81.40 ㎡ (25평형 체감 공간)
                   </div>
                 </div>
@@ -984,7 +991,7 @@
 
                 <div>
                   <span class="text-xs text-slate-400 block">예상 프리미엄 가치 형성</span>
-                  <div id="res-value" class="text-xs text-[#e4cf9f] font-bold mt-0.5 leading-relaxed">
+                  <div id="res-value" class="text-xs text-sky-300 font-bold mt-0.5 leading-relaxed">
                     25층 최고층 & 중앙공원 파노라마 조망 프리미엄 반영 최고가 형성
                   </div>
                 </div>
@@ -1003,7 +1010,7 @@
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-slate-900 text-white border-t border-slate-800 py-14 text-xs font-normal">
+  <footer class="bg-[#0b1021] text-white border-t border-purple-500/20 py-14 text-xs font-normal relative z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
         
@@ -1017,7 +1024,7 @@
             시공사: 포스코이앤씨 (THE SHARP) / 안양시 건축심의 통과 완료.
           </p>
           <div class="text-[11px] text-slate-500">
-            GITHUB: <a href="https://github.com/candoo10001/chowon-sekyung-remodeling" target="_blank" class="text-[#e4cf9f] underline">github.com/candoo10001/chowon-sekyung-remodeling</a>
+            GITHUB: <a href="https://github.com/candoo10001/chowon-sekyung-remodeling" target="_blank" class="text-sky-300 underline">github.com/candoo10001/chowon-sekyung-remodeling</a>
           </div>
         </div>
 
@@ -1056,7 +1063,7 @@
 
   <!-- ================= LIGHTBOX MODAL ================= -->
   <div id="lightboxModal" class="fixed inset-0 z-50 opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl">
-    <div class="relative max-w-5xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl p-4 sm:p-6">
+    <div class="relative max-w-5xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl p-4 sm:p-6 border border-purple-200">
       
       <!-- Close Button -->
       <button onclick="closeLightbox()" aria-label="닫기" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 flex items-center justify-center transition-colors">
