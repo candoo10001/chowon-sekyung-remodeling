@@ -1,144 +1,101 @@
 /* ==========================================================================
-   THE SHARP PARK AVENUE 138 // NEXT-GEN CYBERNETIC ARCHITECTURE
-   Aesthetic Paradigm: Tesla Robotics x Google DeepMind Astra
+   THE SHARP PARK AVENUE 138 // MODERN LUXURY WHITE
+   Aesthetic: Architectural Digest x Apple x High-End Residential Gallery
    ========================================================================== */
 
 /* Custom Smooth Scrolling & Base */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
-  background-color: #020408;
+  background-color: #ffffff;
 }
 
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #020408;
-  color: #f3f4f6;
+  background-color: #ffffff;
+  color: #1e293b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Cyber Matrix Background Grid */
-.cyber-grid-bg {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Ambient Cursor Spotlight Glow */
-#ambient-glow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 650px;
-  height: 650px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(16, 185, 129, 0.025) 45%, transparent 70%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  transition: opacity 0.4s ease;
-  will-change: transform;
-}
-
-/* Custom Ultra-Slim Neon Scrollbar */
+/* Elegant Slim Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #020408;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f0ff;
-  box-shadow: 0 0 10px #00f0ff;
+  background: #bfa15f;
 }
 
 /* Typography Enhancements */
-.font-mono-tech {
-  font-family: 'JetBrains Mono', 'Space Mono', monospace;
+.font-display {
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
 }
-.font-space {
-  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+.font-serif-luxury {
+  font-family: 'Cinzel', 'Cormorant Garamond', serif;
 }
 
-/* Cyber Card Glassmorphism 3.0 */
-.cyber-card {
-  background: rgba(8, 14, 26, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Modern Luxury Card System */
+.white-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
 }
 
-.cyber-card:hover {
-  border-color: rgba(0, 240, 255, 0.35);
-  box-shadow: 0 16px 40px -12px rgba(0, 240, 255, 0.12);
+.white-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.09);
   transform: translateY(-2px);
 }
 
-.cyber-card-glow {
-  background: rgba(10, 18, 34, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.15);
+.white-card-gold {
+  background: #ffffff;
+  border: 1px solid rgba(191, 161, 95, 0.4);
+  box-shadow: 0 12px 35px -10px rgba(191, 161, 95, 0.12);
 }
 
-/* HUD Corner Accents */
-.hud-corner {
-  position: relative;
-}
-.hud-corner::before,
-.hud-corner::after {
-  content: '';
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-color: rgba(0, 240, 255, 0.6);
-  pointer-events: none;
-}
-.hud-corner::before {
-  top: -1px;
-  left: -1px;
-  border-top: 1.5px solid;
-  border-left: 1.5px solid;
-}
-.hud-corner::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 1.5px solid;
-  border-right: 1.5px solid;
+/* Keyframe Subtle Animations */
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1.0);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1.0);
+  }
 }
 
-/* Neon Text Glow & Scanlines */
-.neon-text-cyan {
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-}
-.neon-text-emerald {
-  text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+.animate-subtle-zoom {
+  animation: subtleZoom 30s ease-in-out infinite;
 }
 
 /* ==========================================================================
-   TEMPORAL SCANNER (BEFORE & AFTER SLIDER)
+   BEFORE & AFTER LUXURY COMPARISON SLIDER
    ========================================================================== */
 #comparison-container {
   touch-action: pan-y;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
-  border: 1px solid rgba(0, 240, 255, 0.25);
+  background-color: #f1f5f9;
 }
 
 #before-wrapper {
   will-change: width;
-  box-shadow: 4px 0 35px rgba(0, 0, 0, 0.8);
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
 }
 
 #slider-handle {
@@ -147,85 +104,85 @@ body {
   will-change: left;
 }
 
-.laser-beam {
+.slider-divider-line {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #00f0ff;
-  box-shadow: 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.8);
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ==========================================================================
-   HOLOGRAPHIC BLUEPRINT CAD (59㎡)
+   ARCHITECTURAL WHITE PAPER CAD (59㎡ FLOOR PLAN)
    ========================================================================== */
-.blueprint-cad-grid {
+.blueprint-paper-grid {
+  background-color: #f8fafc;
   background-image: 
-    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(226, 232, 240, 0.8) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.8) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
 .blueprint-wall {
-  stroke: #00f0ff;
+  stroke: #1e293b;
   stroke-width: 2.5;
   fill: none;
-  filter: drop-shadow(0 0 2px rgba(0, 240, 255, 0.5));
 }
 
 .blueprint-ext-wall {
-  stroke: #10b981;
-  stroke-width: 3.5;
-  stroke-dasharray: 5 3;
-  fill: rgba(16, 185, 129, 0.06);
+  stroke: #059669;
+  stroke-width: 2.5;
+  stroke-dasharray: 4 2;
+  fill: rgba(16, 185, 129, 0.08);
 }
 
 .blueprint-room {
-  fill: rgba(255, 255, 255, 0.02);
-  stroke: rgba(0, 240, 255, 0.2);
-  stroke-width: 1;
-  transition: all 0.3s ease;
+  fill: #ffffff;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+  transition: all 0.25s ease;
 }
 
 .blueprint-room:hover {
-  fill: rgba(0, 240, 255, 0.12);
-  stroke: #00f0ff;
+  fill: #f0fdf4;
+  stroke: #059669;
 }
 
 .blueprint-text {
-  font-family: 'JetBrains Mono', 'Pretendard', monospace;
-  font-size: 11px;
-  fill: #e2e8f0;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 11.5px;
+  fill: #0f172a;
   text-anchor: middle;
   dominant-baseline: central;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
 }
 
 .blueprint-area {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  fill: #38bdf8;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9.5px;
+  fill: #64748b;
   text-anchor: middle;
+  font-weight: 500;
 }
 
 /* Floor Plan Tabs Active State */
 .plan-tab.active {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(16, 185, 129, 0.15));
-  color: #00f0ff;
-  border-color: #00f0ff;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+  background-color: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
   font-weight: 700;
 }
 
 /* ==========================================================================
-   MAP & POINTS
+   MAP & LOCATION FILTER
    ========================================================================== */
 .map-filter.active {
-  background: #00f0ff;
-  color: #020408;
-  font-weight: 800;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  background-color: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
 }
 
 .map-point {
@@ -233,28 +190,18 @@ body {
 }
 
 .map-point:hover {
-  transform: scale(1.2);
+  transform: translateY(-3px);
 }
 
 /* ==========================================================================
-   VALUATION TERMINAL / CONFIGURATOR
+   VALUATION CALCULATOR BUTTONS
    ========================================================================== */
 .calc-curr-btn.active, .calc-targ-btn.active, .calc-type-btn.active, .calc-balcony-btn.active, .calc-floor-btn.active {
-  border-color: #00f0ff !important;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(16, 185, 129, 0.1)) !important;
+  border-color: #0f172a !important;
+  background-color: #0f172a !important;
   color: #ffffff !important;
-  font-weight: 800 !important;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-}
-
-/* Keyframe Animations */
-@keyframes pulseCyan {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-.animate-pulse-cyan {
-  animation: pulseCyan 2.5s ease-in-out infinite;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
 }
 
 /* Responsive adjustments */
