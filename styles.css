@@ -1,0 +1,204 @@
+/* ==========================================================================
+   THE SHARP PARK AVENUE 138 (초원세경 리모델링) CUSTOM STYLES
+   ========================================================================== */
+
+/* Custom Smooth Scrolling & Base */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #070e18;
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070e18;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Typography Enhancements */
+.font-display {
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
+}
+.font-serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Keyframe Animations */
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1.02);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtleZoom 25s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+/* Glassmorphism Card System */
+.glass-card {
+  background: rgba(15, 32, 56, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card-gold {
+  background: rgba(15, 32, 56, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 20px 45px -10px rgba(212, 175, 55, 0.15);
+}
+
+/* ==========================================================================
+   BEFORE & AFTER COMPARISON SLIDER
+   ========================================================================== */
+#comparison-container {
+  touch-action: pan-y;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#before-wrapper {
+  will-change: width;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
+}
+
+#slider-handle {
+  transform: translate(-50%, 0);
+  cursor: ew-resize;
+  will-change: left;
+}
+
+/* ==========================================================================
+   FLOOR PLAN SVG BLUEPRINT
+   ========================================================================== */
+.blueprint-wall {
+  stroke: #d4af37;
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.blueprint-ext-wall {
+  stroke: #00a884;
+  stroke-width: 3.5;
+  stroke-dasharray: 4 2;
+  fill: rgba(0, 168, 132, 0.08);
+}
+
+.blueprint-room {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 1;
+  transition: all 0.3s ease;
+}
+
+.blueprint-room:hover {
+  fill: rgba(212, 175, 55, 0.15);
+  stroke: #d4af37;
+}
+
+.blueprint-text {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 11px;
+  fill: #cbd5e1;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-weight: 600;
+}
+
+.blueprint-area {
+  font-size: 9px;
+  fill: #94a3b8;
+  text-anchor: middle;
+}
+
+/* Floor Plan Tabs Active State */
+.plan-tab.active {
+  background-color: #d4af37;
+  color: #070e18;
+  border-color: #d4af37;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+}
+
+/* ==========================================================================
+   MAP & POINTS
+   ========================================================================== */
+.map-filter.active {
+  background-color: #d4af37;
+  color: #070e18;
+  font-weight: 700;
+}
+
+.map-point {
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.map-point:hover {
+  transform: scale(1.15);
+}
+
+/* ==========================================================================
+   CALCULATOR BUTTONS
+   ========================================================================== */
+.calc-curr-btn.active, .calc-targ-btn.active, .calc-type-btn.active, .calc-balcony-btn.active, .calc-floor-btn.active {
+  border-color: #d4af37 !important;
+  background-color: rgba(212, 175, 55, 0.25) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+}
+
+/* ==========================================================================
+   MODAL & LIGHTBOX & TOAST
+   ========================================================================== */
+#lightboxModal {
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+#toast {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  #comparison-container {
+    height: 360px;
+  }
+}
