@@ -1,103 +1,144 @@
 /* ==========================================================================
-   THE SHARP PARK AVENUE 138 (초원세경 리모델링) CUSTOM STYLES
+   THE SHARP PARK AVENUE 138 // NEXT-GEN CYBERNETIC ARCHITECTURE
+   Aesthetic Paradigm: Tesla Robotics x Google DeepMind Astra
    ========================================================================== */
 
 /* Custom Smooth Scrolling & Base */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 90px;
+  background-color: #020408;
 }
 
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #070e18;
-  color: #f1f5f9;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #020408;
+  color: #f3f4f6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Custom Scrollbar */
+/* Cyber Matrix Background Grid */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Ambient Cursor Spotlight Glow */
+#ambient-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(16, 185, 129, 0.025) 45%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: opacity 0.4s ease;
+  will-change: transform;
+}
+
+/* Custom Ultra-Slim Neon Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #070e18;
+  background: #020408;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
-  border-radius: 4px;
+  background: #1e293b;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
 }
 
 /* Typography Enhancements */
-.font-display {
-  font-family: 'Montserrat', 'Pretendard', sans-serif;
+.font-mono-tech {
+  font-family: 'JetBrains Mono', 'Space Mono', monospace;
 }
-.font-serif {
-  font-family: 'Cormorant Garamond', serif;
-}
-
-/* Keyframe Animations */
-@keyframes subtleZoom {
-  0% {
-    transform: scale(1.02);
-  }
-  50% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1.02);
-  }
+.font-space {
+  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
 }
 
-.animate-subtle-zoom {
-  animation: subtleZoom 25s ease-in-out infinite;
+/* Cyber Card Glassmorphism 3.0 */
+.cyber-card {
+  background: rgba(8, 14, 26, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+.cyber-card:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+  box-shadow: 0 16px 40px -12px rgba(0, 240, 255, 0.12);
+  transform: translateY(-2px);
 }
 
-.animate-float {
-  animation: floatSlow 4s ease-in-out infinite;
+.cyber-card-glow {
+  background: rgba(10, 18, 34, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.15);
 }
 
-/* Glassmorphism Card System */
-.glass-card {
-  background: rgba(15, 32, 56, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+/* HUD Corner Accents */
+.hud-corner {
+  position: relative;
+}
+.hud-corner::before,
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(0, 240, 255, 0.6);
+  pointer-events: none;
+}
+.hud-corner::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.hud-corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
 }
 
-.glass-card-gold {
-  background: rgba(15, 32, 56, 0.85);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  box-shadow: 0 20px 45px -10px rgba(212, 175, 55, 0.15);
+/* Neon Text Glow & Scanlines */
+.neon-text-cyan {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+.neon-text-emerald {
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
 }
 
 /* ==========================================================================
-   BEFORE & AFTER COMPARISON SLIDER
+   TEMPORAL SCANNER (BEFORE & AFTER SLIDER)
    ========================================================================== */
 #comparison-container {
   touch-action: pan-y;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
+  border: 1px solid rgba(0, 240, 255, 0.25);
 }
 
 #before-wrapper {
   will-change: width;
-  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 0 35px rgba(0, 0, 0, 0.8);
 }
 
 #slider-handle {
@@ -106,64 +147,85 @@ body {
   will-change: left;
 }
 
+.laser-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.8);
+}
+
 /* ==========================================================================
-   FLOOR PLAN SVG BLUEPRINT
+   HOLOGRAPHIC BLUEPRINT CAD (59㎡)
    ========================================================================== */
+.blueprint-cad-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 .blueprint-wall {
-  stroke: #d4af37;
+  stroke: #00f0ff;
   stroke-width: 2.5;
   fill: none;
+  filter: drop-shadow(0 0 2px rgba(0, 240, 255, 0.5));
 }
 
 .blueprint-ext-wall {
-  stroke: #00a884;
+  stroke: #10b981;
   stroke-width: 3.5;
-  stroke-dasharray: 4 2;
-  fill: rgba(0, 168, 132, 0.08);
+  stroke-dasharray: 5 3;
+  fill: rgba(16, 185, 129, 0.06);
 }
 
 .blueprint-room {
-  fill: rgba(255, 255, 255, 0.04);
-  stroke: rgba(255, 255, 255, 0.15);
+  fill: rgba(255, 255, 255, 0.02);
+  stroke: rgba(0, 240, 255, 0.2);
   stroke-width: 1;
   transition: all 0.3s ease;
 }
 
 .blueprint-room:hover {
-  fill: rgba(212, 175, 55, 0.15);
-  stroke: #d4af37;
+  fill: rgba(0, 240, 255, 0.12);
+  stroke: #00f0ff;
 }
 
 .blueprint-text {
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'JetBrains Mono', 'Pretendard', monospace;
   font-size: 11px;
-  fill: #cbd5e1;
+  fill: #e2e8f0;
   text-anchor: middle;
   dominant-baseline: central;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .blueprint-area {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
-  fill: #94a3b8;
+  fill: #38bdf8;
   text-anchor: middle;
 }
 
 /* Floor Plan Tabs Active State */
 .plan-tab.active {
-  background-color: #d4af37;
-  color: #070e18;
-  border-color: #d4af37;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(16, 185, 129, 0.15));
+  color: #00f0ff;
+  border-color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+  font-weight: 700;
 }
 
 /* ==========================================================================
    MAP & POINTS
    ========================================================================== */
 .map-filter.active {
-  background-color: #d4af37;
-  color: #070e18;
-  font-weight: 700;
+  background: #00f0ff;
+  color: #020408;
+  font-weight: 800;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
 }
 
 .map-point {
@@ -171,29 +233,28 @@ body {
 }
 
 .map-point:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 /* ==========================================================================
-   CALCULATOR BUTTONS
+   VALUATION TERMINAL / CONFIGURATOR
    ========================================================================== */
 .calc-curr-btn.active, .calc-targ-btn.active, .calc-type-btn.active, .calc-balcony-btn.active, .calc-floor-btn.active {
-  border-color: #d4af37 !important;
-  background-color: rgba(212, 175, 55, 0.25) !important;
+  border-color: #00f0ff !important;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(16, 185, 129, 0.1)) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
 }
 
-/* ==========================================================================
-   MODAL & LIGHTBOX & TOAST
-   ========================================================================== */
-#lightboxModal {
-  transition: opacity 0.25s ease, visibility 0.25s ease;
+/* Keyframe Animations */
+@keyframes pulseCyan {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
-#toast {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.animate-pulse-cyan {
+  animation: pulseCyan 2.5s ease-in-out infinite;
 }
 
 /* Responsive adjustments */
