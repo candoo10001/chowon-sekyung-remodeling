@@ -5,8 +5,11 @@
 
 초원세경아파트(초원8단지) 리모델링 사업 및 안양시 건축심의 통과 최신 팩트, 포스코이앤씨의 혁신 설계를 기반으로 제작된 인터랙티브 정보 안내 웹사이트입니다.
 
-🌐 **실시간 웹사이트 바로가기 (Free Domain)**:  
-👉 **[https://candoo10001.github.io/chowon-sekyung-remodeling/](https://candoo10001.github.io/chowon-sekyung-remodeling/)**
+🌐 **실시간 웹사이트 바로가기 (Clean Free Domain)**:  
+👉 **[https://chowon-sekyung.surge.sh](https://chowon-sekyung.surge.sh)**  
+👉 **[https://the-sharp-138.surge.sh](https://the-sharp-138.surge.sh)**  
+
+*(GitHub 미러: [https://candoo10001.github.io/chowon-sekyung-remodeling/](https://candoo10001.github.io/chowon-sekyung-remodeling/))*
 
 ---
 
