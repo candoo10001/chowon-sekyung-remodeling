@@ -110,7 +110,7 @@
 
       <!-- Action Button with Starlight Glow -->
       <div class="hidden sm:flex items-center gap-3">
-        <a href="#gallery" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-gradient-to-r hover:from-purple-900 hover:to-slate-900 transition-all shadow-md flex items-center gap-2 border border-purple-400/20">
+        <a href="#gallery" class="astra-magnetic px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-gradient-to-r hover:from-purple-900 hover:to-slate-900 transition-all shadow-md flex items-center gap-2 border border-purple-400/20">
           <i data-lucide="sparkle" class="w-3.5 h-3.5 text-sky-300"></i>
           <span>공식 조감도 갤러리</span>
         </a>
@@ -153,11 +153,43 @@
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- Galaxy Starlight Pill Badge -->
-      <div class="inline-flex items-center gap-2 p-1.5 px-4 rounded-full bg-white/90 backdrop-blur-md border border-purple-200 text-slate-700 text-xs font-semibold mb-6 shadow-sm">
+      <div class="inline-flex items-center gap-2 p-1.5 px-4 rounded-full bg-white/90 backdrop-blur-md border border-purple-200 text-slate-700 text-xs font-semibold mb-4 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-sky-400 animate-pulse"></span>
         <span class="text-purple-900 font-bold">✦ GALAXY HORIZON 138 ✦</span>
         <span class="text-slate-300">|</span>
         <span class="text-slate-900 font-bold">포스코이앤씨 하이엔드</span>
+      </div>
+
+      <!-- Astra Multimodal Intelligence Core Widget -->
+      <div class="flex flex-col items-center justify-center my-4">
+        <div id="astra-core-orb" class="astra-core-wrapper cursor-pointer group select-none relative p-3" title="클릭하여 아스트라 지능 분석 모드 전환">
+          <!-- Orbital Animated Rings -->
+          <div class="astra-pulse-ring astra-pulse-ring-1"></div>
+          <div class="astra-pulse-ring astra-pulse-ring-2"></div>
+          <div class="astra-pulse-ring astra-pulse-ring-3"></div>
+          
+          <!-- Center Glowing Core with Equalizer -->
+          <div class="w-16 h-16 rounded-full bg-white/95 backdrop-blur-xl border border-purple-300/80 shadow-lg shadow-purple-500/25 flex flex-col items-center justify-center relative z-10 transition-transform duration-300 group-hover:scale-110 group-active:scale-95">
+            <div class="flex items-center justify-center gap-1 h-6">
+              <div class="astra-wave-bar"></div>
+              <div class="astra-wave-bar"></div>
+              <div class="astra-wave-bar"></div>
+              <div class="astra-wave-bar"></div>
+              <div class="astra-wave-bar"></div>
+              <div class="astra-wave-bar"></div>
+            </div>
+            <span class="text-[8.5px] font-extrabold tracking-widest text-purple-950 mt-0.5">ASTRA</span>
+          </div>
+        </div>
+        
+        <!-- Astra Live AI Status Display -->
+        <div class="inline-flex items-center gap-2 mt-2 px-3.5 py-1 rounded-full bg-white/85 backdrop-blur-md border border-purple-200/70 text-xs text-slate-700 shadow-sm transition-all duration-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="astra-status-text" class="font-semibold text-slate-800 transition-opacity duration-200">
+            ASTRA CORE: 775세대 하이엔드 랜드마크 분석 완료
+          </span>
+          <span class="text-[10px] text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded font-bold cursor-pointer hover:bg-purple-100">Click to shift</span>
+        </div>
       </div>
 
       <!-- Main Headline with Galaxy Prismatic Gradient Text -->
@@ -179,22 +211,22 @@
 
       <!-- Key Metrics Strip: Pearlescent Glass Cards -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
-        <div class="galaxy-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card astra-tilt rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">단지 규모 혁신</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">775 <span class="text-xs font-normal text-slate-500">세대</span></div>
           <div class="text-[11px] text-slate-500 mt-1">기존 709세대 → +66세대 일반분양</div>
         </div>
-        <div class="galaxy-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card astra-tilt rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">주차대수 대확충</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">1.31 <span class="text-xs font-normal text-slate-500">대/세대</span></div>
           <div class="text-[11px] text-slate-500 mt-1">기존 0.58대 → 총 1,019대 (지하4층)</div>
         </div>
-        <div class="galaxy-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card astra-tilt rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">단일 평형 혁신</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-sky-500">59.90 <span class="text-xs font-normal text-slate-500">㎡</span></div>
           <div class="text-[11px] text-slate-500 mt-1">전 조합원 100% 신축 25평형 배정</div>
         </div>
-        <div class="galaxy-card rounded-2xl p-5 text-center">
+        <div class="galaxy-card astra-tilt rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">최고 랜드마크</div>
           <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">25 <span class="text-xs font-normal text-slate-500">층</span></div>
           <div class="text-[11px] text-slate-500 mt-1">포스맥 커튼월룩 & 지상공원화</div>
@@ -203,11 +235,11 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#transformation" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-purple-900/15 hover:shadow-purple-900/25 hover:scale-105 transition-all text-sm border border-purple-500/20">
+        <a href="#transformation" class="astra-magnetic w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-purple-900/15 hover:shadow-purple-900/25 hover:scale-105 transition-all text-sm border border-purple-500/20">
           <i data-lucide="split-square-vertical" class="w-4 h-4 text-sky-300"></i>
           Before & After 전·후 비교
         </a>
-        <a href="#gallery" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
+        <a href="#gallery" class="astra-magnetic w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
           <i data-lucide="image" class="w-4 h-4 text-purple-600"></i>
           공식 조감도 & 단지 둘러보기
         </a>
@@ -249,6 +281,51 @@
           <img src="assets/the_sharp_138_rendering.jpg" 
                alt="After: 더샵 파크에비뉴 138 공식 조감도" 
                class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" />
+
+          <!-- Astra Holographic Laser Scanner Beam -->
+          <div class="astra-scanline"></div>
+
+          <!-- Astra Spatial Hotspot 1: 25F Skyline -->
+          <div class="astra-hotspot top-[18%] left-[72%] hidden sm:block">
+            <div class="astra-sonar-ring"></div>
+            <div class="astra-sonar-ring astra-sonar-ring-delay"></div>
+            <div class="w-7 h-7 rounded-full bg-white/95 backdrop-blur-md border-2 border-purple-500 shadow-md flex items-center justify-center text-purple-700 hover:scale-110 transition-transform">
+              <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
+            <div class="astra-hud-tooltip">
+              <div class="font-bold text-sky-300 text-[10px] mb-0.5">ASTRA SPATIAL 01</div>
+              <div class="font-bold text-white text-xs">최고 25층 랜드마크 스카이라인</div>
+              <div class="text-slate-300 text-[10px]">평촌 중앙공원 파노라마 영구 조망</div>
+            </div>
+          </div>
+
+          <!-- Astra Spatial Hotspot 2: Curtain Wall Look -->
+          <div class="astra-hotspot top-[45%] left-[84%] hidden sm:block">
+            <div class="astra-sonar-ring"></div>
+            <div class="astra-sonar-ring astra-sonar-ring-delay"></div>
+            <div class="w-7 h-7 rounded-full bg-white/95 backdrop-blur-md border-2 border-sky-500 shadow-md flex items-center justify-center text-sky-700 hover:scale-110 transition-transform">
+              <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
+            <div class="astra-hud-tooltip">
+              <div class="font-bold text-sky-300 text-[10px] mb-0.5">ASTRA SPATIAL 02</div>
+              <div class="font-bold text-white text-xs">포스코 PosMAC 프리미엄 커튼월룩</div>
+              <div class="text-slate-300 text-[10px]">고내식 강판 & 하이엔드 입면 디자인</div>
+            </div>
+          </div>
+
+          <!-- Astra Spatial Hotspot 3: 100% Park & Parking -->
+          <div class="astra-hotspot bottom-[20%] left-[62%] hidden sm:block">
+            <div class="astra-sonar-ring"></div>
+            <div class="astra-sonar-ring astra-sonar-ring-delay"></div>
+            <div class="w-7 h-7 rounded-full bg-white/95 backdrop-blur-md border-2 border-amber-500 shadow-md flex items-center justify-center text-amber-700 hover:scale-110 transition-transform">
+              <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
+            <div class="astra-hud-tooltip">
+              <div class="font-bold text-sky-300 text-[10px] mb-0.5">ASTRA SPATIAL 03</div>
+              <div class="font-bold text-white text-xs">지상 100% 공원화 & 지하 4층</div>
+              <div class="text-slate-300 text-[10px]">세대당 1.31대 광폭 자주식 주차 (총 1,019대)</div>
+            </div>
+          </div>
 
           <!-- BEFORE IMAGE (Clipped on top) -->
           <div id="before-wrapper" class="absolute inset-0 w-1/2 overflow-hidden border-r-2 border-white pointer-events-none transition-none">
@@ -366,7 +443,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         
         <!-- Card 1 -->
-        <div class="galaxy-card rounded-2xl overflow-hidden group cursor-pointer"
+        <div class="galaxy-card astra-tilt rounded-2xl overflow-hidden group cursor-pointer"
              onclick="openLightbox('assets/the_sharp_138_rendering.jpg', '더샵 파크에비뉴 138 공식 조감도 (메인 투시도)', '시공사 포스코이앤씨 / 최고 25층 스카이라인, 커튼월룩 입면, 포스맥 강판 스틸아트월 특화')">
           <div class="relative h-64 overflow-hidden bg-slate-100">
             <img src="assets/the_sharp_138_rendering.jpg" 
@@ -391,7 +468,7 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="galaxy-card rounded-2xl overflow-hidden group cursor-pointer"
+        <div class="galaxy-card astra-tilt rounded-2xl overflow-hidden group cursor-pointer"
              onclick="openLightbox('assets/rendering_detail.png', '더샵 파크에비뉴 138 단지 마스터플랜 조감도', '100% 지상공원화 테마파크 & 보차분리 순환 동선')">
           <div class="relative h-64 overflow-hidden bg-slate-100">
             <img src="assets/rendering_detail.png" 
@@ -416,7 +493,7 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="galaxy-card rounded-2xl overflow-hidden group cursor-pointer"
+        <div class="galaxy-card astra-tilt rounded-2xl overflow-hidden group cursor-pointer"
              onclick="openLightbox('assets/chowon_before.png', '초원세경 805·806동 전경 실사', '1996년 준공 당시 21층 복도식 709세대 원본 현장 기록')">
           <div class="relative h-64 overflow-hidden bg-slate-100">
             <img src="assets/chowon_before.png" 
@@ -464,7 +541,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Pillar 1 -->
-        <div class="galaxy-card rounded-2xl p-8">
+        <div class="galaxy-card astra-tilt rounded-2xl p-8">
           <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6 shadow-sm border border-purple-100">
             <i data-lucide="shield-check" class="w-6 h-6"></i>
           </div>
@@ -478,7 +555,7 @@
         </div>
 
         <!-- Pillar 2 -->
-        <div class="galaxy-card rounded-2xl p-8">
+        <div class="galaxy-card astra-tilt rounded-2xl p-8">
           <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-6 shadow-sm border border-sky-100">
             <i data-lucide="car" class="w-6 h-6"></i>
           </div>
@@ -492,7 +569,7 @@
         </div>
 
         <!-- Pillar 3 -->
-        <div class="galaxy-card rounded-2xl p-8">
+        <div class="galaxy-card astra-tilt rounded-2xl p-8">
           <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 shadow-sm border border-emerald-100">
             <i data-lucide="trees" class="w-6 h-6"></i>
           </div>
@@ -506,7 +583,7 @@
         </div>
 
         <!-- Pillar 4 -->
-        <div class="galaxy-card rounded-2xl p-8">
+        <div class="galaxy-card astra-tilt rounded-2xl p-8">
           <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6 shadow-sm border border-purple-100">
             <i data-lucide="layout-grid" class="w-6 h-6"></i>
           </div>
@@ -520,7 +597,7 @@
         </div>
 
         <!-- Pillar 5 -->
-        <div class="galaxy-card rounded-2xl p-8">
+        <div class="galaxy-card astra-tilt rounded-2xl p-8">
           <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 shadow-sm border border-amber-100">
             <i data-lucide="coffee" class="w-6 h-6"></i>
           </div>
@@ -534,7 +611,7 @@
         </div>
 
         <!-- Pillar 6 -->
-        <div class="galaxy-card rounded-2xl p-8">
+        <div class="galaxy-card astra-tilt rounded-2xl p-8">
           <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-6 shadow-sm border border-sky-100">
             <i data-lucide="navigation" class="w-6 h-6"></i>
           </div>
@@ -584,7 +661,7 @@
       </div>
 
       <!-- Plan Display -->
-      <div class="galaxy-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
+      <div class="galaxy-card astra-tilt rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <!-- Left: SVG Plan Canvas -->
@@ -593,8 +670,34 @@
               <span id="plan-code" class="font-display font-semibold">THE SHARP 59A SIGNATURE UNIT</span>
               <span class="text-purple-700 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-600"></span> 3Bay 맞통풍</span>
             </div>
-            <div id="plan-svg-container" class="w-full flex items-center justify-center">
+            <div id="plan-svg-container" class="w-full flex items-center justify-center relative">
               <!-- Dynamically rendered -->
+            </div>
+
+            <!-- Astra Blueprint Spatial Hotspot: Living Room -->
+            <div class="astra-hotspot top-[48%] left-[48%] hidden sm:block">
+              <div class="astra-sonar-ring"></div>
+              <div class="w-6 h-6 rounded-full bg-purple-600 text-white shadow-sm flex items-center justify-center hover:scale-110 transition-transform">
+                <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </div>
+              <div class="astra-hud-tooltip">
+                <div class="font-bold text-purple-300 text-[10px]">INSPECTION 01</div>
+                <div class="font-bold text-white text-xs">3Bay 맞통풍 와이드 거실</div>
+                <div class="text-slate-300 text-[10px]">전면 채광 극대화 & 주방-거실 통풍축</div>
+              </div>
+            </div>
+
+            <!-- Astra Blueprint Spatial Hotspot: Master Suite -->
+            <div class="astra-hotspot top-[38%] left-[80%] hidden sm:block">
+              <div class="astra-sonar-ring"></div>
+              <div class="w-6 h-6 rounded-full bg-sky-600 text-white shadow-sm flex items-center justify-center hover:scale-110 transition-transform">
+                <i data-lucide="sparkle" class="w-3 h-3"></i>
+              </div>
+              <div class="astra-hud-tooltip">
+                <div class="font-bold text-sky-300 text-[10px]">INSPECTION 02</div>
+                <div class="font-bold text-white text-xs">안방 마스터 드레스룸 & 부부욕실</div>
+                <div class="text-slate-300 text-[10px]">호텔식 파우더룸 및 워크인 수납 일체화</div>
+              </div>
             </div>
           </div>
 
@@ -670,7 +773,7 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="galaxy-card rounded-2xl p-6">
+        <div class="galaxy-card astra-tilt rounded-2xl p-6">
           <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
             <i data-lucide="dumbbell" class="w-5 h-5"></i>
           </div>
@@ -678,7 +781,7 @@
           <p class="text-xs text-slate-500 leading-relaxed">최고급 테크노짐 웨이트 머신 및 요가·필라테스 룸 구성.</p>
         </div>
 
-        <div class="galaxy-card rounded-2xl p-6">
+        <div class="galaxy-card astra-tilt rounded-2xl p-6">
           <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 border border-sky-100">
             <i data-lucide="flag" class="w-5 h-5"></i>
           </div>
@@ -686,7 +789,7 @@
           <p class="text-xs text-slate-500 leading-relaxed">전 타석 GDR 스윙 분석기 및 프라이빗 퍼팅존 완비.</p>
         </div>
 
-        <div class="galaxy-card rounded-2xl p-6">
+        <div class="galaxy-card astra-tilt rounded-2xl p-6">
           <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
             <i data-lucide="waves" class="w-5 h-5"></i>
           </div>
@@ -694,7 +797,7 @@
           <p class="text-xs text-slate-500 leading-relaxed">온탕, 냉탕 및 편백나무 건식 사우나로 완성되는 데일리 릴랙스.</p>
         </div>
 
-        <div class="galaxy-card rounded-2xl p-6">
+        <div class="galaxy-card astra-tilt rounded-2xl p-6">
           <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 border border-sky-100">
             <i data-lucide="book-open" class="w-5 h-5"></i>
           </div>
@@ -702,7 +805,7 @@
           <p class="text-xs text-slate-500 leading-relaxed">학습과 재택근무를 지원하는 조용한 집중 독서실 및 노트북 존.</p>
         </div>
 
-        <div class="galaxy-card rounded-2xl p-6">
+        <div class="galaxy-card astra-tilt rounded-2xl p-6">
           <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 border border-amber-100">
             <i data-lucide="home" class="w-5 h-5"></i>
           </div>
@@ -710,7 +813,7 @@
           <p class="text-xs text-slate-500 leading-relaxed">방문객을 위한 호텔 스위트룸 수준의 프라이빗 숙박 공간.</p>
         </div>
 
-        <div class="galaxy-card rounded-2xl p-6">
+        <div class="galaxy-card astra-tilt rounded-2xl p-6">
           <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
             <i data-lucide="smile" class="w-5 h-5"></i>
           </div>
@@ -760,7 +863,7 @@
       </div>
 
       <!-- Location Point Cards -->
-      <div class="galaxy-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto">
+      <div class="galaxy-card astra-tilt rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           
           <div class="map-point transit bg-slate-50 p-5 rounded-xl border border-slate-200">
@@ -823,7 +926,7 @@
 
       <div class="max-w-4xl mx-auto space-y-4">
         
-        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+        <div class="galaxy-card astra-tilt p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
           <div>
             <div class="text-xs text-emerald-700 font-bold mb-1">STEP 01 · 완료</div>
             <h4 class="font-display font-bold text-slate-900 text-base">리모델링 주택조합 설립인가</h4>
@@ -832,7 +935,7 @@
           <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold hidden sm:block">인가 완료</span>
         </div>
 
-        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+        <div class="galaxy-card astra-tilt p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
           <div>
             <div class="text-xs text-emerald-700 font-bold mb-1">STEP 02 · 완료</div>
             <h4 class="font-display font-bold text-slate-900 text-base">시공사 선정: 포스코이앤씨 (THE SHARP)</h4>
@@ -841,7 +944,7 @@
           <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold hidden sm:block">선정 완료</span>
         </div>
 
-        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+        <div class="galaxy-card astra-tilt p-6 rounded-2xl border-l-4 border-l-emerald-600 flex items-center justify-between">
           <div>
             <div class="text-xs text-emerald-700 font-bold mb-1">STEP 03 · 완료</div>
             <h4 class="font-display font-bold text-slate-900 text-base">1차 안전진단 통과 (C등급 확보)</h4>
@@ -850,7 +953,7 @@
           <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold hidden sm:block">통과 완료</span>
         </div>
 
-        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-purple-600 flex items-center justify-between shadow-md">
+        <div class="galaxy-card astra-tilt p-6 rounded-2xl border-l-4 border-l-purple-600 flex items-center justify-between shadow-md">
           <div>
             <div class="text-xs text-purple-700 font-bold mb-1">STEP 04 · 최신 승인 현황</div>
             <h4 class="font-display font-bold text-slate-900 text-base">안양시 건축심의 조건부 의결 통과</h4>
@@ -859,7 +962,7 @@
           <span class="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1 rounded-full font-bold hidden sm:block">심의 통과</span>
         </div>
 
-        <div class="galaxy-card p-6 rounded-2xl border-l-4 border-l-slate-300 flex items-center justify-between opacity-80">
+        <div class="galaxy-card astra-tilt p-6 rounded-2xl border-l-4 border-l-slate-300 flex items-center justify-between opacity-80">
           <div>
             <div class="text-xs text-slate-500 font-bold mb-1">STEP 05 · 준비 중</div>
             <h4 class="font-display font-bold text-slate-800 text-base">사업계획승인 신청 (연내 목표)</h4>
@@ -889,7 +992,7 @@
         </p>
       </div>
 
-      <div class="galaxy-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
+      <div class="galaxy-card astra-tilt rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           <!-- Controls (7 cols) -->

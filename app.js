@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initComparisonSlider();
   initFloorPlans();
   initCalculator();
+
+  // Astra Motion Engine
+  initAstraCore();
+  initAstra3DTilt();
+  initAstraMagneticButtons();
 });
 
 /* ==========================================================================
@@ -561,3 +566,113 @@ window.addEventListener('keydown', (e) => {
     closeLightbox();
   }
 });
+
+
+/* ==========================================================================
+   7. ASTRA INTERACTIVE MOTION ENGINE
+   ========================================================================== */
+
+function initAstraCore() {
+  const astraCore = document.getElementById('astra-core-orb');
+  const astraStatus = document.getElementById('astra-status-text');
+  const waveBars = document.querySelectorAll('.astra-wave-bar');
+  if (!astraCore) return;
+
+  const statusMessages = [
+    'ASTRA CORE: 775세대 하이엔드 랜드마크 분석 완료',
+    'ASTRA CORE: 지하 4층 1.31대 자주식 주차 최적화',
+    'ASTRA CORE: 안양시 건축심의 조건부 의결 통과 완료',
+    'ASTRA CORE: 전세대 100% 신축 59㎡ 평면 매핑 완료',
+    'ASTRA CORE: 평촌 중앙공원 그린 조망권 100% 확보'
+  ];
+  let msgIdx = 0;
+
+  // Interactivity on Core Click / Hover
+  astraCore.addEventListener('click', () => {
+    msgIdx = (msgIdx + 1) % statusMessages.length;
+    if (astraStatus) {
+      astraStatus.style.opacity = '0';
+      setTimeout(() => {
+        astraStatus.textContent = statusMessages[msgIdx];
+        astraStatus.style.opacity = '1';
+      }, 150);
+    }
+
+    // Dynamic wave spike on click
+    waveBars.forEach((bar) => {
+      bar.style.transform = `scaleY(${Math.random() * 1.5 + 1.2})`;
+      setTimeout(() => {
+        bar.style.transform = '';
+      }, 400);
+    });
+  });
+
+  // Dynamic subtle wave fluctuation
+  setInterval(() => {
+    waveBars.forEach((bar) => {
+      const scale = 0.5 + Math.random() * 0.9;
+      bar.style.transform = `scaleY(${scale.toFixed(2)})`;
+    });
+  }, 350);
+}
+
+function initAstra3DTilt() {
+  const tiltCards = document.querySelectorAll('.astra-tilt');
+  if (!tiltCards.length) return;
+
+  tiltCards.forEach((card) => {
+    if (!card.querySelector('.astra-glaze')) {
+      const glaze = document.createElement('div');
+      glaze.className = 'astra-glaze';
+      card.appendChild(glaze);
+    }
+
+    let bounds;
+
+    function onMouseEnter() {
+      bounds = card.getBoundingClientRect();
+    }
+
+    function onMouseMove(e) {
+      if (!bounds) bounds = card.getBoundingClientRect();
+      const mouseX = e.clientX - bounds.left;
+      const mouseY = e.clientY - bounds.top;
+
+      const xPercent = mouseX / bounds.width - 0.5;
+      const yPercent = mouseY / bounds.height - 0.5;
+
+      const rotateX = (-yPercent * 10).toFixed(2);
+      const rotateY = (xPercent * 10).toFixed(2);
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.setProperty('--mouse-x', `${mouseX}px`);
+      card.style.setProperty('--mouse-y', `${mouseY}px`);
+    }
+
+    function onMouseLeave() {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    }
+
+    card.addEventListener('mouseenter', onMouseEnter);
+    card.addEventListener('mousemove', onMouseMove);
+    card.addEventListener('mouseleave', onMouseLeave);
+  });
+}
+
+function initAstraMagneticButtons() {
+  const magneticBtns = document.querySelectorAll('.astra-magnetic');
+  if (!magneticBtns.length) return;
+
+  magneticBtns.forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0px, 0px)';
+    });
+  });
+}
