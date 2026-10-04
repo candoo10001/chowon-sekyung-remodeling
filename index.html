@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>더샵 파크에비뉴 138 | 평촌 초원세경 리모델링 정보 안내</title>
-  <meta name="description" content="평촌의 중심, 중앙공원을 품은 25층 하이엔드 랜드마크. 평촌 초원세경아파트 리모델링(더샵 파크에비뉴 138) 사업 정보 안내. 최고 25층, 775세대, 단일 전용 59㎡ 혁신 평면, 100% 지상공원화." />
+  <meta name="description" content="평촌의 중심, 중앙공원을 품은 25층 하이엔드 랜드마크. 평촌 초원세경아파트 리모델링(더샵 파크에비뉴 138) 사업 정보 안내. 최고 25층, 775세대, 수평증축 검토 평면, 100% 지상공원화." />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
@@ -26,7 +26,7 @@
             luxury: {
               gold: '#bfa15f',
               goldLight: '#e4cf9f',
-              goldDark: '#8f7236',
+              goldDark: '#80652d',
               charcoal: '#0f172a',
               slate: '#475569',
               muted: '#94a3b8',
@@ -50,6 +50,7 @@
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tour.css" />
 </head>
 <body class="bg-white text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-slate-900 selection:text-white">
 
@@ -69,12 +70,12 @@
   </aside>
 
   <!-- ================= GLOBAL FLOATING WHITE HEADER ================= -->
-  <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 backdrop-blur-xl bg-white/90 border-b border-slate-200/80 mt-[37px]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <header id="main-header" class="sticky top-0 z-40 transition-shadow duration-300 backdrop-blur-xl bg-white/95 border-b border-slate-200/80">
+    <div class="header-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
       
       <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-md shadow-slate-900/10 group-hover:bg-[#bfa15f] transition-colors">
+      <a href="#" class="header-brand flex items-center gap-2 sm:gap-3 group min-w-0">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl bg-slate-900 flex items-center justify-center shadow-md shadow-slate-900/10 group-hover:bg-[#bfa15f] transition-colors">
           <span class="font-display font-black text-white text-base tracking-tighter">138</span>
         </div>
         <div>
@@ -83,17 +84,18 @@
             <span class="text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200 px-1.5 py-0.5 rounded">포스코이앤씨</span>
           </div>
           <div class="text-[11px] md:text-xs font-medium text-slate-500">
-            더샵 파크에비뉴 138 <span class="text-slate-400 font-normal">(초원세경)</span>
+            더샵 파크에비뉴 138 <span class="text-slate-500 font-normal">(초원세경)</span>
           </div>
         </div>
       </a>
 
       <!-- Desktop Nav with Clean Modern Titles -->
-      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
+      <nav aria-label="주 메뉴" class="hidden xl:flex items-center gap-4 text-sm font-medium text-slate-600 whitespace-nowrap">
         <a href="#transformation" class="hover:text-slate-950 transition-colors">변화 스토리</a>
         <a href="#gallery" class="hover:text-slate-950 text-slate-950 font-bold transition-colors">공식 조감도</a>
         <a href="#premiums" class="hover:text-slate-950 transition-colors">6대 프리미엄</a>
-        <a href="#floorplans" class="hover:text-slate-950 transition-colors">혁신 59㎡ 평면</a>
+        <a href="#floorplans" class="hover:text-slate-950 transition-colors">수평증축 평면</a>
+        <a href="#apartment-tour" class="text-[#80652d] font-bold hover:text-slate-950 transition-colors">3D 투어</a>
         <a href="#community" class="hover:text-slate-950 transition-colors">클럽 더샵</a>
         <a href="#location" class="hover:text-slate-950 transition-colors">입지 환경</a>
         <a href="#timeline" class="hover:text-slate-950 transition-colors">추진 일정</a>
@@ -101,7 +103,7 @@
       </nav>
 
       <!-- Action Button -->
-      <div class="hidden sm:flex items-center gap-3">
+      <div class="hidden sm:flex xl:hidden items-center gap-3 ml-auto">
         <a href="#gallery" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-slate-800 transition-all shadow-md flex items-center gap-2">
           <i data-lucide="image" class="w-3.5 h-3.5 text-[#e4cf9f]"></i>
           <span>공식 조감도 갤러리</span>
@@ -109,28 +111,29 @@
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" aria-label="메뉴 열기" class="lg:hidden p-2 text-slate-700 hover:text-black focus:outline-none">
+      <button id="mobile-menu-btn" type="button" aria-label="메뉴 열기" aria-controls="mobile-menu" aria-expanded="false" class="xl:hidden shrink-0 p-2 text-slate-700 hover:text-black">
         <i data-lucide="menu" class="w-6 h-6"></i>
       </button>
     </div>
 
     <!-- Mobile Nav Dropdown -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 px-6 py-6 transition-all shadow-xl font-medium text-slate-700">
+    <nav id="mobile-menu" aria-label="모바일 메뉴" class="hidden xl:hidden bg-white backdrop-blur-2xl border-b border-slate-200 px-6 py-6 shadow-xl font-medium text-slate-700">
       <div class="flex flex-col gap-4 text-sm">
         <a href="#transformation" class="mobile-nav-link py-1 hover:text-black">변화 스토리 (Before & After)</a>
         <a href="#gallery" class="mobile-nav-link py-1 text-slate-950 font-bold">공식 조감도 & 실사 갤러리</a>
         <a href="#premiums" class="mobile-nav-link py-1 hover:text-black">6대 프리미엄</a>
-        <a href="#floorplans" class="mobile-nav-link py-1 hover:text-black">혁신 59㎡ 평면</a>
+        <a href="#floorplans" class="mobile-nav-link py-1 hover:text-black">수평증축 평면</a>
+        <a href="#apartment-tour" class="mobile-nav-link py-1 text-[#80652d] font-bold">예상 아파트 3D 투어</a>
         <a href="#community" class="mobile-nav-link py-1 hover:text-black">클럽 더샵 커뮤니티</a>
         <a href="#location" class="mobile-nav-link py-1 hover:text-black">입지 & 생활 인프라</a>
         <a href="#timeline" class="mobile-nav-link py-1 hover:text-black">사업 추진 현황</a>
         <a href="#calculator" class="mobile-nav-link py-1 hover:text-black">가치 상승 시뮬레이터</a>
       </div>
-    </div>
+    </nav>
   </header>
 
   <!-- ================= HERO SECTION (MODERN LUXURY EDITORIAL) ================= -->
-  <section id="hero" class="relative min-h-[90vh] flex items-center justify-center pt-36 pb-24 overflow-hidden bg-white">
+  <section id="hero" class="relative min-h-[90vh] flex items-center justify-center pt-20 sm:pt-24 pb-24 overflow-hidden bg-white">
     
     <!-- Background Image with Clean Natural Light Vignette -->
     <div class="absolute inset-0 z-0 pointer-events-none">
@@ -145,7 +148,7 @@
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- Luxury Status Badge -->
-      <div class="inline-flex items-center gap-2 p-1.5 px-4 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-sm">
+      <div class="inline-flex flex-wrap justify-center items-center gap-2 p-1.5 px-4 rounded-2xl sm:rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-[#bfa15f]"></span>
         <span class="text-slate-900 font-bold">THE SHARP 138</span>
         <span class="text-slate-300">|</span>
@@ -161,7 +164,7 @@
       </h1>
 
       <!-- English Subtitle -->
-      <p class="font-display text-sm sm:text-base font-semibold text-[#8f7236] tracking-widest uppercase mb-4">
+      <p class="font-display text-sm sm:text-base font-semibold text-[#80652d] tracking-widest uppercase mb-4">
         THE SHARP PARK AVENUE 138
       </p>
 
@@ -183,8 +186,8 @@
         </div>
         <div class="white-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">단일 평형 혁신</div>
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-[#8f7236]">59.90 <span class="text-xs font-normal text-slate-500">㎡</span></div>
-          <div class="text-[11px] text-slate-500 mt-1">전 조합원 100% 신축 25평형 배정</div>
+          <div class="text-2xl sm:text-3xl font-display font-extrabold text-[#80652d]">수평증축</div>
+          <div class="text-[11px] text-slate-500 mt-1">세대별 최종 면적·평면 확인 필요</div>
         </div>
         <div class="white-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">최고 랜드마크</div>
@@ -208,7 +211,7 @@
     </div>
 
     <!-- Scroll Indicator -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-400 flex flex-col items-center gap-1 text-[11px] tracking-widest uppercase font-medium">
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-500 flex flex-col items-center gap-1 text-[11px] tracking-widest uppercase font-medium">
       <span>SCROLL</span>
       <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 animate-bounce"></i>
     </div>
@@ -220,11 +223,11 @@
       
       <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           TRANSFORMATION STORY
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          1996년 초원세경에서 2028년 <span class="text-[#bfa15f]">더샵 파크에비뉴 138</span>로
+          1996년 초원세경에서 2028년 <span class="text-[#80652d]">더샵 파크에비뉴 138</span>로
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           30년 된 복도식 노후 단지가 포스코이앤씨의 혁신 기술력을 만나 평촌을 대표하는 최고급 주거 명작으로 거듭납니다. 
@@ -269,9 +272,9 @@
           </div>
 
           <!-- SLIDER HANDLE -->
-          <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 z-30 flex items-center justify-center pointer-events-none transition-none">
+          <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 z-10 flex items-center justify-center pointer-events-none transition-none">
             <div class="slider-divider-line"></div>
-            <div class="w-9 h-9 rounded-full bg-white text-slate-800 flex items-center justify-center shadow-lg border border-slate-200 pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
+            <div id="comparison-slider" role="slider" tabindex="0" aria-label="리모델링 전후 비교" aria-valuemin="5" aria-valuemax="95" aria-valuenow="50" aria-valuetext="기존 모습 50%, 리모델링 후 50%" class="w-11 h-11 shrink-0 rounded-full bg-white text-slate-800 flex items-center justify-center shadow-lg border border-slate-200 pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
               <i data-lucide="chevrons-left-right" class="w-4 h-4 text-slate-700"></i>
             </div>
           </div>
@@ -285,14 +288,14 @@
         <h4 class="font-display font-bold text-slate-900 text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
           <i data-lucide="sparkles" class="w-4 h-4 text-[#bfa15f]"></i> 주요 항목별 세부 비교 제원표
         </h4>
-        <div class="overflow-x-auto">
-          <table class="w-full text-xs sm:text-sm text-left">
+        <div class="comparison-table-scroll overflow-x-auto" role="region" aria-label="주요 항목별 세부 비교 제원표 (좌우 스크롤)" tabindex="0">
+          <table class="comparison-table w-full text-xs sm:text-sm text-left">
             <thead class="text-slate-500 border-b border-slate-200 font-semibold">
               <tr>
                 <th class="pb-3">비교 항목</th>
                 <th class="pb-3 text-slate-500">기존 초원세경 (1996)</th>
                 <th class="pb-3 text-slate-900 font-bold">더샵 파크에비뉴 138 (2028)</th>
-                <th class="pb-3 text-emerald-600 font-bold">변화 혜택</th>
+                <th class="pb-3 text-emerald-700 font-bold">변화 혜택</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
@@ -300,35 +303,36 @@
                 <td class="py-3 font-semibold text-slate-900">단지 규모</td>
                 <td class="py-3 text-slate-500">709세대 (총 8개동)</td>
                 <td class="py-3 font-bold text-slate-900">775세대 (+66세대 증축)</td>
-                <td class="py-3 text-emerald-600 font-semibold">일반분양으로 분담금 절감</td>
+                <td class="py-3 text-emerald-700 font-semibold">일반분양으로 분담금 절감</td>
               </tr>
               <tr>
                 <td class="py-3 font-semibold text-slate-900">최고 층수</td>
                 <td class="py-3 text-slate-500">최고 21층</td>
                 <td class="py-3 font-bold text-slate-900">최고 25층 (별동 증축)</td>
-                <td class="py-3 text-emerald-600 font-semibold">평촌 중앙공원 스카이라인</td>
+                <td class="py-3 text-emerald-700 font-semibold">평촌 중앙공원 스카이라인</td>
               </tr>
               <tr>
                 <td class="py-3 font-semibold text-slate-900">평형 구조</td>
                 <td class="py-3 text-slate-500">전용 49.68㎡ 복도식 (2Bay)</td>
-                <td class="py-3 font-bold text-slate-900">전용 59.90㎡ 계단식 (3Bay)</td>
-                <td class="py-3 text-emerald-600 font-semibold">전 조합원 100% 25평 신축 배정</td>
+                <td class="py-3 font-bold text-slate-900">수평증축 · 최종 평면 확인 필요</td>
+                <td class="py-3 text-emerald-700 font-semibold">기존 골조를 활용한 공간 확장</td>
               </tr>
               <tr>
                 <td class="py-3 font-semibold text-slate-900">주차 공간</td>
                 <td class="py-3 text-slate-500">412대 (세대당 0.58대, 지상)</td>
                 <td class="py-3 font-bold text-slate-900">1,019대 (세대당 1.31대, 지하4층)</td>
-                <td class="py-3 text-emerald-600 font-semibold">주차난 완전 종식 & 지하 EV 직결</td>
+                <td class="py-3 text-emerald-700 font-semibold">주차난 완전 종식 & 지하 EV 직결</td>
               </tr>
               <tr>
                 <td class="py-3 font-semibold text-slate-900">지상 조경</td>
                 <td class="py-3 text-slate-500">지상 아스팔트 주차장</td>
                 <td class="py-3 font-bold text-slate-900">100% 차 없는 지상 공원화</td>
-                <td class="py-3 text-emerald-600 font-semibold">아이들이 안전한 힐링 테마가든</td>
+                <td class="py-3 text-emerald-700 font-semibold">아이들이 안전한 힐링 테마가든</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <p class="sm:hidden text-[11px] text-slate-500 mt-3">표를 좌우로 밀어 모든 비교 항목을 확인하세요.</p>
       </div>
 
     </div>
@@ -339,11 +343,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           OFFICIAL ARCHITECTURAL GALLERY
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          포스코이앤씨 조감도 및 <span class="text-[#bfa15f]">현장 실사 갤러리</span>
+          포스코이앤씨 조감도 및 <span class="text-[#80652d]">현장 실사 갤러리</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           인터넷 포털 및 언론에 공개된 포스코이앤씨 공식 조감도와 805·806동 현장 실사를 원본 해상도로 감상하세요.
@@ -368,7 +372,7 @@
             </div>
           </div>
           <div class="p-6">
-            <div class="text-xs font-semibold text-[#8f7236] uppercase tracking-wider mb-1">OFFICIAL RENDERING</div>
+            <div class="text-xs font-semibold text-[#80652d] uppercase tracking-wider mb-1">OFFICIAL RENDERING</div>
             <h3 class="font-display font-bold text-slate-900 text-lg mb-2">포스코이앤씨 하이엔드 입면 조감도</h3>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
               포스코 고유의 고내식 합금도금강판(PosMAC)과 커튼월룩을 입혀 시간이 흘러도 변치 않는 품격을 선사합니다.
@@ -410,11 +414,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           THE 6 PILLARS OF EXCELLENCE
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          포스코이앤씨가 선사하는 <span class="text-[#bfa15f]">6대 프리미엄 가치</span>
+          포스코이앤씨가 선사하는 <span class="text-[#80652d]">6대 프리미엄 가치</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           평촌 1기 신도시 리모델링의 새로운 주거 기준을 정립하는 압도적 기술력입니다.
@@ -428,7 +432,7 @@
           <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6 shadow-sm border border-slate-200">
             <i data-lucide="shield-check" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#8f7236] uppercase tracking-wider block mb-1">01. FAÇADE DESIGN</span>
+          <span class="text-xs font-display font-bold text-[#80652d] uppercase tracking-wider block mb-1">01. FAÇADE DESIGN</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             포스맥 스틸아트월 & 커튼월룩
           </h3>
@@ -442,7 +446,7 @@
           <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6 shadow-sm border border-slate-200">
             <i data-lucide="car" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#8f7236] uppercase tracking-wider block mb-1">02. PARKING SYSTEM</span>
+          <span class="text-xs font-display font-bold text-[#80652d] uppercase tracking-wider block mb-1">02. PARKING SYSTEM</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             지하 4개층 직통 EV & 1.31대 주차
           </h3>
@@ -470,12 +474,12 @@
           <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6 shadow-sm border border-slate-200">
             <i data-lucide="layout-grid" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#8f7236] uppercase tracking-wider block mb-1">04. INNOVATION 59㎡</span>
+          <span class="text-xs font-display font-bold text-[#80652d] uppercase tracking-wider block mb-1">04. HORIZONTAL EXTENSION</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
-            전 세대 100% 59㎡ 계단식 배정
+            정방형에서 시작하는 공간 확장
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            초원세경 709세대 전 조합원이 소음·외풍 없는 3Bay 계단식 판상형 59.90㎡ 신축을 배정받아 신축 25평형 아파트의 표준을 실현합니다.
+            기존 형태와 골조 조건을 바탕으로 확장 가능한 공간을 검토합니다. 세대별 최종 면적, 베이 수, 현관 및 설비 위치는 조합의 확정 도면 확인이 필요합니다.
           </p>
         </div>
 
@@ -484,7 +488,7 @@
           <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6 shadow-sm border border-slate-200">
             <i data-lucide="layers" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#8f7236] uppercase tracking-wider block mb-1">05. SOUNDPROOF TECH</span>
+          <span class="text-xs font-display font-bold text-[#80652d] uppercase tracking-wider block mb-1">05. SOUNDPROOF TECH</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             층간소음 저감 & 스마트 하이엔드
           </h3>
@@ -498,7 +502,7 @@
           <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-6 shadow-sm border border-slate-200">
             <i data-lucide="award" class="w-6 h-6"></i>
           </div>
-          <span class="text-xs font-display font-bold text-[#8f7236] uppercase tracking-wider block mb-1">06. CLUB THE SHARP</span>
+          <span class="text-xs font-display font-bold text-[#80652d] uppercase tracking-wider block mb-1">06. CLUB THE SHARP</span>
           <h3 class="font-display text-lg font-bold text-slate-900 mb-2">
             신축 대단지급 고품격 커뮤니티
           </h3>
@@ -517,28 +521,28 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           ARCHITECTURAL FLOOR PLAN
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          혁신 신평면 <span class="text-[#bfa15f]">59㎡ 설계 뷰어</span>
+          정방형에서 넓어지는 집 <span class="text-[#80652d]">수평증축 검토안</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          초원세경 709세대 전 조합원을 위한 100% 동일 공급 전용 59.90㎡ 신평면의 상세 도면입니다.
+          기존 정방형 2침실에서, 코어를 피하며 길어지는 수평증축을 검토합니다. 공개 검토 도면을 참고한 배치이며 현재 승인 평면은 아닙니다.
         </p>
       </div>
 
       <!-- Plan Tabs -->
       <div class="flex justify-center mb-10">
-        <div class="inline-flex p-1.5 rounded-2xl bg-slate-100 border border-slate-200 gap-2 text-xs font-semibold">
+        <div class="grid grid-cols-1 sm:inline-flex w-full sm:w-auto p-1.5 rounded-2xl bg-slate-100 border border-slate-200 gap-2 text-xs font-semibold" role="group" aria-label="평면 선택">
           <button id="tab-type59A" onclick="switchPlan('type59A')" class="plan-tab active px-5 py-2.5 rounded-xl border border-transparent transition-all">
-            59A 시그니처 판상형
+            수평증축 검토안
           </button>
           <button id="tab-type59B" onclick="switchPlan('type59B')" class="plan-tab px-5 py-2.5 rounded-xl border border-transparent transition-all text-slate-600 hover:text-slate-900">
-            59B 와이드 거실형
+            동선 · 서비스 공간 보기
           </button>
-          <button id="tab-type49old" onclick="switchPlan('type49old')" class="plan-tab px-5 py-2.5 rounded-xl border border-transparent transition-all text-slate-400 hover:text-slate-900">
-            기존 49㎡ 복도식 (1996)
+          <button id="tab-type49old" onclick="switchPlan('type49old')" class="plan-tab px-5 py-2.5 rounded-xl border border-transparent transition-all text-slate-600 hover:text-slate-900">
+            기존 2침실 배치
           </button>
         </div>
       </div>
@@ -548,52 +552,45 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <!-- Left: SVG Plan Canvas -->
-          <div class="lg:col-span-7 bg-slate-50 p-4 rounded-xl border border-slate-200 blueprint-paper-grid relative">
-            <div class="flex items-center justify-between text-xs font-medium text-slate-600 pb-2 mb-2 border-b border-slate-200">
-              <span id="plan-code" class="font-display font-semibold">THE SHARP 59A SIGNATURE UNIT</span>
-              <span class="text-[#8f7236] flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#bfa15f]"></span> 3Bay 맞통풍</span>
+          <div class="lg:col-span-7 min-w-0 bg-slate-50 p-4 rounded-xl border border-slate-200 blueprint-paper-grid relative">
+            <div class="flex flex-wrap gap-2 items-center justify-between text-xs font-medium text-slate-600 pb-2 mb-2 border-b border-slate-200">
+              <span id="plan-code" class="font-display font-semibold">PLAN STUDY / SHARED 2D + 3D</span>
+              <span class="text-[#80652d] flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#bfa15f]"></span> <span id="plan-layout">코어를 피한 수평증축</span></span>
             </div>
-            <div id="plan-svg-container" class="w-full flex items-center justify-center">
+            <div id="plan-svg-container" class="w-full overflow-x-auto" role="region" aria-label="선택 평면 도면 (좌우 스크롤)" tabindex="0">
               <!-- Dynamically rendered -->
             </div>
+            <p class="sm:hidden text-[11px] text-slate-500 mt-2">도면을 좌우로 밀어 전체 구조를 확인하세요.</p>
           </div>
 
           <!-- Right: Specs & Highlights -->
           <div class="lg:col-span-5 space-y-6">
             <div>
-              <div class="flex items-center gap-2 mb-2">
-                <span id="plan-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-[#8f7236] border border-amber-200">
-                  3Bay 맞통풍 판상형 시그니처
-                </span>
-                <span id="plan-ratio" class="text-xs font-semibold text-emerald-700">
-                  전용률 78.8%
-                </span>
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span id="plan-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-[#80652d] border border-amber-200">공개 검토도 참고안</span>
+                <span id="plan-ratio" class="text-xs font-semibold text-emerald-700">승인 여부 미확인</span>
               </div>
-              <h3 id="plan-title" class="font-display text-2xl font-bold text-slate-900 mb-2">
-                59㎡ A-TYPE (3Bay 판상형)
-              </h3>
-              <p id="plan-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                초원세경 709세대 전 조합원을 위한 주력 평면.
-              </p>
+              <h3 id="plan-title" class="font-display text-2xl font-bold text-slate-900 mb-2">동선과 생활 공간을 나눈 검토안</h3>
+              <p id="plan-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed">원도면과 구조 검토가 필요한 공간 배치 아이디어입니다.</p>
             </div>
 
             <!-- Spec Grid -->
-            <div class="grid grid-cols-2 gap-3 py-4 border-y border-slate-100 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-4 border-y border-slate-100 text-xs">
               <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="text-slate-400 block mb-0.5">기존 면적</span>
+                <span class="text-slate-500 block mb-0.5">기존 면적</span>
                 <span id="plan-spec-old" class="font-bold text-slate-800">전용 49.68㎡ (19평형)</span>
               </div>
               <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="text-[#8f7236] block mb-0.5 font-semibold">리모델링 후</span>
-                <span id="plan-spec-new" class="font-bold text-slate-900">전용 59.90㎡ (25평형)</span>
+                <span class="text-[#80652d] block mb-0.5 font-semibold">리모델링 후</span>
+                <span id="plan-spec-new" class="font-bold text-slate-900">최종 전용·공급면적 미확인</span>
               </div>
               <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="text-slate-400 block mb-0.5">전용 증가분</span>
-                <span id="plan-spec-increase" class="font-bold text-emerald-600">+10.22㎡ (순증가)</span>
+                <span class="text-slate-500 block mb-0.5">전용 증가분</span>
+                <span id="plan-spec-increase" class="font-bold text-emerald-700">세대별 확정치 미확인</span>
               </div>
               <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="text-slate-400 block mb-0.5">발코니 서비스</span>
-                <span id="plan-spec-balcony" class="font-bold text-slate-800">확장 약 +21.5㎡</span>
+                <span class="text-slate-500 block mb-0.5">발코니 서비스</span>
+                <span id="plan-spec-balcony" class="font-bold text-slate-800">위치·면적·확장 여부 미확인</span>
               </div>
             </div>
 
@@ -610,6 +607,19 @@
         </div>
       </div>
 
+
+      <div class="research-note max-w-5xl mx-auto" id="plan-research">
+        <span class="tour-eyebrow">RESEARCH NOTES · 2026.10.04</span>
+        <h3>도면의 근거와 실제로 검토한 부분</h3>
+        <div class="research-grid">
+          <article><small>초원세경 공유 도면 · 2026.02.06</small><h4>외곽보다 먼저, 코어와 동선</h4><p>공용 코어를 피해 꺾이는 외곽, 후면 침실 2개, 중간 욕실·현관, 전면 거실·안방, 드레스룸과 두 번째 욕실의 구성을 참고했습니다. 게시판 공유 자료로 승인 여부·현재 적용 여부는 미확인입니다.</p><a href="https://hogangnono.com/community/apts/apts-7500870" target="_blank" rel="noopener">공유 도면이 있는 원문 ↗</a></article>
+          <article><small>가구를 넣고 확인한 배치 가정</small><h4>남는 공간이 통로가 되도록</h4><p>안방의 1.5 × 2m 침대 모듈, 작은방의 싱글 침대, 수납장을 배치했습니다. 식탁 옆 주 동선은 약 1m, 주방 작업대 앞은 약 1m를 목표로 검토했습니다. 모델상의 값이며 실제 건축 치수는 아닙니다.</p><a href="#apartment-tour">같은 배치를 3D로 확인 ↗</a></article>
+          <article><small>남아 있는 현실적인 제약</small><h4>깊어진 중앙부의 채광과 설비</h4><p>내부 주방·욕실에는 자연채광과 환기 제약이 있습니다. 창가에는 침실과 거실을 두었지만, 배관 이동·샤프트·내력벽 철거·코어 변경은 구조 및 설비 검토가 필요합니다. 이 검토안으로 해결됐다고 보지 않습니다.</p><a href="https://news.samsungcnt.com/ko/전체기사/건설부문/2024-11-삼성물산-리모델링-특화평면-18개-타입-개발/" target="_blank" rel="noopener">삼성물산의 기존부·증축부 설계 접근 ↗</a></article>
+        </div>
+        <p class="research-footnote">기존 평면: <a href="https://contents.ohou.se/projects/123614" target="_blank" rel="noopener">오늘의집 19평 시공사례</a> 및 그 글에 연결된 <a href="https://m.blog.naver.com/ik_lime/220918361529" target="_blank" rel="noopener">한샘라임인테리어 공개 평면</a>. 기존 사진과 공유 검토도의 좌우 방향·세대 타입 대응은 미확인입니다. 기존부와 증축부의 정확한 경계도 임의로 확정하지 않았습니다.</p>
+        <p class="research-footnote">면적 주의: 2월 공유 도면에는 60A·58㎡·24평형 표기가 함께 보이며, <a href="https://m.dnews.co.kr/uhtml/view.jsp?idxno=202605061502070780707&amp;section=S1N1" target="_blank" rel="noopener">5월 보도</a>는 전용면적 40% 증축안을 언급합니다. 49.68㎡ × 1.4 = 69.55㎡는 단순 계산일 뿐, 이 모델이나 세대별 최종 면적을 의미하지 않습니다.</p>
+        <p class="research-footnote">비교 검토: 완공된 워커힐 일신의 21평→30평 전후 평면은 <a href="https://www.codil.or.kr/filebank/original/RK/OTKCRK180237/OTKCRK180237.pdf" target="_blank" rel="noopener">건설기술정보시스템 연구 보고서(인쇄면 38쪽)</a>에 수록됩니다. 방 증가와 길어진 동선을 살피는 참고이며, 초원세경 19평과 같은 치수·구조의 사례는 아닙니다.</p>
+      </div>
     </div>
   </section>
 
@@ -618,11 +628,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           COMMUNITY FACILITIES
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          입주민 전용 하이엔드 <span class="text-[#bfa15f]">클럽 더샵</span>
+          입주민 전용 하이엔드 <span class="text-[#80652d]">클럽 더샵</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           피트니스부터 사우나, 스크린골프, 게스트하우스까지 775세대 입주민의 라이프 품격을 완성합니다.
@@ -688,11 +698,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           LOCATION & LIFE INFRASTRUCTURE
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          평촌 최중심 <span class="text-[#bfa15f]">골든 트라이앵글 입지</span>
+          평촌 최중심 <span class="text-[#80652d]">골든 트라이앵글 입지</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           지하철 4호선 평촌역 도보 4분, 평촌 중앙공원 도보 3분, 명문 평촌 학원가와 한림대병원까지 원스톱 라이프.
@@ -815,11 +825,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
+        <span class="text-[#80652d] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
           PROJECT TIMELINE & STATUS
         </span>
         <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          투명하고 신속한 <span class="text-[#bfa15f]">사업 추진 현황</span>
+          투명하고 신속한 <span class="text-[#80652d]">사업 추진 현황</span>
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           평촌 1기 신도시 최초 용적률 301.49% 완화 기준 건축심의 통과 완료. 연내 사업계획승인을 향해 순항 중입니다.
@@ -857,14 +867,14 @@
 
         <div class="white-card-gold p-6 rounded-2xl border-l-4 border-l-[#bfa15f] flex items-center justify-between shadow-md">
           <div>
-            <div class="text-xs text-[#8f7236] font-bold mb-1">STEP 04 · 최신 승인 현황</div>
+            <div class="text-xs text-[#80652d] font-bold mb-1">STEP 04 · 최신 승인 현황</div>
             <h4 class="font-display font-bold text-slate-900 text-base">안양시 건축심의 조건부 의결 통과</h4>
             <p class="text-xs text-slate-600 mt-0.5">평촌 최초 용적률 301.49% 완화 적용, 최고 25층 8개동 공식 승인</p>
           </div>
-          <span class="text-xs bg-amber-50 text-[#8f7236] border border-amber-200 px-3 py-1 rounded-full font-bold hidden sm:block">심의 통과</span>
+          <span class="text-xs bg-amber-50 text-[#80652d] border border-amber-200 px-3 py-1 rounded-full font-bold hidden sm:block">심의 통과</span>
         </div>
 
-        <div class="white-card p-6 rounded-2xl border-l-4 border-l-slate-300 flex items-center justify-between opacity-80">
+        <div class="white-card p-6 rounded-2xl border-l-4 border-l-slate-300 flex items-center justify-between">
           <div>
             <div class="text-xs text-slate-500 font-bold mb-1">STEP 05 · 준비 중</div>
             <h4 class="font-display font-bold text-slate-800 text-base">사업계획승인 신청 (연내 목표)</h4>
@@ -879,159 +889,167 @@
   </section>
 
   <!-- ================= SECTION: SMART 59㎡ VALUE CALCULATOR ================= -->
-  <section id="calculator" class="py-24 bg-white relative border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[#bfa15f] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 block">
-          SMART 59㎡ VALUE SIMULATOR
-        </span>
-        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          스마트 59㎡ <span class="text-[#bfa15f]">가치 상승 시뮬레이터</span>
-        </h2>
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          초원세경 709세대 전 조합원을 위한 100% 59.90㎡ 배정에 맞춘 실사용 면적 및 가치 상승 추정 시뮬레이터입니다.
-        </p>
+  <section id="calculator" class="py-24 bg-white border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-[#80652d] text-xs font-bold tracking-widest block mb-3">PRICE CONTEXT · 2026.10.04</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">실거래를 출발점으로,<br/><span class="text-[#80652d]">준공 후 가치를 가정해 봅니다.</span></h2>
+        <p class="text-slate-600 text-sm leading-relaxed">현재 19평 9.5억원은 사용자 제공 매매 완료 가격입니다. 공급평수 기준 평당 약 5,000만원을 출발점으로 면적 변화와 단가 변화를 나누어 계산합니다.</p>
       </div>
-
-      <div class="white-card rounded-2xl p-6 sm:p-10 border border-slate-200 max-w-5xl mx-auto shadow-lg">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          <!-- Controls (7 cols) -->
-          <div class="lg:col-span-7 space-y-6">
-            
-            <!-- Type Selector -->
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">
-                1. 희망 평면 타입 선택
-              </label>
-              <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="setCalcPlanType('59A')" id="calc-type-59A" class="calc-type-btn active p-3.5 rounded-xl border border-slate-900 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
-                  59A 판상형<br/><span class="text-[11px] font-normal text-slate-300">3Bay 맞통풍 드레스룸</span>
-                </button>
-                <button type="button" onclick="setCalcPlanType('59B')" id="calc-type-59B" class="calc-type-btn p-3.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm text-center hover:border-slate-400 transition-all">
-                  59B 거실특화<br/><span class="text-[11px] font-normal text-slate-500">4.2m 와이드 LDK 오픈</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Balcony Expansion Selector -->
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">
-                2. 발코니 서비스 확장 여부
-              </label>
-              <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="setCalcBalcony('expanded')" id="calc-balcony-expanded" class="calc-balcony-btn active p-3 rounded-xl border border-slate-900 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
-                  서비스 발코니 확장형<br/><span class="text-[11px] font-normal text-slate-300">+21.5㎡ (실사용 81.4㎡)</span>
-                </button>
-                <button type="button" onclick="setCalcBalcony('basic')" id="calc-balcony-basic" class="calc-balcony-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm text-center hover:border-slate-400 transition-all">
-                  기본형 (비확장)<br/><span class="text-[11px] font-normal text-slate-500">전용 59.90㎡ 기본 구조</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Floor Tier Selector -->
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2 uppercase">
-                3. 동·층수 조망권 선택
-              </label>
-              <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="setCalcFloor('royal')" id="calc-floor-royal" class="calc-floor-btn active p-3 rounded-xl border border-slate-900 bg-slate-900 text-white font-bold text-xs sm:text-sm text-center transition-all">
-                  로얄층 (15~25층)<br/><span class="text-[11px] font-normal text-slate-300">평촌 중앙공원 파노라마 조망</span>
-                </button>
-                <button type="button" onclick="setCalcFloor('standard')" id="calc-floor-standard" class="calc-floor-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm text-center hover:border-slate-400 transition-all">
-                  일반층 (1~14층)<br/><span class="text-[11px] font-normal text-slate-500">단지 내 정원 조경 조망</span>
-                </button>
-              </div>
-            </div>
-
+      <div class="market-evidence">
+        <article><small>사용자 확인 거래 · 계약일/층 미제공</small><h3>초원세경 · 기존 19평</h3><strong>9.50 <span>억원</span></strong><p>9.5억 ÷ 공급 19평 = 약 5,000만원/평<br/>해당 거래는 공적 원장으로 별도 대조하지 못했습니다.</p></article>
+        <article><small>공개 실거래 재집계 · 2026.09.11 · 23층</small><h3>평촌센텀퍼스트 · 전용 59.8㎡</h3><strong>12.30 <span>억원</span></strong><p>출처 표기 공급 25평 기준 약 4,920만원/평.<br/>입지·연식·사업 방식이 다른 비교 사례입니다.</p><a href="https://aptsonpoom.com/danji/A10022907" target="_blank" rel="noopener">아파트손품 거래 내역 ↗</a></article>
+        <article><small>공개 실거래 재집계 · 2026.08.31 · 7층</small><h3>평촌더샵아이파크 · 전용 59.8㎡</h3><strong>11.10 <span>억원</span></strong><p>전용면적이 비슷한 인근 거래의 가격 수준.<br/>초원세경의 준공 후 가격을 보장하지 않습니다.</p><a href="https://apt.zaritalk.com/complex/호계동-평촌더샵아이파크-5394" target="_blank" rel="noopener">자리톡 거래 내역 ↗</a></article>
+      </div>
+      <div class="value-simulator">
+        <div class="value-inputs">
+          <h3>내 가정으로 계산하기</h3><p>전용면적과 공급평수를 구분합니다. 아래 25평은 계산 예시이며 최종 배정 면적이 아닙니다.</p>
+          <div class="value-fields">
+            <label for="value-sale">기존 매매가 <span>억원</span><input id="value-sale" type="number" min="0.1" max="100" step="0.01" value="9.5" /></label>
+            <label for="value-old-area">기존 공급평수 <span>평</span><input id="value-old-area" type="number" min="1" max="100" step="0.1" value="19" /></label>
+            <label for="value-new-area">준공 후 공급평수 가정 <span>평</span><input id="value-new-area" type="number" min="1" max="100" step="0.1" value="25" /></label>
+            <label for="value-premium">평당 가격 변화 가정 <span>%</span><input id="value-premium" type="number" min="-50" max="100" step="1" value="0" /></label>
           </div>
-
-          <!-- Calculation Result Card (5 cols) -->
-          <div class="lg:col-span-5 bg-slate-900 text-white p-6 sm:p-8 rounded-2xl flex flex-col justify-between shadow-xl">
-            <div>
-              <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
-                <span class="text-xs font-display font-semibold text-slate-400 uppercase tracking-wider">VALUE PROJECTION</span>
-                <span class="text-[11px] bg-[#bfa15f] text-slate-950 font-bold px-2 py-0.5 rounded">시뮬레이션</span>
-              </div>
-
-              <div class="space-y-4 text-xs">
-                <div>
-                  <span class="text-slate-400 block mb-0.5">선택 평면 타입</span>
-                  <span id="res-plan-type" class="font-bold text-sm text-white">3Bay 맞통풍 판상형 (침실3/욕실2/안방 드레스룸)</span>
-                </div>
-
-                <div>
-                  <span class="text-slate-400 block mb-0.5">전용면적 순증가</span>
-                  <span id="res-area-diff" class="font-bold text-emerald-400">+10.22 ㎡ (+3.1평 순증가)</span>
-                </div>
-
-                <div>
-                  <span class="text-slate-400 block mb-0.5">발코니 서비스 확장</span>
-                  <span id="res-balcony-diff" class="font-bold text-white">+21.50 ㎡ (전면 서비스 확장)</span>
-                </div>
-
-                <div>
-                  <span class="text-slate-400 block mb-0.5">총 실사용 체감 공간</span>
-                  <span id="res-usable" class="font-display font-extrabold text-xl text-[#e4cf9f]">약 81.40 ㎡ (24.6평형 체감 공간)</span>
-                </div>
-
-                <div class="pt-3 border-t border-slate-800">
-                  <span class="text-slate-400 block mb-0.5">미래 예상 가치 형성</span>
-                  <p id="res-value" class="text-xs text-slate-300 leading-relaxed">
-                    25층 최고층 & 중앙공원 파노라마 조망 프리미엄 반영 최고가 형성 (평촌 신축 25평형 시세 주도 기대)
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-slate-800 text-[10px] text-slate-500 leading-tight">
-              * 본 시뮬레이션 수치는 조합 심의 및 인허가 과정에서 세부 조정될 수 있는 참고용 데이터입니다.
-            </div>
+          <div class="value-presets" role="group" aria-label="평당 가격 변화 예시">
+            <button type="button" class="calc-option active" data-premium="0" aria-pressed="true">동일 단가<span>0%</span></button>
+            <button type="button" class="calc-option" data-premium="10" aria-pressed="false">상승 가정<span>+10%</span></button>
+            <button type="button" class="calc-option" data-premium="20" aria-pressed="false">상승 가정<span>+20%</span></button>
           </div>
-
+          <p id="value-error" role="alert" hidden>입력 범위와 단위를 확인해 주세요. 빈 값으로는 계산할 수 없습니다.</p>
+        </div>
+        <div class="value-result" aria-live="polite" aria-atomic="true">
+          <span>ASSUMPTION, NOT A VALUATION</span><h3>조건부 매매가 시나리오</h3>
+          <strong id="res-value">12.50억원</strong>
+          <dl><div><dt>기존 공급평당 단가</dt><dd id="res-base-unit">5,000만원</dd></div><div><dt>변화율 적용 단가</dt><dd id="res-new-unit">5,000만원</dd></div><div><dt>가정한 준공 후 공급면적</dt><dd id="res-supply">25평</dd></div></dl>
+          <p id="value-formula">9.5억 ÷ 19평 × 25평 × 1.00</p>
+          <p>분담금·세금·금융비용을 차감하지 않은 매매가입니다. 수익이나 감정평가액이 아닙니다. 준공 시점과 시장 변화에 따라 하락할 수 있습니다.</p>
         </div>
       </div>
+      <p class="research-footnote">비교 거래는 2026.10.04 열람한 민간 재집계 자료입니다. 신고 지연·정정·해제 여부는 <a href="https://rt.molit.go.kr/" target="_blank" rel="noopener">국토교통부 실거래가 공개시스템</a>에서 재확인해야 합니다. 현재 가격에는 사업 기대가 이미 반영될 수 있어, 준공 프리미엄을 고정 사실로 적용하지 않습니다.</p>
+    </div>
+  </section>
 
+  <!-- ================= PREDICTED APARTMENT TOUR ================= -->
+  <section id="apartment-tour" aria-labelledby="tour-heading" class="tour-section">
+    <div class="tour-container">
+      <div class="tour-section-heading">
+        <div>
+          <span class="tour-eyebrow">A HOME, IMAGINED</span>
+          <h2 id="tour-heading">아직 오지 않은 집,<br /><span>먼저 걸어보세요.</span></h2>
+        </div>
+        <p>햇살이 머무는 거실부터 나만의 작은 서재까지.<br />위 수평증축 검토안과 같은 배치의 가상 공간입니다.</p>
+      </div>
+      <div class="tour-disclaimer" id="tour-disclaimer">
+        <span>예상 디자인 · 확정 아님</span>
+        <p>이 3D 모델은 공간 이해를 돕는 창작 콘셉트입니다. 승인 도면·견본주택이 아니며, 실제 치수와 면적을 재현하지 않습니다. 구조, 창호, 가구, 마감재와 창밖 풍경은 모두 가정한 연출입니다.</p>
+      </div>
+
+      <div id="tour-shell" class="tour-shell" data-state="idle">
+        <div class="tour-topbar">
+          <div class="tour-brand"><span class="tour-brand-mark">138</span><div>THE SHARP <span>CONCEPT RESIDENCE / 01</span></div></div>
+          <div class="tour-mode-switch" role="group" aria-label="3D 보기 방식">
+            <button id="tour-mode-overview" type="button" aria-pressed="true" data-tour-control disabled>전체 모형</button>
+            <button id="tour-mode-interior" type="button" aria-pressed="false" data-tour-control disabled>실내 시점</button>
+          </div>
+        </div>
+
+        <div class="tour-main">
+          <div class="tour-stage-column">
+            <div id="tour-stage" class="tour-stage" aria-describedby="tour-disclaimer tour-instructions">
+              <img id="tour-poster" class="tour-poster" src="assets/apartment-tour-preview.png" alt="가구와 공간 배치를 상상해 제작한 아파트 3D 콘셉트 모형" width="1200" height="800" loading="lazy" />
+              <div id="tour-canvas-host" class="tour-canvas-host"></div>
+              <div class="tour-stage-label"><span class="tour-status-dot"></span> PREDICTED DESIGN <span>미확정 콘셉트</span></div>
+              <div id="tour-start-overlay" class="tour-start-overlay">
+                <div class="tour-start-card">
+                  <span class="tour-eyebrow">YOUR NEXT CHAPTER</span>
+                  <h3>새로운 일상을 상상하다</h3>
+                  <p id="tour-load-message" role="status">모형을 돌려보거나, 각 방의 실내 시점으로 들어가 보세요.</p>
+                  <button id="tour-start" type="button">3D 투어 시작 <span aria-hidden="true">↗</span></button>
+                  <a href="#floorplans" class="tour-fallback-link">2D 평면으로 보기</a>
+                </div>
+              </div>
+              <div id="tour-view-caption" class="tour-view-caption" hidden><span id="tour-view-name">전체 모형</span><span id="tour-view-detail">지붕을 열어 살펴보는 가상의 공간</span></div>
+            </div>
+            <div class="tour-toolbar">
+              <p id="tour-instructions">시작 버튼을 누르면 3D 공간을 불러옵니다.</p>
+              <div class="tour-camera-buttons" role="group" aria-label="카메라 조작">
+                <button type="button" id="tour-left" aria-label="왼쪽으로 회전" data-tour-control disabled>↶</button>
+                <button type="button" id="tour-right" aria-label="오른쪽으로 회전" data-tour-control disabled>↷</button>
+                <button type="button" id="tour-zoom-in" aria-label="가까이 보기" data-tour-control disabled>＋</button>
+                <button type="button" id="tour-zoom-out" aria-label="멀리 보기" data-tour-control disabled>−</button>
+                <button type="button" id="tour-reset" data-tour-control disabled>처음으로</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="tour-sidebar" aria-label="예상 공간 둘러보기">
+            <div class="tour-sidebar-heading"><span>EXPLORE THE SPACES</span><span>01 — 08</span></div>
+            <div class="tour-room-list" role="group" aria-label="둘러볼 공간 선택">
+              <button type="button" class="tour-room" data-room="living" aria-pressed="true" data-tour-control disabled><span>01</span><span>거실<small>빛과 여백이 머무는 곳</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="kitchen" aria-pressed="false" data-tour-control disabled><span>02</span><span>주방 · 다이닝<small>함께 만드는 일상의 맛</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="master" aria-pressed="false" data-tour-control disabled><span>03</span><span>안방<small>온전히 쉬어가는 시간</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="bedroom" aria-pressed="false" data-tour-control disabled><span>04</span><span>침실<small>취향을 채우는 작은 방</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="study" aria-pressed="false" data-tour-control disabled><span>05</span><span>서재<small>집중과 영감의 사이</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="bath" aria-pressed="false" data-tour-control disabled><span>06</span><span>공용 욕실<small>차분하게 시작하는 아침</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="ensuite" aria-pressed="false" data-tour-control disabled><span>07</span><span>부부욕실<small>안방에서 이어지는 독립된 욕실</small></span><span aria-hidden="true">↗</span></button>
+              <button type="button" class="tour-room" data-room="entry" aria-pressed="false" data-tour-control disabled><span>08</span><span>현관<small>집으로 돌아오는 순간</small></span><span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="tour-room-story" aria-live="polite" aria-atomic="true">
+              <span id="tour-room-kicker">LIVING ROOM</span>
+              <h3 id="tour-room-title">빛을 담은 거실</h3>
+              <p id="tour-room-description">밝은 오크 바닥과 낮은 패브릭 소파, 큰 창가를 조합한 거실 콘셉트입니다. 가구와 창호 위치는 이해를 돕기 위한 가상 배치입니다.</p>
+            </div>
+            <div class="tour-material-control" role="group" aria-label="마감 분위기 선택">
+              <span>마감 분위기 <small>가상 옵션</small></span>
+              <div><button type="button" data-palette="warm" aria-pressed="true" data-tour-control disabled><i class="tour-swatch warm" aria-hidden="true"></i>내추럴 오크</button><button type="button" data-palette="cool" aria-pressed="false" data-tour-control disabled><i class="tour-swatch cool" aria-hidden="true"></i>모던 그레이지</button></div>
+            </div>
+            <button id="tour-guide" class="tour-guide" type="button" aria-pressed="false" data-tour-control disabled><span aria-hidden="true">▷</span> 자동으로 둘러보기</button>
+            <p id="tour-guide-status" class="tour-guide-status" role="status">공간을 선택하면 해당 위치로 이동합니다.</p>
+          </aside>
+        </div>
+        <div class="tour-bottom-note"><span>DESIGN EXPLORATION, NOT A PROMISE.</span><span>본 투어는 분양·시공 사양을 보장하지 않습니다.</span></div>
+      </div>
+      <noscript><p class="tour-disclaimer">3D 투어는 JavaScript가 필요합니다. 위 콘셉트 이미지 또는 <a href="#floorplans">2D 평면</a>으로 공간 아이디어를 확인하세요.</p></noscript>
     </div>
   </section>
 
   <!-- ================= LIGHTBOX MODAL ================= -->
-  <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
-    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center">
-      <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-slate-300 p-2 text-sm font-semibold flex items-center gap-1 focus:outline-none">
+  <dialog id="lightboxModal" class="lightbox-dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div class="lightbox-content">
+      <button id="lightbox-close" type="button" onclick="closeLightbox()" autofocus class="self-end text-white hover:text-slate-300 p-2 text-sm font-semibold flex items-center gap-1">
         닫기 <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <img id="modalImage" src="" alt="확대 보기" class="max-h-[75vh] w-auto rounded-xl shadow-2xl object-contain" />
+      <img id="modalImage" alt="확대 보기" class="rounded-xl shadow-2xl object-contain" />
       <div class="mt-4 text-center">
         <h4 id="modalTitle" class="text-white font-display font-bold text-base sm:text-lg"></h4>
         <p id="modalDesc" class="text-slate-400 text-xs sm:text-sm mt-1"></p>
       </div>
     </div>
-  </div>
+  </dialog>
 
   <!-- ================= FOOTER ================= -->
   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800 text-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-slate-800">
         <div>
-          <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class="font-display font-extrabold text-white text-base tracking-wider">THE SHARP PARK AVENUE 138</span>
             <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">초원세경 리모델링</span>
           </div>
           <p class="text-slate-400 text-xs max-w-xl">
-            경기도 안양시 동안구 부림로 138 (평촌동 898-2) 일원 | 리모델링 사업 정보 안내 페이지
+            경기도 안양시 동안구 관평로138번길 13 (평촌동 896-2) 일원 | 리모델링 사업 정보 안내 페이지
           </p>
         </div>
-        <div class="flex items-center gap-4 text-xs">
+        <div class="flex flex-wrap items-center gap-4 text-xs">
           <a href="#transformation" class="hover:text-white transition-colors">변화 스토리</a>
           <a href="#gallery" class="hover:text-white transition-colors">공식 조감도</a>
-          <a href="#floorplans" class="hover:text-white transition-colors">59㎡ 평면</a>
+          <a href="#floorplans" class="hover:text-white transition-colors">수평증축 평면</a>
+          <a href="#apartment-tour" class="hover:text-white transition-colors">예상 3D 투어</a>
           <a href="#timeline" class="hover:text-white transition-colors">추진 일정</a>
         </div>
       </div>
       
-      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-slate-400">
         <p>
           본 웹사이트는 평촌 초원세경아파트 리모델링 사업의 공식 인허가 데이터 및 시공사 발표 자료를 기반으로 제작된 정보 안내 페이지입니다.
         </p>
@@ -1041,6 +1059,8 @@
   </footer>
 
   <!-- Application Script -->
+  <script src="plan-layout.js"></script>
   <script src="app.js"></script>
+  <script src="tour.js" defer></script>
 </body>
 </html>

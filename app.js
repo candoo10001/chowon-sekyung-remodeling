@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initComparisonSlider();
   initFloorPlans();
   initCalculator();
+  initLightbox();
+  document.querySelectorAll('.map-filter').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+  });
 });
 
 /* ==========================================================================
@@ -27,30 +31,51 @@ function initMobileMenu() {
 
   if (!menuBtn || !mobileMenu) return;
 
+  function setMenuOpen(open) {
+    mobileMenu.classList.toggle('hidden', !open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  }
+
   menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
+    setMenuOpen(mobileMenu.classList.contains('hidden'));
   });
 
   links.forEach(link => {
     link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
+      setMenuOpen(false);
     });
   });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+      setMenuOpen(false);
+      menuBtn.focus();
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('#main-header')) setMenuOpen(false);
+  });
+  const desktop = window.matchMedia('(min-width: 1280px)');
+  desktop.addEventListener('change', () => setMenuOpen(false));
 }
 
 function initHeaderScroll() {
   const header = document.getElementById('main-header');
   if (!header) return;
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      header.classList.add('shadow-md', 'bg-white/95');
-      header.classList.remove('bg-white/85');
-    } else {
-      header.classList.remove('shadow-md', 'bg-white/95');
-      header.classList.add('bg-white/85');
-    }
-  });
+  const updateShadow = () => header.classList.toggle('shadow-md', window.scrollY > 30);
+  window.addEventListener('scroll', updateShadow, { passive: true });
+  updateShadow();
+
+  // Limit the dropdown to the visible space even while the notice is on screen.
+  const menu = document.getElementById('mobile-menu');
+  const updateMenuHeight = () => {
+    if (menu) menu.style.maxHeight = `${Math.max(0, window.innerHeight - header.getBoundingClientRect().bottom)}px`;
+  };
+  window.addEventListener('scroll', updateMenuHeight, { passive: true });
+  window.addEventListener('resize', updateMenuHeight);
+  updateMenuHeight();
 }
 
 /* ==========================================================================
@@ -63,7 +88,9 @@ function initComparisonSlider() {
 
   if (!container || !beforeWrapper || !handle) return;
 
-  let isDragging = false;
+  const slider = document.getElementById('comparison-slider');
+  let dragStart = null;
+  let percentage = 50;
 
   function syncBeforeImageWidth() {
     const rect = container.getBoundingClientRect();
@@ -77,16 +104,14 @@ function initComparisonSlider() {
   const beforeBadge = document.getElementById('before-badge');
   const afterBadge = document.getElementById('after-badge');
 
-  function updateSliderPosition(clientX) {
-    const rect = container.getBoundingClientRect();
-    let x = clientX - rect.left;
-
-    if (x < rect.width * 0.05) x = rect.width * 0.05;
-    if (x > rect.width * 0.95) x = rect.width * 0.95;
-
-    const percentage = (x / rect.width) * 100;
+  function setPosition(value) {
+    percentage = Math.max(5, Math.min(95, value));
     beforeWrapper.style.width = `${percentage}%`;
     handle.style.left = `${percentage}%`;
+    if (slider) {
+      slider.setAttribute('aria-valuenow', String(Math.round(percentage)));
+      slider.setAttribute('aria-valuetext', `기존 모습 ${Math.round(percentage)}%, 리모델링 후 ${100 - Math.round(percentage)}%`);
+    }
 
     if (beforeBadge) {
       if (percentage < 20) {
@@ -103,186 +128,55 @@ function initComparisonSlider() {
       }
     }
 
-    syncBeforeImageWidth();
+  }
+
+  function updateSliderPosition(clientX) {
+    const rect = container.getBoundingClientRect();
+    if (rect.width) setPosition((clientX - rect.left) / rect.width * 100);
   }
 
   syncBeforeImageWidth();
   window.addEventListener('resize', syncBeforeImageWidth);
 
-  container.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    updateSliderPosition(e.clientX);
+  container.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.button !== 0) return;
+    dragStart = { id: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
+    container.setPointerCapture(event.pointerId);
+    if (event.pointerType === 'mouse') updateSliderPosition(event.clientX);
   });
-
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    updateSliderPosition(e.clientX);
-  });
-
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-  });
-
-  container.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    if (e.touches.length > 0) {
-      updateSliderPosition(e.touches[0].clientX);
+  container.addEventListener('pointermove', event => {
+    if (!dragStart || event.pointerId !== dragStart.id) return;
+    const dx = Math.abs(event.clientX - dragStart.x);
+    const dy = Math.abs(event.clientY - dragStart.y);
+    if (!dragStart.moved && dy > dx && dy > 8) {
+      dragStart = null; // A vertical gesture scrolls the page without moving the divider.
+      return;
     }
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging || e.touches.length === 0) return;
-    updateSliderPosition(e.touches[0].clientX);
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => {
-    isDragging = false;
+    if (dx > 8) dragStart.moved = true;
+    if (dragStart.moved) updateSliderPosition(event.clientX);
+  });
+  container.addEventListener('pointerup', event => {
+    if (dragStart && event.pointerId === dragStart.id) updateSliderPosition(event.clientX);
+    dragStart = null;
+  });
+  container.addEventListener('pointercancel', () => { dragStart = null; });
+  container.addEventListener('lostpointercapture', () => { dragStart = null; });
+  if (slider) slider.addEventListener('keydown', event => {
+    const steps = { ArrowLeft: -5, ArrowDown: -5, ArrowRight: 5, ArrowUp: 5 };
+    if (event.key in steps) {
+      event.preventDefault();
+      setPosition(percentage + steps[event.key]);
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      setPosition(event.key === 'Home' ? 5 : 95);
+    }
   });
 }
 
 /* ==========================================================================
    3. ARCHITECTURAL FLOOR PLAN ENGINE (59㎡)
    ========================================================================== */
-const floorPlanData = {
-  type59A: {
-    badge: '3Bay 맞통풍 판상형 시그니처',
-    ratio: '전용률 78.8%',
-    code: 'THE SHARP 59A SIGNATURE UNIT',
-    title: '59㎡ A-TYPE (3Bay 판상형)',
-    desc: '초원세경 709세대 전 조합원을 위한 주력 평면. 기존 2Bay 복도식 구조에서 침실 3개, 욕실 2개, 안방 워크인 드레스룸 및 파우더룸을 갖춘 최신 3Bay 계단식 맞통풍 판상형으로 완벽 탈바꿈합니다.',
-    specOld: '기존 전용 49.68㎡ (공급 19평형, 2Bay 복도식)',
-    specNew: '리모델링 후 전용 59.90㎡ (공급 25평형, 계단식)',
-    specIncrease: '+10.22㎡ (전용 순증가 + 발코니 확장 시 총 81.4㎡)',
-    specBalcony: '서비스 발코니 확장 약 +21.5㎡ (실사용 81.4㎡ / 25평형 실공간)',
-    features: [
-      '소음 없는 100% 계단식 설계 (1개 층 2세대 프라이빗 엘리베이터 홀)',
-      '전면 3Bay 채광 극대화 & 주방-거실 맞통풍 환기 구조',
-      '안방 부부욕실 + 워크인 드레스룸 + 파우더룸 독립 설계',
-      '주방 ㄷ자형 아일랜드 대면형 싱크 & 현관 클린 팬트리'
-    ],
-    svg: `
-      <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="380" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-        <rect x="22" y="22" width="376" height="35" fill="rgba(2, 132, 199, 0.08)" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="210" y="44" class="blueprint-text" fill="#0284c7">발코니 서비스 면적 확장 구간 (+21.5㎡ 실사용 공간 확보)</text>
-        
-        <rect x="25" y="60" width="100" height="150" class="blueprint-room" />
-        <text x="75" y="125" class="blueprint-text">침실 2 (자녀방)</text>
-        <text x="75" y="142" class="blueprint-area">3.0m × 3.3m</text>
-
-        <rect x="130" y="60" width="155" height="150" class="blueprint-room" />
-        <text x="207" y="125" class="blueprint-text">거 실 (3.8m 광폭)</text>
-        <text x="207" y="142" class="blueprint-area">LIVING ROOM (맞통풍)</text>
-
-        <rect x="290" y="60" width="105" height="150" class="blueprint-room" />
-        <text x="342" y="125" class="blueprint-text">침실 1 (안방)</text>
-        <text x="342" y="142" class="blueprint-area">MASTER BEDROOM</text>
-        
-        <rect x="290" y="60" width="105" height="45" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
-        <text x="342" y="85" class="blueprint-text" fill="#0f172a">드레스룸 / 부부욕실</text>
-
-        <rect x="25" y="215" width="100" height="60" class="blueprint-room" />
-        <text x="75" y="245" class="blueprint-text">침실 3 (서재/다목적)</text>
-
-        <rect x="130" y="215" width="95" height="60" class="blueprint-room" />
-        <text x="177" y="245" class="blueprint-text">주방 / 식당 (ㄷ자형)</text>
-        <text x="177" y="260" class="blueprint-area">대면형 아일랜드</text>
-
-        <rect x="230" y="215" width="55" height="60" class="blueprint-room" />
-        <text x="257" y="245" class="blueprint-text">욕실 2 (욕조)</text>
-        
-        <rect x="290" y="215" width="105" height="60" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
-        <text x="342" y="245" class="blueprint-text" fill="#475569">현관 / 클린팬트리</text>
-      </svg>
-    `
-  },
-  type59B: {
-    badge: '와이드 거실 & LDK 오픈 다이닝 특화',
-    ratio: '전용률 78.5%',
-    code: 'THE SHARP 59B OPEN LIVING',
-    title: '59㎡ B-TYPE (와이드 거실 특화형)',
-    desc: '거실과 주방의 개방감을 극대화한 젊고 모던한 59㎡ 혁신 평면. 4.2m 광폭 거실과 대형 아일랜드 식탁, 대용량 수납 팬트리를 배치하여 30평형대 이상의 여유로운 공간감을 제공합니다.',
-    specOld: '기존 전용 49.68㎡ (공급 19평형, 2Bay 복도식)',
-    specNew: '리모델링 후 전용 59.90㎡ (공급 25평형, 계단식)',
-    specIncrease: '+10.22㎡ (전용 순증가 + 발코니 확장 시 총 81.4㎡)',
-    specBalcony: '서비스 발코니 확장 약 +21.5㎡ (실사용 81.4㎡ / 25평형 실공간)',
-    features: [
-      '4.2m 광폭 거실로 확 트인 중앙공원 파노라마 조망권 극대화',
-      '거실-주방이 하나로 이어지는 LDK 일체형 프리미엄 개방 구조',
-      '안방 대형 워크인 드레스룸 및 호텔식 독립 세면대',
-      '현관 에어샤워 & 워크인 대형 팬트리 수납 무상 제공'
-    ],
-    svg: `
-      <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="380" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
-        <rect x="22" y="22" width="376" height="35" fill="rgba(2, 132, 199, 0.08)" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <text x="210" y="44" class="blueprint-text" fill="#0284c7">와이드 발코니 확장 구간 (+21.5㎡)</text>
-
-        <rect x="25" y="60" width="220" height="150" class="blueprint-room" />
-        <text x="135" y="125" class="blueprint-text">4.2m 와이드 파노라마 거실</text>
-        <text x="135" y="142" class="blueprint-area">OPEN LIVING (30평형급 공간감)</text>
-
-        <rect x="250" y="60" width="145" height="150" class="blueprint-room" />
-        <text x="322" y="125" class="blueprint-text">침실 1 (안방)</text>
-        <text x="322" y="142" class="blueprint-area">MASTER BEDROOM</text>
-        
-        <rect x="250" y="60" width="145" height="45" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
-        <text x="322" y="85" class="blueprint-text" fill="#0f172a">초대형 드레스룸 & 부부욕실</text>
-
-        <rect x="25" y="215" width="125" height="60" class="blueprint-room" />
-        <text x="87" y="245" class="blueprint-text">대형 아일랜드 다이닝</text>
-
-        <rect x="155" y="215" width="90" height="60" class="blueprint-room" />
-        <text x="200" y="245" class="blueprint-text">침실 2</text>
-
-        <rect x="250" y="215" width="65" height="60" class="blueprint-room" />
-        <text x="282" y="245" class="blueprint-text">공용욕실</text>
-
-        <rect x="320" y="215" width="75" height="60" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
-        <text x="357" y="245" class="blueprint-text" fill="#475569">현관/팬트리</text>
-      </svg>
-    `
-  },
-  type49old: {
-    badge: '1996년 기존 초원세경 49㎡ 복도식 구조',
-    ratio: '전용률 72.1%',
-    code: 'LEGACY 49 TYPE (BEFORE)',
-    title: '기존 49.68㎡ 복도식 구조 (1996년 준공)',
-    desc: '30년 전 시공된 전형적인 복도식 소형 평면. 욕실이 1개뿐이며, 복도 창문으로 인한 프라이버시 침해와 소음, 좁은 주방 및 수납 부족의 한계를 안고 있었습니다.',
-    specOld: '현재 전용면적 49.68㎡ (공급 19평형)',
-    specNew: '리모델링 전 기존 상태',
-    specIncrease: '복도식 2Bay 구조 (개선 시급)',
-    specBalcony: '노후 비확장 단일 발코니 (약 6.5㎡)',
-    features: [
-      '외부 복도로 사람 통행 소음 및 겨울철 외풍 노출',
-      '단 1개의 욕실로 아침 출근·등교 시간 혼잡',
-      '드레스룸 및 수납공간 부재로 방 하나를 옷방으로 낭비',
-      '주방과 거실의 구분이 모호한 일자형 좁은 조리 공간'
-    ],
-    svg: `
-      <svg viewBox="0 0 420 300" class="w-full h-auto drop-shadow-sm opacity-85" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20" y="20" width="380" height="260" rx="8" fill="#fff1f2" stroke="#f43f5e" stroke-width="1.5"/>
-        
-        <rect x="22" y="22" width="376" height="30" fill="rgba(244,63,94,0.1)" stroke="#f43f5e" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="210" y="40" class="blueprint-text" fill="#e11d48">공용 복도 (통행 소음 노출 및 사생활 간섭)</text>
-
-        <rect x="25" y="55" width="180" height="155" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-        <text x="115" y="130" class="blueprint-text" fill="#64748b">거실 겸 침실 (2Bay)</text>
-        <text x="115" y="148" class="blueprint-area">공간 분리 미흡</text>
-
-        <rect x="210" y="55" width="185" height="155" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-        <text x="302" y="130" class="blueprint-text" fill="#64748b">안방 (침실)</text>
-        <text x="302" y="148" class="blueprint-area">드레스룸 없음</text>
-
-        <rect x="25" y="215" width="200" height="60" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
-        <text x="125" y="245" class="blueprint-text" fill="#64748b">일자형 주방 / 현관</text>
-
-        <rect x="230" y="215" width="165" height="60" fill="#fee2e2" stroke="#f43f5e" stroke-width="1"/>
-        <text x="312" y="245" class="blueprint-text" fill="#e11d48">욕실 단 1개 (혼잡)</text>
-      </svg>
-    `
-  }
-};
+const floorPlanData = window.floorPlanData;
 
 function initFloorPlans() {
   window.switchPlan('type59A');
@@ -294,13 +188,10 @@ window.switchPlan = function(type) {
 
   const tabs = document.querySelectorAll('.plan-tab');
   tabs.forEach(tab => {
-    tab.classList.remove('active');
+    const selected = tab.id === `tab-${type}`;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-pressed', String(selected));
   });
-
-  const activeTab = document.getElementById(`tab-${type}`);
-  if (activeTab) {
-    activeTab.classList.add('active');
-  }
 
   const badgeEl = document.getElementById('plan-badge');
   const ratioEl = document.getElementById('plan-ratio');
@@ -317,6 +208,8 @@ window.switchPlan = function(type) {
   if (badgeEl) badgeEl.textContent = data.badge;
   if (ratioEl) ratioEl.textContent = data.ratio;
   if (codeEl) codeEl.textContent = data.code;
+  const layoutEl = document.getElementById('plan-layout');
+  if (layoutEl) layoutEl.textContent = data.layout;
   if (titleEl) titleEl.textContent = data.title;
   if (descEl) descEl.textContent = data.desc;
   if (specOldEl) specOldEl.textContent = data.specOld;
@@ -326,6 +219,7 @@ window.switchPlan = function(type) {
 
   if (svgContainer) {
     svgContainer.innerHTML = data.svg;
+    svgContainer.scrollLeft = 0;
   }
 
   if (featuresList) {
@@ -347,6 +241,7 @@ window.filterMap = function(category, e) {
   filters.forEach(btn => {
     btn.classList.remove('active', 'bg-slate-900', 'text-white');
     btn.classList.add('bg-slate-100', 'text-slate-600');
+    btn.setAttribute('aria-pressed', 'false');
   });
 
   const evt = e || window.event;
@@ -354,6 +249,7 @@ window.filterMap = function(category, e) {
   if (activeBtn) {
     activeBtn.classList.add('active', 'bg-slate-900', 'text-white');
     activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+    activeBtn.setAttribute('aria-pressed', 'true');
   }
 
   const points = document.querySelectorAll('.map-point');
@@ -369,76 +265,91 @@ window.filterMap = function(category, e) {
 /* ==========================================================================
    5. SMART 59㎡ VALUE CALCULATOR
    ========================================================================== */
-let calcState = {
-  type: '59A',
-  balcony: 'expanded',
-  floor: 'royal'
-};
-
 function initCalculator() {
-  updateCalculatorResult();
-}
-
-window.setCalcPlanType = function(type) {
-  calcState.type = type;
-  document.querySelectorAll('.calc-type-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(`calc-type-${type}`);
-  if (btn) btn.classList.add('active');
-  updateCalculatorResult();
-};
-
-window.setCalcBalcony = function(mode) {
-  calcState.balcony = mode;
-  document.querySelectorAll('.calc-balcony-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(`calc-balcony-${mode}`);
-  if (btn) btn.classList.add('active');
-  updateCalculatorResult();
-};
-
-window.setCalcFloor = function(tier) {
-  calcState.floor = tier;
-  document.querySelectorAll('.calc-floor-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(`calc-floor-${tier}`);
-  if (btn) btn.classList.add('active');
-  updateCalculatorResult();
-};
-
-function updateCalculatorResult() {
-  const currentArea = 49.68;
-  const newArea = 59.90;
-  const diffArea = (newArea - currentArea).toFixed(2);
-  const diffPyung = (diffArea / 3.30578).toFixed(1);
-
-  const balconyArea = calcState.balcony === 'expanded' ? 21.50 : 0.00;
-  const totalUsable = (newArea + balconyArea).toFixed(2);
-  const totalUsablePyung = (totalUsable / 3.30578).toFixed(1);
-
-  let planDesc = '3Bay 맞통풍 판상형 (침실3/욕실2/안방 드레스룸)';
-  if (calcState.type === '59B') {
-    planDesc = '4.2m 와이드 거실 & LDK 대면형 다이닝 특화';
-  }
-
-  let valueDesc = '평촌 신축 25평형 최고 시세(평당 3,800만~4,200만원대 형성 예상)';
-  if (calcState.floor === 'royal') {
-    valueDesc = '25층 최고층 & 중앙공원 파노라마 조망 프리미엄 반영 최고가 형성';
-  }
-
-  const resAreaDiff = document.getElementById('res-area-diff');
-  const resBalconyDiff = document.getElementById('res-balcony-diff');
-  const resUsable = document.getElementById('res-usable');
-  const resValue = document.getElementById('res-value');
-  const resPlanType = document.getElementById('res-plan-type');
-
-  if (resAreaDiff) resAreaDiff.textContent = `+${diffArea} ㎡ (+${diffPyung}평 순증가)`;
-  if (resBalconyDiff) resBalconyDiff.textContent = calcState.balcony === 'expanded' ? '+21.50 ㎡ (전면 서비스 확장)' : '0.00 ㎡ (비확장 기본형)';
-  if (resUsable) resUsable.textContent = `약 ${totalUsable} ㎡ (${totalUsablePyung}평형 체감 공간)`;
-  if (resValue) resValue.textContent = valueDesc;
-  if (resPlanType) resPlanType.textContent = planDesc;
+  const ids = ['value-sale', 'value-old-area', 'value-new-area', 'value-premium'];
+  const inputs = ids.map(id => document.getElementById(id));
+  const presets = [...document.querySelectorAll('[data-premium]')];
+  const update = () => {
+    const valid = inputs.every(input => input.value !== '' && input.checkValidity());
+    document.getElementById('value-error').hidden = valid;
+    inputs.forEach(input => input.setAttribute('aria-invalid', String(input.value === '' || !input.checkValidity())));
+    presets.forEach(button => {
+      const selected = inputs[3].value !== '' && Number(button.dataset.premium) === inputs[3].valueAsNumber;
+      button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
+    });
+    if (!valid) {
+      for (const id of ['res-value','res-base-unit','res-new-unit','res-supply','value-formula']) document.getElementById(id).textContent = '—';
+      return;
+    }
+    const [sale, oldArea, newArea, premium] = inputs.map(input => input.valueAsNumber);
+    const base = sale / oldArea * 10000, next = base * (1 + premium / 100);
+    const money = value => Math.round(value).toLocaleString('ko-KR') + '만원';
+    document.getElementById('res-value').textContent = (next * newArea / 10000).toFixed(2) + '억원';
+    document.getElementById('res-base-unit').textContent = money(base);
+    document.getElementById('res-new-unit').textContent = money(next);
+    document.getElementById('res-supply').textContent = newArea + '평';
+    document.getElementById('value-formula').textContent = `${sale}억 ÷ ${oldArea}평 × ${newArea}평 × ${(1 + premium / 100).toFixed(2)}`;
+  };
+  inputs.forEach(input => input.addEventListener('input', update));
+  presets.forEach(button => button.addEventListener('click', () => { inputs[3].value = button.dataset.premium; update(); }));
+  update();
 }
 
 /* ==========================================================================
    6. LIGHTBOX MODAL VIEWER
    ========================================================================== */
+let lightboxTrigger = null;
+let previousBodyOverflow = '';
+
+function restoreLightboxState() {
+  if (!lightboxTrigger || document.getElementById('lightboxModal').open) return;
+  document.body.style.overflow = previousBodyOverflow;
+  const trigger = lightboxTrigger;
+  lightboxTrigger = null;
+  trigger.focus({ preventScroll: true });
+}
+
+function initLightbox() {
+  const modal = document.getElementById('lightboxModal');
+  if (!modal) return;
+  document.querySelectorAll('#gallery [onclick]').forEach(card => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-haspopup', 'dialog');
+    card.addEventListener('click', () => card.focus({ preventScroll: true }), { capture: true });
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        card.click();
+      }
+    });
+  });
+  modal.addEventListener('close', restoreLightboxState);
+  modal.addEventListener('cancel', event => {
+    event.preventDefault();
+    window.closeLightbox();
+  });
+  modal.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const controls = [...modal.querySelectorAll('button, a[href], [tabindex="0"]')];
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+  modal.addEventListener('click', event => {
+    const rect = modal.getBoundingClientRect();
+    if (event.target === modal && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) {
+      window.closeLightbox();
+    }
+  });
+}
+
 window.openLightbox = function(src, title, desc) {
   const modal = document.getElementById('lightboxModal');
   const modalImg = document.getElementById('modalImage');
@@ -448,25 +359,23 @@ window.openLightbox = function(src, title, desc) {
   if (!modal || !modalImg) return;
 
   modalImg.src = src;
+  modalImg.alt = title || '더샵 파크에비뉴 138';
   if (modalTitle) modalTitle.textContent = title || '더샵 파크에비뉴 138';
   if (modalDesc) modalDesc.textContent = desc || '';
 
-  modal.classList.remove('opacity-0', 'pointer-events-none');
-  modal.classList.add('opacity-100', 'pointer-events-auto');
+  if (modal.open) return;
+  lightboxTrigger = document.activeElement;
+  previousBodyOverflow = document.body.style.overflow;
+  modal.showModal();
+  modal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 };
 
 window.closeLightbox = function() {
   const modal = document.getElementById('lightboxModal');
-  if (!modal) return;
+  if (!modal || !modal.open) return;
 
-  modal.classList.add('opacity-0', 'pointer-events-none');
-  modal.classList.remove('opacity-100', 'pointer-events-auto');
-  document.body.style.overflow = '';
+  modal.close();
+  // The native close event is queued; restore before another image can open.
+  restoreLightboxState();
 };
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeLightbox();
-  }
-});
