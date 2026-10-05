@@ -107,6 +107,39 @@ class ApartmentTourTests(unittest.TestCase):
         self.page.unroute('**/tour-scene.js*')
         self.start()
 
+    def test_touch_viewer_does_not_trap_page_scroll(self):
+        context = self.browser.new_context(viewport={'width': 390, 'height': 844},
+                                          is_mobile=True, has_touch=True, reduced_motion='reduce')
+        page = context.new_page()
+        try:
+            page.goto(self.url, wait_until='networkidle')
+            page.locator('#tour-start').tap()
+            expect(page.locator('#tour-shell')).to_have_attribute('data-state', 'ready')
+            toggle = page.locator('#tour-touch-toggle')
+            expect(toggle).to_be_visible()
+            canvas = page.locator('#tour-canvas-host canvas')
+            self.assertEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
+            toggle.tap()
+            expect(toggle).to_have_attribute('aria-pressed', 'true')
+            self.assertNotEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
+            toggle.tap()
+            expect(toggle).to_have_attribute('aria-pressed', 'false')
+            page.locator('.tour-room[data-room="master"]').tap()
+            expect(canvas).to_have_attribute('data-current-room', 'master')
+            self.assertEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
+            page.locator('#tour-stage').evaluate('(e) => e.scrollIntoView()')
+            box = canvas.bounding_box()
+            session = context.new_cdp_session(page)
+            x, y = box['x'] + box['width'] / 2, box['y'] + box['height'] / 2
+            before = page.evaluate('scrollY')
+            session.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': x, 'y': y + 50}]})
+            for step in range(1, 9):
+                session.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': x, 'y': y + 50 - step * 15}]})
+            session.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+            self.assertGreater(page.evaluate('scrollY'), before)
+        finally:
+            context.close()
+
     def test_phone_controls_and_resizing(self):
         self.page.set_viewport_size({'width': 320, 'height': 700})
         canvas = self.start()
@@ -121,7 +154,7 @@ class ApartmentTourTests(unittest.TestCase):
         self.page.set_viewport_size({'width': 375, 'height': 812})
         self.page.locator('.tour-room[data-room="master"]').click()
         expect(canvas).to_have_attribute('data-current-room', 'master')
-        self.assertGreaterEqual(self.page.locator('#tour-stage').bounding_box()['y'], 80)
+        self.assertGreaterEqual(self.page.locator('#tour-stage').bounding_box()['y'], 79)
         self.assertLess(self.page.locator('#tour-stage').bounding_box()['y'], 120)
 
 

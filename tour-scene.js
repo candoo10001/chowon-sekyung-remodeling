@@ -31,7 +31,8 @@ export async function createTour(host, onInteraction, onError) {
   textures.slice(0,4).forEach(t=>{t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,4);});
   textures[0].colorSpace=THREE.SRGBColorSpace;
   const renderer = new THREE.WebGLRenderer({antialias:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));
+  const mobileRendering = window.matchMedia('(pointer: coarse)').matches;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, mobileRendering ? 1.25 : 1.75));
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=.92;
   const canvas=renderer.domElement; canvas.tabIndex=0;
@@ -43,6 +44,7 @@ export async function createTour(host, onInteraction, onError) {
   const composer=new EffectComposer(renderer);
   const renderPass=new RenderPass(scene,camera);
   const ambientOcclusion=new SSAOPass(scene,camera,1,1,16);
+  ambientOcclusion.enabled = !mobileRendering;
   ambientOcclusion.kernelRadius=.35;
   ambientOcclusion.minDistance=.0003;
   ambientOcclusion.maxDistance=.045;

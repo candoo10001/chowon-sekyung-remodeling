@@ -4,6 +4,7 @@ Thumbs.db
 __pycache__/
 .venv/
 test-artifacts/
+.npm-cache/
 research/*.pdf
 research/*.txt
 research/*.html

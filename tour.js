@@ -4,6 +4,27 @@
   const byId = id => document.getElementById(id);
   let tour = null, loading = false, mode = 'overview', room = 'living', palette = 'warm';
   let timer = null, inView = true, attempts = 0;
+  const touchDevice = window.matchMedia('(pointer: coarse)');
+  const touchToggle = byId('tour-touch-toggle');
+  function updateInstructions() {
+    const touch = touchDevice.matches;
+    const interactive = shell.classList.contains('touch-interactive');
+    byId('tour-instructions').textContent = touch && !interactive
+      ? '화면 위에서도 페이지를 스크롤할 수 있어요. 터치 조작을 켜면 드래그로 둘러볼 수 있습니다.'
+      : mode === 'overview' ? '드래그: 회전 · 두 손가락: 확대/축소 · 방을 선택하면 실내로 이동' : '드래그: 시선 이동 · 다른 방은 공간 버튼으로 선택 · 화면 밖에서 페이지 스크롤';
+  }
+  function setTouchInteraction(enabled) {
+    shell.classList.toggle('touch-interactive', enabled);
+    touchToggle.setAttribute('aria-pressed', String(enabled));
+    touchToggle.textContent = enabled ? '페이지 스크롤로 돌아가기' : '3D 터치 조작 켜기';
+    updateInstructions();
+  }
+  touchToggle.addEventListener('click', () => {
+    stopGuide();
+    setTouchInteraction(!shell.classList.contains('touch-interactive'));
+  });
+  touchDevice.addEventListener('change', () => setTouchInteraction(false));
+  updateInstructions();
   const roomOrder = [...shell.querySelectorAll('[data-room]')].map(button => button.dataset.room);
   function showStage() {
     if (window.innerWidth < 1024) byId('tour-stage').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
@@ -25,11 +46,11 @@
     byId('tour-room-description').textContent = data.description;
     byId('tour-view-name').textContent = mode === 'overview' ? '전체 모형' : data.name;
     byId('tour-view-detail').textContent = mode === 'overview' ? '공용 코어를 제외한 수평증축 검토안 · 미확정' : '가상 인테리어 · 창밖 풍경은 실제 조망 아님';
-    byId('tour-instructions').textContent = mode === 'overview' ? '드래그: 회전 · 두 손가락: 확대/축소 · 방을 선택하면 실내로 이동' : '드래그: 시선 이동 · 다른 방은 공간 버튼으로 선택 · 화면 밖에서 페이지 스크롤';
+    updateInstructions();
     tour.setView(mode, room);
   }
   function fail() {
-    stopGuide(); loading = false;
+    stopGuide(); setTouchInteraction(false); loading = false;
     if (tour) { tour.dispose(); tour = null; }
     byId('tour-canvas-host').replaceChildren();
     shell.dataset.state = 'error';

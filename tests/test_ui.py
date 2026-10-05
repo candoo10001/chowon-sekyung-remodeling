@@ -77,6 +77,7 @@ class UIRegressionTests(unittest.TestCase):
         for width in (320, 375, 390, 640, 768, 1024, 1280, 1440):
             with self.subTest(width=width):
                 self.page.set_viewport_size({'width': width, 'height': 812})
+                self.page.locator('#value-settings').evaluate('(e) => e.open = true')
                 self.page.evaluate('scrollTo(0, 0)')
                 self.assert_disjoint(self.page.locator('body > aside'), self.page.locator('#main-header'))
                 nav = self.page.locator('#main-header nav[aria-label="주 메뉴"]')
@@ -85,6 +86,14 @@ class UIRegressionTests(unittest.TestCase):
                     self.assertLessEqual(nav.bounding_box()['x'] + nav.bounding_box()['width'], width)
                 else:
                     self.assert_disjoint(self.page.locator('.header-brand'), self.page.locator('#mobile-menu-btn'))
+                if width < 768:
+                    for selector in ('.plan-tab', '.map-filter'):
+                        boxes = [button.bounding_box() for button in self.page.locator(selector).all()]
+                        self.assertLess(max(b['y'] for b in boxes) - min(b['y'] for b in boxes), 1)
+                        self.assertTrue(all(b['height'] >= 44 and b['width'] >= 44 for b in boxes))
+                        self.assertTrue(self.page.locator(selector).evaluate_all('(es) => es.every(e => e.scrollWidth <= e.clientWidth)'))
+                    fields = self.page.locator('.value-fields input')
+                    self.assertAlmostEqual(fields.nth(2).bounding_box()['y'], fields.nth(3).bounding_box()['y'], delta=1)
                 self.assert_disjoint(self.page.locator('#before-badge'), self.page.locator('#after-badge'))
                 self.assert_disjoint(self.page.locator('#plan-badge'), self.page.locator('#plan-ratio'))
                 self.assert_disjoint(self.page.locator('#plan-code'), self.page.locator('#plan-layout'))
@@ -99,6 +108,12 @@ class UIRegressionTests(unittest.TestCase):
                 self.assertAlmostEqual(self.page.locator('#main-header').bounding_box()['y'], 0, delta=1)
 
     def test_calculator_selection_contrast_and_results(self):
+        expect(self.page.locator('[data-premium="20"]')).to_have_attribute('aria-pressed', 'true')
+        expect(self.page.locator('#res-value')).to_have_text('15.00억원')
+        expect(self.page.locator('#value-premium')).to_have_value('20')
+        self.assertLess(self.page.locator('#calculator').bounding_box()['height'], 700)
+        self.assertEqual(self.page.locator('[data-price-disclosure][open]').count(), 0)
+        self.page.locator('#value-settings > summary').click()
         buttons = self.page.locator('[data-premium]')
         for index, amount in ((1,'13.75'), (2,'15.00'), (0,'12.50'), (1,'13.75')):
             buttons.nth(index).click()
@@ -134,7 +149,39 @@ class UIRegressionTests(unittest.TestCase):
             expect(self.page.locator('#plan-layout')).to_have_text(label)
             colors = button.evaluate('e => [getComputedStyle(e).color, getComputedStyle(e).backgroundColor]')
             self.assertGreaterEqual(contrast(*colors), 4.5)
-            self.assertGreaterEqual(self.page.locator('#plan-svg-container svg').bounding_box()['width'], 420)
+            self.assertLessEqual(self.page.locator('#plan-svg-container svg').bounding_box()['width'], self.page.locator('#plan-svg-container').bounding_box()['width'] + 1)
+
+    def test_mobile_navigation_plan_zoom_and_calculator_helpers(self):
+        self.page.set_viewport_size({'width': 320, 'height': 568})
+        nav = self.page.locator('.mobile-quick-nav')
+        for target in ('floorplans', 'apartment-tour', 'timeline', 'calculator'):
+            link = nav.locator(f'a[href="#{target}"]')
+            link.click()
+            expect(link).to_have_attribute('aria-current', 'location')
+            self.assertGreaterEqual(self.page.locator('#' + target).bounding_box()['y'], 64)
+        self.page.locator('#value-settings > summary').click()
+        self.page.locator('#value-new-area').fill('28')
+        expect(nav).to_be_hidden()
+        expect(self.page.locator('#new-area-metric')).to_contain_text('92.6')
+        self.page.locator('#value-reset').click()
+        expect(self.page.locator('#value-new-area')).to_have_value('25')
+        expect(self.page.locator('#res-value')).to_have_text('15.00억원')
+        expect(self.page.locator('[data-premium="20"]')).to_have_attribute('aria-pressed', 'true')
+        expect(nav).to_be_visible()
+        nav.locator('a[href="#floorplans"]').click()
+        self.page.locator('#plan-zoom').click()
+        container = self.page.locator('#plan-svg-container')
+        self.assertGreater(container.evaluate('(e) => e.scrollWidth'), container.evaluate('(e) => e.clientWidth'))
+        self.page.locator('#tab-type49old').click()
+        expect(self.page.locator('#plan-zoom')).to_have_attribute('aria-pressed', 'true')
+        self.page.locator('#plan-zoom').click()
+        self.assertLessEqual(container.evaluate('(e) => e.scrollWidth'), container.evaluate('(e) => e.clientWidth') + 1)
+        table = self.page.locator('.comparison-table-scroll')
+        self.assertLessEqual(table.evaluate('(e) => e.scrollWidth'), table.evaluate('(e) => e.clientWidth') + 1)
+        for row in self.page.locator('.comparison-table tbody tr').all():
+            self.assertEqual(row.locator('td[data-label]').count(), 4)
+        self.page.locator('.checklist-items summary').first.click()
+        expect(self.page.locator('.checklist-items details').first).to_have_attribute('open', '')
 
     def test_section_and_plan_label_contrast(self):
         labels = self.page.locator('section > div > .text-center > span, #plan-badge, #plan-layout, #floorplans .bg-slate-50 > span:first-child')

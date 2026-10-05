@@ -108,3 +108,27 @@
   .tour-camera-buttons #tour-reset { padding: 0 8px; }
   .tour-bottom-note { padding: 14px; }
 }
+
+/* Touch devices start in page-scroll mode, with an explicit viewer toggle. */
+.tour-touch-toggle { display: none; }
+@media (pointer: coarse) {
+  .tour-touch-toggle { display: block; width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #9fac97; border-radius: 8px; background: white; color: #243b34; font-size: 13px; font-weight: 700; }
+  .tour-touch-toggle[aria-pressed="true"] { background: #243b34; color: white; }
+  .tour-canvas-host { touch-action: pan-y pinch-zoom; }
+  .tour-shell:not(.touch-interactive) .tour-canvas-host canvas { pointer-events: none; }
+}
+@media (max-width: 767px) {
+  .tour-section { padding: 48px 0; }
+  .tour-section-heading h2 { font-size: 28px; }
+  .tour-section-heading > p, .tour-disclaimer p { font-size: 13px; }
+  .tour-stage { height: clamp(320px, 52svh, 420px); min-height: 320px; }
+  .tour-toolbar > p { font-size: 12px; }
+  .tour-start-card p, .tour-room-story p { font-size: 13px; }
+  .tour-fallback-link { min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; margin-top: 6px; }
+  .tour-room-list { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; }
+  .tour-room { justify-content: center; padding: 8px 2px; min-height: 48px; border-color: #dce1d7; text-align: center; }
+  .tour-room > span:first-child { display: none; }
+  .tour-room > span:nth-child(2) { font-size: 12px; }
+  .tour-material-control button { font-size: 12px; }
+  .tour-guide-status, .tour-bottom-note { font-size: 12px; }
+}

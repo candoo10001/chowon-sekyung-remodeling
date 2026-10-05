@@ -2,7 +2,7 @@
 
 Static HTML/CSS/JavaScript site with a research-based **concept** floor plan,
 interactive 3D tour, and editable price scenarios. The model is not an approved
-architectural or structural design. Changes in this workspace have not been deployed.
+architectural or structural design. Live site: https://chowon-sekyung.surge.sh (published 2026-10-05).
 
 ## Run
 
@@ -38,12 +38,29 @@ two material palettes and a 7-second guided sequence. Keyboard: Left/Right, +/�
 Home. This is not free walking. Rendering and guide stop offscreen or in hidden tabs;
 reduced motion is respected. Load/WebGL failure retains a poster, 2D link and retry.
 
+## Mobile experience
+
+Phones have a compact header, safe-area-aware bottom navigation, larger reading
+text and tap targets, and comparison cards instead of a horizontally scrolling
+table. Floor plans fit the screen by default; the enlargement button preserves
+access to detailed labels. The bottom navigation hides while editing inputs and
+in short landscape viewports. Reduced-motion preferences apply to anchor links.
+
+On touch devices the 3D canvas initially allows page scrolling. Enable touch
+interaction with the button below the viewer, or use the room/camera buttons.
+Touch devices use a lower rendering pixel ratio and skip ambient occlusion.
+Gallery images load lazily. The calculator adds supply-area conversions to square
+metres and a default-value reset. A collapsible consultation checklist covers
+unit plans, additional costs and the dates of project notices.
+
 ## Price scenarios
 
 The user's confirmed sale is 9.5억원 / supplied 19평 = approximately 5,000만원/평.
 The exact trade has not been independently matched to the official register.
 The calculator's supplied 25평 is an editable example, not a confirmed allocation.
 At unchanged unit price it yields 12.50억; +10% yields 13.75억; +20% yields 15.00억.
+The initial selection and reset use the +20% scenario (15.00억). Mobile price
+inputs, calculation breakdown and transaction sources are expandable.
 These are arithmetic scenarios, excluding contributions, taxes and financing costs.
 Nearby transaction dates, areas, floors and reaggregation sources are on the page.
 
@@ -59,7 +76,8 @@ python -m unittest discover -s tests -v
 
 Tests cover 320–1440px layouts, selected-text contrast, input validation and price
 arithmetic, floor-plan tabs, touch/keyboard controls, dialogs, eight WebGL views,
-load failure/retry, and simplified furniture/fixture/door-sweep geometry. Geometry
+load failure/retry, mobile quick navigation, plan enlargement, calculator reset,
+real touch scrolling over the viewer, and simplified furniture/fixture/door-sweep geometry. Geometry
 checks are design sanity checks, not architectural or code-compliance certification.
 Browser tests explicitly enable software WebGL; production does not force it.
 

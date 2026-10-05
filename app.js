@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init Components
   initMobileMenu();
+  initQuickNavigation();
   initHeaderScroll();
   initComparisonSlider();
   initFloorPlans();
@@ -71,10 +72,11 @@ function initHeaderScroll() {
   // Limit the dropdown to the visible space even while the notice is on screen.
   const menu = document.getElementById('mobile-menu');
   const updateMenuHeight = () => {
-    if (menu) menu.style.maxHeight = `${Math.max(0, window.innerHeight - header.getBoundingClientRect().bottom)}px`;
+    if (menu) menu.style.maxHeight = `${Math.max(0, (window.visualViewport?.height || window.innerHeight) - header.getBoundingClientRect().bottom)}px`;
   };
   window.addEventListener('scroll', updateMenuHeight, { passive: true });
   window.addEventListener('resize', updateMenuHeight);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', updateMenuHeight);
   updateMenuHeight();
 }
 
@@ -180,6 +182,14 @@ const floorPlanData = window.floorPlanData;
 
 function initFloorPlans() {
   window.switchPlan('type59A');
+  const zoom = document.getElementById('plan-zoom');
+  zoom.addEventListener('click', () => {
+    const expanded = zoom.getAttribute('aria-pressed') !== 'true';
+    zoom.setAttribute('aria-pressed', String(expanded));
+    zoom.textContent = expanded ? '전체 보기' : '도면 확대';
+    document.getElementById('plan-svg-container').classList.toggle('is-zoomed', expanded);
+    document.getElementById('plan-zoom-help').textContent = expanded ? '도면을 좌우로 밀어 자세히 확인하세요.' : '전체 배치를 먼저 보고, 확대해서 방 이름을 확인하세요.';
+  });
 }
 
 window.switchPlan = function(type) {
@@ -266,10 +276,20 @@ window.filterMap = function(category, e) {
    5. SMART 59㎡ VALUE CALCULATOR
    ========================================================================== */
 function initCalculator() {
+  const mobilePrices = window.matchMedia('(max-width: 767px)');
+  const disclosures = [...document.querySelectorAll('[data-price-disclosure]')];
+  function setPriceLayout() {
+    disclosures.forEach(detail => { detail.open = !mobilePrices.matches; });
+  }
+  setPriceLayout();
+  mobilePrices.addEventListener('change', setPriceLayout);
   const ids = ['value-sale', 'value-old-area', 'value-new-area', 'value-premium'];
   const inputs = ids.map(id => document.getElementById(id));
   const presets = [...document.querySelectorAll('[data-premium]')];
   const update = () => {
+    for (const [input, output] of [[inputs[1], 'old-area-metric'], [inputs[2], 'new-area-metric']]) {
+      document.getElementById(output).textContent = input.value && input.checkValidity() ? `약 ${(input.valueAsNumber * 3.305785).toFixed(1)}㎡ · 공급면적` : '';
+    }
     const valid = inputs.every(input => input.value !== '' && input.checkValidity());
     document.getElementById('value-error').hidden = valid;
     inputs.forEach(input => input.setAttribute('aria-invalid', String(input.value === '' || !input.checkValidity())));
@@ -278,10 +298,12 @@ function initCalculator() {
       button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
     });
     if (!valid) {
+      document.getElementById('value-assumptions').textContent = '입력값을 확인해 주세요.';
       for (const id of ['res-value','res-base-unit','res-new-unit','res-supply','value-formula']) document.getElementById(id).textContent = '—';
       return;
     }
     const [sale, oldArea, newArea, premium] = inputs.map(input => input.valueAsNumber);
+    document.getElementById('value-assumptions').textContent = `${sale}억 · ${oldArea}평 → ${newArea}평 · ${premium > 0 ? '+' : ''}${premium}%`;
     const base = sale / oldArea * 10000, next = base * (1 + premium / 100);
     const money = value => Math.round(value).toLocaleString('ko-KR') + '만원';
     document.getElementById('res-value').textContent = (next * newArea / 10000).toFixed(2) + '억원';
@@ -292,6 +314,10 @@ function initCalculator() {
   };
   inputs.forEach(input => input.addEventListener('input', update));
   presets.forEach(button => button.addEventListener('click', () => { inputs[3].value = button.dataset.premium; update(); }));
+  document.getElementById('value-reset').addEventListener('click', () => {
+    inputs.forEach(input => { input.value = input.defaultValue; });
+    update();
+  });
   update();
 }
 
@@ -379,3 +405,39 @@ window.closeLightbox = function() {
   // The native close event is queued; restore before another image can open.
   restoreLightboxState();
 };
+
+
+// Keep frequently used sections within thumb reach on long mobile pages.
+function initQuickNavigation() {
+  const nav = document.querySelector('.mobile-quick-nav');
+  const links = [...nav.querySelectorAll('a')];
+  const sections = [...document.querySelectorAll('body > section[id]')];
+  let scheduled = false;
+  function update() {
+    scheduled = false;
+    const line = document.getElementById('main-header').getBoundingClientRect().bottom + 100;
+    let current = null;
+    for (const section of sections) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= line && rect.bottom > line) current = '#' + section.id;
+    }
+    for (const link of links) {
+      if (link.hash === current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    }
+  }
+  window.addEventListener('scroll', () => {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  // Avoid covering fields or results while a phone keyboard is open.
+  document.addEventListener('focusin', event => {
+    if (event.target.matches('input, textarea, select')) nav.classList.add('keyboard-open');
+  });
+  document.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
+      nav.classList.toggle('keyboard-open', document.activeElement.matches('input, textarea, select'));
+    });
+  });
+  update();
+}
