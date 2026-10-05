@@ -1028,45 +1028,14 @@
               <div id="tour-canvas-host" class="tour-canvas-host"></div>
               <div class="tour-stage-label"><span class="tour-status-dot"></span> PREDICTED DESIGN <span>미확정 콘셉트</span></div>
               
-              <!-- 3D Viewport Controls HUD -->
+              <!-- 3D Viewport Controls HUD (icon-only) -->
               <div class="tour-stage-controls" role="toolbar" aria-label="3D 뷰어 환경 설정">
-                <div class="tour-material-control" role="group" aria-label="마감 분위기 선택">
-                  <span class="tour-overlay-icon" aria-hidden="true" title="마감 분위기">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-                  </span>
-                  <div class="tour-overlay-btns">
-                    <button type="button" data-palette="warm" aria-pressed="true" data-tour-control disabled title="내추럴 오크">
-                      <i class="tour-swatch warm" aria-hidden="true"></i>
-                      <span>오크</span>
-                    </button>
-                    <button type="button" data-palette="cool" aria-pressed="false" data-tour-control disabled title="모던 그레이지">
-                      <i class="tour-swatch cool" aria-hidden="true"></i>
-                      <span>그레이지</span>
-                    </button>
-                  </div>
-                </div>
-
+                <button type="button" data-palette="warm" aria-pressed="true" aria-label="내추럴 오크" data-tour-control disabled><i class="tour-swatch warm" aria-hidden="true"></i></button>
+                <button type="button" data-palette="cool" aria-pressed="false" aria-label="모던 그레이지" data-tour-control disabled><i class="tour-swatch cool" aria-hidden="true"></i></button>
                 <div class="tour-stage-control-divider" aria-hidden="true"></div>
-
-                <div class="tour-daylight-control" role="group" aria-label="채광 시간대 선택">
-                  <span class="tour-overlay-icon" aria-hidden="true" title="자연 채광">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-                  </span>
-                  <div class="tour-daylight-buttons tour-overlay-btns">
-                    <button type="button" data-daylight="morning" aria-pressed="false" data-tour-control disabled title="아침 햇살">
-                      <span class="daylight-icon" aria-hidden="true">🌅</span>
-                      <span>아침</span>
-                    </button>
-                    <button type="button" data-daylight="afternoon" aria-pressed="true" data-tour-control disabled title="한낮 채광">
-                      <span class="daylight-icon" aria-hidden="true">☀️</span>
-                      <span>한낮</span>
-                    </button>
-                    <button type="button" data-daylight="evening" aria-pressed="false" data-tour-control disabled title="은은한 석양">
-                      <span class="daylight-icon" aria-hidden="true">🌇</span>
-                      <span>석양</span>
-                    </button>
-                  </div>
-                </div>
+                <button type="button" data-daylight="morning" aria-pressed="false" aria-label="아침 햇살" data-tour-control disabled>🌅</button>
+                <button type="button" data-daylight="afternoon" aria-pressed="true" aria-label="한낮 채광" data-tour-control disabled>☀️</button>
+                <button type="button" data-daylight="evening" aria-pressed="false" aria-label="은은한 석양" data-tour-control disabled>🌇</button>
               </div>
 
               <div id="tour-start-overlay" class="tour-start-overlay">

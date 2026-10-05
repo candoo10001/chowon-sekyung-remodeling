@@ -119,29 +119,53 @@ export async function createTour(host, onInteraction, onError) {
     const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,40),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;
   }
   function plant(x,z) {
-    cylinder(.15,.3,x,.15,z,stone);cylinder(.014,.8,x,.6,z,oak);
-    for(let i=0;i<9;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(.13,12,8),sage);m.scale.set(.7,.18,2);m.position.set(x+Math.sin(i*2.4)*.14,.5+i*.055,z+Math.cos(i*2.4)*.14);m.rotation.set(.2,i*2.4,.2);apartment.add(m);}
+    cylinder(.17,.38,x,.19,z,white);
+    cylinder(.15,.02,x,.36,z,dark);
+    cylinder(.014,.9,x,.72,z,oak);
+    for(let i=0;i<11;i++){
+      const angle=i*2.15,dist=.15+(i%3)*.04,height=.48+i*.055;
+      const leaf=new THREE.Mesh(new THREE.SphereGeometry(.14,14,10),sage);
+      leaf.scale.set(.75,.08,1.8);leaf.position.set(x+Math.sin(angle)*dist,height,z+Math.cos(angle)*dist);
+      leaf.rotation.set(.35+(i%2)*.12,angle,.25);leaf.castShadow=true;apartment.add(leaf);
+    }
   }
   function bed(x,z,w,accent,angle=0) {
     const first=apartment.children.length;
-    box(w+.1,.22,2.04,x,.19,z,oak,apartment,.05);
-    box(w,.24,1.98,x,.4,z,white,apartment,.10);
-    box(w+.12,1.0,.15,x,.57,z-1.05,fabric,apartment,.06);
-    box(w+.035,.11,1.25,x,.55,z+.32,accent,apartment,.05);
-    for(let i=0;i<(w>1.3?2:1);i++){const p=box(w>1.3?.61:.74,.17,.44,x+(w>1.3?(i-.5)*.72:0),.59,z-.66,cream,apartment,.07);p.rotation.x=-.14;}
-    for(let i=0;i<4;i++)box(w,.016,.015,x,.612,z+.57+i*.08,cream,apartment,.004);
+    const isDouble=w>1.3,count=isDouble?2:1;
+    box(w+.06,.08,2.06,x,.04,z,dark,apartment);
+    box(w+.12,.18,2.08,x,.17,z,oak,apartment,.03);
+    box(w+.16,1.05,.16,x,.60,z-1.05,fabric,apartment,.06);
+    for(let c=-1;c<=1;c++)box(.008,.95,.015,x+c*(w*.28),.62,z-.97,dark,apartment);
+    box(w,.26,1.96,x,.39,z,white,apartment,.06);
+    box(w+.04,.14,1.32,x,.51,z+.28,cream,apartment,.08);
+    box(w+.05,.04,.42,x,.59,z+.72,accent,apartment,.04);
+    for(let i=0;i<count;i++){
+      const px=isDouble?x+(i-.5)*.74:x;
+      const p1=box(isDouble?.62:.72,.20,.32,px,.61,z-.72,cream,apartment,.08);p1.rotation.x=-.32;
+      const p2=box(isDouble?.58:.68,.16,.34,px,.55,z-.44,white,apartment,.07);p2.rotation.x=-.10;
+    }
+    box(isDouble?.46:.38,.12,.22,x,.57,z-.30,sage,apartment,.05);
+    for(const side of [-1,1]){
+      const nx=x+side*(w/2+.32),nz=z-.85;
+      box(.38,.24,.34,nx,.30,nz,oak,apartment,.02);
+      cylinder(.055,.015,nx,.43,nz,brass);cylinder(.008,.24,nx,.55,nz,brass);cylinder(.085,.13,nx,.63,nz,glow);
+    }
     if(angle){const parts=apartment.children.slice(first);const group=new THREE.Group();group.position.set(x,0,z);apartment.add(group);parts.forEach(part=>group.attach(part));group.rotation.y=angle;}
   }
   function chair(x,z,angle=0) {
     const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=angle;apartment.add(g);
-    box(.46,.10,.46,0,.46,0,fabric,g,.04);box(.46,.34,.075,0,.69,-.19,oak,g,.03);
-    for(const x of [-.17,.17])for(const z of [-.17,.17])box(.035,.42,.035,x,.23,z,dark,g);
+    box(.46,.08,.46,0,.45,0,fabric,g,.05);
+    box(.44,.32,.08,0,.68,-.19,fabric,g,.04);
+    for(const px of [-.16,.16])for(const pz of [-.16,.16])cylinder(.014,.44,px,.22,pz,dark,g);
   }
   function art(x,y,z,angle=0) {
     const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=angle;apartment.add(g);
-    box(.85,.65,.04,0,0,0,oak,g);box(.80,.6,.045,0,0,.01,cream,g);
-    const disc=cylinder(.19,.01,.10,0,0,sage,g);disc.rotation.x=Math.PI/2;disc.position.z=.04;
-    box(.18,.36,.01,-.18,-.06,.04,white,g);
+    box(.92,.72,.035,0,0,0,dark,g,.005);
+    box(.88,.68,.038,0,0,.004,white,g);
+    box(.80,.60,.042,0,0,.008,cream,g);
+    const arch=cylinder(.22,.012,.12,.04,.044,sage,g);arch.rotation.x=Math.PI/2;
+    box(.30,.18,.012,-.14,-.10,.046,oak,g,.005);
+    box(.14,.32,.010,.10,-.06,.048,brass,g,.005);
   }
   function tap(x,z){
     const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(x,.91,z-.18),new THREE.Vector3(x,1.17,z-.18),new THREE.Vector3(x,1.21,z-.08),new THREE.Vector3(x,1.12,z+.03)]);
@@ -196,18 +220,50 @@ export async function createTour(host, onInteraction, onError) {
       box(.01,2.08,d+.015,x,1.1,z,oak);continue;
     }
     if(f.type==='sofa'){
-      box(w,.28,d,x,.26,z,fabric,apartment,.10);box(.19,.63,d+.06,x-.32,.48,z,fabric,apartment,.08);
-      for(const dz of [-.73,0,.73])box(.73,.18,.69,x+.07,.45,z+dz,cream,apartment,.07);
-      for(const side of [-1,1]){box(w,.49,.15,x,.40,z+side*d/2,fabric,apartment,.06);const p=box(.17,.36,.40,x-.15,.71,z+side*.65,sage,apartment,.06);p.rotation.z=-.2;}
+      box(w-.15,.06,d-.12,x,.03,z,dark,apartment);
+      box(w,.22,d,x,.17,z,fabric,apartment,.05);
+      box(.22,.64,d+.04,x-.34,.50,z,fabric,apartment,.06);
+      for(const dz of [-.73,0,.73]){
+        box(.75,.16,.68,x+.08,.36,z+dz,cream,apartment,.08);
+        const b=box(.16,.38,.66,x-.20,.65,z+dz,cream,apartment,.08);b.rotation.z=.12;
+      }
+      for(const side of [-1,1]){
+        box(w,.38,.16,x,.36,z+side*d/2,fabric,apartment,.06);
+        const p=box(.16,.32,.32,x-.12,.56,z+side*.64,sage,apartment,.06);p.rotation.set(-.18,side*.25,-.22);
+      }
+      box(.65,.03,.55,x+.12,.45,z-.65,cream,apartment,.02);
     }else if(f.type==='coffee'){
-      cylinder(w/2,.09,x,.41,z,stone);cylinder(.25,.34,x,.2,z,stone);cylinder(.09,.13,x+.12,.52,z,cream);box(.24,.04,.18,x-.14,.48,z+.12,sage);
+      cylinder(w/2,.035,x,.32,z,stone);
+      for(let a=0;a<3;a++){
+        const ang=a*Math.PI*2/3;
+        cylinder(.012,.30,x+Math.cos(ang)*(w/2-.08),.15,z+Math.sin(ang)*(w/2-.08),dark);
+      }
+      cylinder(.24,.030,x+.42,.36,z+.18,oak);
+      cylinder(.014,.34,x+.42,.17,z+.18,dark);
+      box(.22,.025,.16,x-.10,.35,z-.06,dark,apartment,.005);
+      box(.20,.020,.14,x-.08,.37,z-.06,white,apartment,.005);
+      cylinder(.045,.07,x+.12,.37,z-.08,glass);
+      cylinder(.030,.05,x+.12,.365,z-.08,glow);
+      cylinder(.08,.03,x+.42,.39,z+.18,cream);
     }else if(f.type==='media'){
-      box(w,.26,d,x,.25,z,oak,apartment,.025);box(.035,.68,1.15,x+.105,1.18,z,dark,apartment,.015);
+      box(w,.28,d,x,.30,z,oak,apartment,.02);
+      for(let dz=-d/2+.08;dz<d/2;dz+=.08)box(.006,.26,.012,x+.11,.30,z+dz,dark);
+      box(.025,.78,1.40,x+.10,1.25,z,dark,apartment,.01);
+      box(.010,.74,1.36,x+.085,1.25,z,mirror,apartment);
+      box(.04,.045,.82,x+.09,.82,z,dark,apartment,.01);
+      cylinder(.05,.16,x,.52,z+.45,cream);
+      cylinder(.04,.10,x,.49,z-.45,stone);
     }else if(f.type==='dining'){
-      box(w,.07,d,x,.76,z,oak,apartment,.14);
-      for(const dx of [-.43,.43])box(.05,.7,.05,x+dx,.39,z,dark);
-      cylinder(.14,.018,x,.806,z,white);
-      cylinder(.02,.48,x,2.1,z,brass,windows);cylinder(.23,.1,x,1.84,z,glow,windows);
+      box(w,.055,d,x,.76,z,oak,apartment,.04);
+      for(const dx of [-w/2+.14,w/2-.14]){
+        for(const dz of [-d/2+.12,d/2-.12])cylinder(.018,.73,x+dx,.37,z+dz,dark);
+      }
+      cylinder(.065,.18,x,.87,z,cream);
+      cylinder(.005,.32,x,1.05,z,dark);cylinder(.004,.28,x+.02,1.02,z+.02,dark);
+      cylinder(.006,.65,x,2.05,z,brass,windows);
+      cylinder(.08,.02,x,1.72,z,brass,windows);
+      const globe=new THREE.Mesh(new THREE.SphereGeometry(.14,24,16),glow);
+      globe.position.set(x,1.62,z);windows.add(globe);
     }else if(f.type==='chair'){
       chair(x,z,Math.PI);
     }else if(f.type==='desk'){
@@ -215,11 +271,17 @@ export async function createTour(host, onInteraction, onError) {
       const g=new THREE.Group();g.position.set(x-.40,0,z);apartment.add(g);
       chair(x-.37,z,-Math.PI/2);
     }else if(f.type==='counter'){
-      box(w,.83,d,x,.43,z,cream,apartment,.015);box(w+.04,.045,d+.04,x,.87,z,stone,apartment,.015);
-      box(w,.58,.31,x,1.96,z-.155,plaster);box(w-.1,.025,.16,x,1.65,z-.09,glow);
-      for(let dx=-w/2+.55;dx<w/2;dx+=.55)box(.008,.75,.014,x+dx,.44,z+d/2+.01,oak);
-      box(.52,.018,.40,x+.60,.90,z,white,apartment,.035);box(.44,.012,.32,x+.6,.913,z,dark,apartment,.04);tap(x+.6,z);
-      box(.47,.012,.38,x-.6,.90,z,dark,apartment,.015);
+      box(w-.04,.08,d-.06,x,.04,z,dark,apartment);
+      box(w,.76,d,x,.46,z,cream,apartment,.015);
+      box(w+.04,.05,d+.05,x,.87,z,stone,apartment,.015);
+      box(.05,.84,d+.05,x-w/2-.02,.45,z,stone,apartment,.01);
+      box(w,.60,.32,x,1.95,z-.15,plaster);
+      box(w-.08,.018,.08,x,1.64,z-.15,glow);
+      for(let dx=-w/2+.45;dx<w/2;dx+=.45)box(.006,.68,.012,x+dx,.46,z+d/2+.01,brass);
+      box(.52,.010,.42,x-.55,.90,z,dark,apartment,.01);
+      cylinder(.08,.012,x-.65,.906,z,glow);cylinder(.06,.012,x-.45,.906,z,glow);
+      box(.54,.020,.40,x+.55,.895,z,dark,apartment,.02);
+      box(.46,.015,.34,x+.55,.905,z,white,apartment,.03);tap(x+.55,z);
     }else if(f.type==='fridge'){
       box(w,2.13,d,x,1.08,z,cream,apartment,.025);box(.025,.56,.025,x+w/2+.015,1.42,z+.20,brass);
     }
@@ -247,7 +309,10 @@ export async function createTour(host, onInteraction, onError) {
   cylinder(.015,1.25,.48,1.30,-1.05,brass);cylinder(.11,.02,.48,1.94,-.87,brass);
   // A narrow shoe cabinet sits outside the clear route between entry and bedrooms.
   box(1.30,2.1,.26,-.67,1.07,-2.34,cream);box(.018,1.12,.54,.105,1.48,-1.86,mirror);
-  for(const [x,z]of [[-1.8,4.5],[1.8,3.5],[-.7,-.1],[-2.6,-1.5],[-2.3,-4.5],[.3,-4.5],[.95,.3]])cylinder(.043,.012,x,2.345,z,glow,windows);
+  for(const [x,z]of [[-1.8,4.5],[1.8,3.5],[-.7,-.1],[-2.6,-1.5],[-2.3,-4.5],[.3,-4.5],[.95,.3]]){
+    cylinder(.052,.006,x,2.355,z,white,windows);
+    cylinder(.036,.006,x,2.350,z,glow,windows);
+  }
 
   const ground=box(200,.1,200,0,-.34,0,material('#e7e9e6'),scene);ground.castShadow=false;
   const hemi=new THREE.HemisphereLight('#f2f7ff','#cfbea7',.85);scene.add(hemi);
