@@ -28,26 +28,34 @@ export async function createTour(host, onInteraction, onError) {
   const park = await new HDRLoader().loadAsync('./assets/tour-materials/park.hdr');
   park.mapping=THREE.EquirectangularReflectionMapping;
   textures.push(hdr,park);
-  textures.slice(0,4).forEach(t=>{t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,4);});
-  textures[0].colorSpace=THREE.SRGBColorSpace;
   const renderer = new THREE.WebGLRenderer({antialias:true});
-  const mobileRendering = window.matchMedia('(pointer: coarse)').matches;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, mobileRendering ? 1.25 : 1.75));
+  const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.02;
   const canvas=renderer.domElement; canvas.tabIndex=0;
   canvas.setAttribute('aria-label','가상 아파트 3D 뷰어. 드래그로 둘러보기. 아래 버튼으로도 조작할 수 있습니다.');
   host.append(canvas);
+  textures.slice(0,4).forEach(t=>{
+    t.wrapS=t.wrapT=THREE.RepeatWrapping;
+    t.repeat.set(3,4);
+    t.anisotropy=maxAnisotropy;
+    t.generateMipmaps=true;
+    t.minFilter=THREE.LinearMipmapLinearFilter;
+    t.magFilter=THREE.LinearFilter;
+  });
+  textures[0].colorSpace=THREE.SRGBColorSpace;
   const scene=new THREE.Scene();scene.background=new THREE.Color('#e7e9e6');
   hdr.mapping=THREE.EquirectangularReflectionMapping;scene.environment=hdr;scene.environmentIntensity=1.15;
   const camera=new THREE.PerspectiveCamera(42,1,.05,150);
   const composer=new EffectComposer(renderer);
   const renderPass=new RenderPass(scene,camera);
-  const ambientOcclusion=new SSAOPass(scene,camera,1,1,16);
+  const mobileRendering = window.matchMedia('(pointer: coarse)').matches;
+  const ambientOcclusion=new SSAOPass(scene,camera,1,1,32);
   ambientOcclusion.enabled = !mobileRendering;
-  ambientOcclusion.kernelRadius=0.80;
-  ambientOcclusion.minDistance=0.004;
-  ambientOcclusion.maxDistance=0.28;
+  ambientOcclusion.kernelRadius=0.65;
+  ambientOcclusion.minDistance=0.005;
+  ambientOcclusion.maxDistance=0.24;
   const outputPass=new OutputPass();
   composer.addPass(renderPass);composer.addPass(ambientOcclusion);composer.addPass(outputPass);
   const controls=new OrbitControls(camera,canvas);
@@ -56,30 +64,30 @@ export async function createTour(host, onInteraction, onError) {
 
   function createMarbleTexture() {
     const c = document.createElement('canvas');
-    c.width = 512; c.height = 512;
+    c.width = 1024; c.height = 1024;
     const ctx = c.getContext('2d');
     if (!ctx) return null;
-    ctx.fillStyle = '#f6f3ed'; ctx.fillRect(0, 0, 512, 512);
-    for (let i = 0; i < 40; i++) {
-      const x = (i * 73) % 512, y = (i * 97) % 512, r = 40 + (i % 5) * 20;
+    ctx.fillStyle = '#f7f4ed'; ctx.fillRect(0, 0, 1024, 1024);
+    for (let i = 0; i < 50; i++) {
+      const x = (i * 149) % 1024, y = (i * 197) % 1024, r = 80 + (i % 6) * 40;
       const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0, 'rgba(232, 226, 215, 0.45)');
-      g.addColorStop(1, 'rgba(246, 243, 237, 0)');
+      g.addColorStop(0, 'rgba(230, 224, 212, 0.40)');
+      g.addColorStop(1, 'rgba(247, 244, 237, 0)');
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
     }
     const veins = [
-      { color: 'rgba(150, 142, 132, 0.28)', w: 4 },
-      { color: 'rgba(185, 160, 125, 0.22)', w: 2.5 },
-      { color: 'rgba(130, 122, 114, 0.20)', w: 2 }
+      { color: 'rgba(145, 137, 126, 0.28)', w: 4.5 },
+      { color: 'rgba(180, 155, 120, 0.22)', w: 2.5 },
+      { color: 'rgba(125, 118, 108, 0.18)', w: 2 }
     ];
     veins.forEach((v, vi) => {
-      for (let j = 0; j < 3; j++) {
+      for (let j = 0; j < 4; j++) {
         ctx.strokeStyle = v.color; ctx.lineWidth = v.w; ctx.beginPath();
-        let x = (vi * 160 + j * 120 + 30) % 512, y = 0;
+        let x = (vi * 320 + j * 240 + 60) % 1024, y = 0;
         ctx.moveTo(x, y);
-        while (y < 512) {
-          y += 25;
-          x += Math.sin(y * 0.05 + j) * 18 + ((j % 2) ? 6 : -6);
+        while (y < 1024) {
+          y += 35;
+          x += Math.sin(y * 0.025 + j) * 24 + ((j % 2) ? 8 : -8);
           ctx.lineTo(x, y);
         }
         ctx.stroke();
@@ -87,8 +95,12 @@ export async function createTour(host, onInteraction, onError) {
     });
     const tex = new THREE.CanvasTexture(c);
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    tex.repeat.set(1.5, 1.5);
+    tex.repeat.set(2, 2);
     tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = maxAnisotropy;
+    tex.generateMipmaps = true;
+    tex.minFilter = THREE.LinearMipmapLinearFilter;
+    tex.magFilter = THREE.LinearFilter;
     return tex;
   }
   const marbleTexture = createMarbleTexture();
@@ -96,15 +108,15 @@ export async function createTour(host, onInteraction, onError) {
   const materials=[];
   function material(color,extra={}) {const m=new THREE.MeshPhysicalMaterial({color,roughness:.5,...extra});materials.push(m);return m;}
   const oak=material('#ba9e7c',{roughness:.38,clearcoat:.16,clearcoatRoughness:.22});
-  const floor=material('#e8dac0',{map:textures[0],normalMap:textures[1],roughnessMap:textures[2],normalScale:new THREE.Vector2(.28,.28),roughness:.32,metalness:.02,clearcoat:.36,clearcoatRoughness:.20,reflectivity:.55});
+  const floor=material('#e8dac0',{map:textures[0],normalMap:textures[1],roughnessMap:textures[2],normalScale:new THREE.Vector2(.14,.14),roughness:.32,metalness:.02,clearcoat:.36,clearcoatRoughness:.20,reflectivity:.55});
   const plaster=material('#f3f0e8',{roughness:.82}),cream=material('#e5ded0',{roughness:.75,sheen:.4,sheenColor:new THREE.Color('#faf5ea'),sheenRoughness:.3}),white=material('#faf9f5',{roughness:.78});
   const baseboard=material('#ede8de',{roughness:.5,clearcoat:.15});
   const stone=material('#ede7dc',{...(marbleTexture ? {map:marbleTexture} : {}),roughness:.14,metalness:.02,clearcoat:.88,clearcoatRoughness:.06,reflectivity:.85});
   const dark=material('#1f2220',{metalness:.72,roughness:.26,clearcoat:.18});
   const brass=material('#cca562',{metalness:.94,roughness:.20,clearcoat:.35,clearcoatRoughness:.12});
-  const fabric=material('#cec6b8',{normalMap:textures[3],normalScale:new THREE.Vector2(.26,.26),roughness:.82,sheen:.92,sheenRoughness:.35,sheenColor:new THREE.Color('#f4f0e6')});
-  const sage=material('#7e8c7c',{normalMap:textures[3],normalScale:new THREE.Vector2(.16,.16),roughness:.76,sheen:.65,sheenRoughness:.40,sheenColor:new THREE.Color('#9eb09b')});
-  const rug=material('#d4cbba',{normalMap:textures[3],normalScale:new THREE.Vector2(.48,.48),roughness:.94,sheen:.85,sheenRoughness:.50,sheenColor:new THREE.Color('#eee9dd')});
+  const fabric=material('#cec6b8',{normalMap:textures[3],normalScale:new THREE.Vector2(.18,.18),roughness:.82,sheen:.92,sheenRoughness:.35,sheenColor:new THREE.Color('#f4f0e6')});
+  const sage=material('#7e8c7c',{normalMap:textures[3],normalScale:new THREE.Vector2(.14,.14),roughness:.76,sheen:.65,sheenRoughness:.40,sheenColor:new THREE.Color('#9eb09b')});
+  const rug=material('#d4cbba',{normalMap:textures[3],normalScale:new THREE.Vector2(.25,.25),roughness:.94,sheen:.85,sheenRoughness:.50,sheenColor:new THREE.Color('#eee9dd')});
   const glass=material('#eef6f5',{transmission:.90,opacity:1,transparent:true,ior:1.52,roughness:.04,metalness:.02,depthWrite:false});
   const mirror=material('#e4e8e5',{metalness:.98,roughness:.04,clearcoat:1,clearcoatRoughness:.02});
   const glow=material('#fff4e2',{emissive:new THREE.Color('#ffdfa6'),emissiveIntensity:2.2,roughness:.2});
@@ -178,7 +190,7 @@ export async function createTour(host, onInteraction, onError) {
     const geo=thickness?new THREE.ExtrudeGeometry(shape,{depth:thickness,bevelEnabled:false}):new THREE.ShapeGeometry(shape);
     geo.rotateX(-Math.PI/2);const mesh=new THREE.Mesh(geo,mat);mesh.position.y=y;mesh.receiveShadow=true;mesh.castShadow=!!thickness;parent.add(mesh);return mesh;
   }
-  textures.slice(0,3).forEach(t=>t.repeat.set(.48,.48));
+  textures.slice(0,3).forEach(t=>t.repeat.set(1.4,1.4));
   slab(white,-.25,.2);slab(floor,.003);
   const ceilingMat=plaster.clone();ceilingMat.side=THREE.DoubleSide;materials.push(ceilingMat);slab(ceilingMat,2.36,0,windows);
   for(const zone of [...layout.zones,...Object.values(layout.rooms).filter(r=>r.floor==='stone')]){const [x,z,a,b]=zone.bounds;box(a-x-.12,.018,b-z-.12,(x+a)/2,.02,(z+b)/2,stone);}
