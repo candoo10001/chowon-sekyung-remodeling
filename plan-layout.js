@@ -7,7 +7,7 @@
       kitchen:{name:'주방 · 다이닝',bounds:[-3.6,.4,-.5,3.3],label:[-2,1.3],camera:[-.7,1.5,2.1],target:[-2.65,1,.7]},
       master:{name:'안방',bounds:[-.15,2.5,3.6,6],label:[1.55,4.2],camera:[.45,1.5,5.1],target:[2.35,.8,3.7]},
       bedroom:{name:'침실 2',bounds:[-.9,-6,1.5,-3.1],label:[.3,-4.6],camera:[.82,1.5,-3.5],target:[-.15,.8,-5.05]},
-      study:{name:'침실 3 · 서재',bounds:[-3.6,-6,-.9,-3.1],label:[-2.25,-4.6],camera:[-2.2,1.5,-3.45],target:[-2.3,.85,-5]},
+      study:{name:'서재',bounds:[-3.6,-6,-.9,-3.1],label:[-2.25,-4.6],camera:[-2.2,1.5,-3.45],target:[-2.3,.85,-5]},
       bath:{name:'공용 욕실',bounds:[-3.6,-2.9,-1.9,-.7],label:[-2.75,-1.8],camera:[-2.15,1.5,-1.2],target:[-3,.95,-2.1],floor:'stone'},
       ensuite:{name:'부부욕실',bounds:[.2,-1.2,1.7,1.1],label:[.95,-.1],camera:[.64,1.5,.78],target:[1.18,.86,-.22],floor:'stone'},
       entry:{name:'현관',bounds:[-1.5,-2.5,.2,-1.2],label:[-.6,-1.85],camera:[-.15,1.5,-1.83],target:[-1.05,1.15,-.4]}
@@ -33,9 +33,9 @@
       {type:'sofa',x:-3,z:4.55,w:.85,d:2.35},{type:'coffee',x:-1.78,z:4.65,w:.8,d:.8},{type:'media',x:-.36,z:4.75,w:.28,d:1.55},{type:'dining',x:-1.85,z:2.45,w:1.2,d:.72},
       {type:'counter',x:-2.35,z:.75,w:2.3,d:.62},{type:'fridge',x:-3.19,z:1.8,w:.64,d:.64},
       {type:'chair',x:-2.18,z:3.08,w:.46,d:.46},{type:'chair',x:-1.52,z:3.08,w:.46,d:.46},
-      {type:'bed',x:2.43,z:3.72,w:1.5,d:2,angle:-Math.PI/2},{type:'bed',x:-.3,z:-4.83,w:1,d:2},{type:'bed',x:-2.4,z:-5.23,w:.9,d:2,angle:Math.PI/2},
-      {type:'desk',x:-1.18,z:-4.3,w:.4,d:.9},
-      {type:'wardrobe',x:3.23,z:1.8,w:.55,d:1.15},{type:'wardrobe',x:2.05,z:1.445,w:1.5,d:.55},{type:'wardrobe',x:1.15,z:-4.62,w:.5,d:1.2},{type:'wardrobe',x:-3.2,z:-3.8,w:.55,d:1.1}
+      {type:'bed',x:2.43,z:3.72,w:1.5,d:2,angle:-Math.PI/2},{type:'bed',x:-.3,z:-4.83,w:1,d:2},{type:'bookshelf',x:-3.42,z:-4.55,w:.34,d:2.4},{type:'armchair',x:-2.35,z:-5.05,w:.75,d:.75},
+      {type:'desk',x:-1.45,z:-4.25,w:.55,d:1.1},
+      {type:'wardrobe',x:3.23,z:1.8,w:.55,d:1.15},{type:'wardrobe',x:2.05,z:1.445,w:1.5,d:.55},{type:'wardrobe',x:1.15,z:-4.62,w:.5,d:1.2}
     ]
   };
   const X=x=>230+x*42,Y=z=>285+z*42;
@@ -55,7 +55,7 @@
       drawing+=plan.walls.map(wall).join('');
       drawing+=plan.windows.map(([x,z,w])=>`<path d="M${X(x-w/2)},${Y(z)} h${w*42}" stroke="#729ba4" stroke-width="5"/>`).join('');
       drawing+=plan.doors.map(([x,z,o,side])=>o==='v'?`<path d="M${X(x)},${Y(z-.425)} h${side*33.6} a33.6,33.6 0 0 ${side<0?0:1} ${-side*33.6},33.6" fill="none" stroke="#859285"/>`:`<path d="M${X(x-.425)},${Y(z)} v${side*33.6} a33.6,33.6 0 0 ${side<0?1:0} 33.6,${-side*33.6}" fill="none" stroke="#859285"/>`).join('');
-      if(!analysis)drawing+=plan.furniture.map(f=>rect(f.x-(f.angle?f.d:f.w)/2,f.z-(f.angle?f.w:f.d)/2,f.angle?f.d:f.w,f.angle?f.w:f.d,['bed','sofa'].includes(f.type)?'#d3d7cc':'#d4bfa0','rx="3" stroke="#aeb4a7" stroke-width=".7"')).join('');
+      if(!analysis)drawing+=plan.furniture.map(f=>rect(f.x-(f.angle?f.d:f.w)/2,f.z-(f.angle?f.w:f.d)/2,f.angle?f.d:f.w,f.angle?f.w:f.d,['bed','sofa','armchair'].includes(f.type)?'#d3d7cc':'#d4bfa0','rx="3" stroke="#aeb4a7" stroke-width=".7"')).join('');
       if(!analysis)drawing+=plan.fixtures.map(f=>rect(f.x-f.w/2,f.z-f.d/2,f.w,f.d,f.type==='shower'?'#dae5e4':'#fff','rx="4" stroke="#8a9c93" stroke-width="1"')).join('');
       if(analysis)drawing+=`<path d="M${X(2.2)},${Y(-1.85)} H${X(-.75)} V${Y(2.8)}" stroke="#aa7535" stroke-width="9" opacity=".35" fill="none"/>`+text('연결 동선',-.75,.05,9)+text('후면 침실군',-1.05,-5.5,10);
       drawing+=[...Object.values(plan.rooms),...plan.zones].map(r=>text(r.name,...r.label,r.name.length>7?9:11)).join('');

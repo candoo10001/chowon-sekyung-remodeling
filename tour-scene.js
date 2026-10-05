@@ -13,7 +13,7 @@ const stories = {
  kitchen:['KITCHEN','작지만 정돈된 주방','기존 영역에 주방을 모으고 식탁을 거실 쪽으로 연결했습니다. 설비 위치는 원도면 확인 후 조정이 필요합니다.'],
  master:['BEDROOM','휴식과 수납을 나누는 안방','안방 뒤쪽에 드레스룸을 두고, 그곳에서 부부욕실로 연결합니다. 침대 발치와 거실에서 들어오는 통로를 비웠습니다.'],
  bedroom:['SECOND ROOM','빛이 드는 작은 침실','후면 증축을 가정한 침실입니다. 침대와 수납장을 벽 쪽으로 모아 출입구 앞 공간을 확보했습니다.'],
- study:['STUDIO','침실과 서재를 함께','후면 침실군의 작은 방입니다. 싱글 침대와 책상을 양쪽 벽에 붙여 가운데 이동 공간을 확보하는 배치입니다.'],
+ study:['LIBRARY','책과 사색을 위한 서재','벽면 가득 채운 원목 서가와 아늑한 1인 리딩 체어. 오롯이 독서와 집필에 몰입할 수 있도록 서재 본연의 공간으로 완성했습니다.'],
  bath:['BATH','간결한 석재와 금속','주방과 가까운 기존 영역에 욕실을 배치한 검토안입니다. 배관·샤프트 위치는 확인되지 않았습니다.'],
  ensuite:['ENSUITE BATH','안방에서 이어지는 부부욕실','드레스룸 안쪽에 독립된 욕실을 두어 안방 동선을 짧게 잡은 검토안입니다. 배관·샤프트와 실제 증축 범위는 확인되지 않았습니다.'],
  entry:['ARRIVAL','공용 코어에서 집 안으로','공유 도면의 측면 진입을 참고했습니다. 현관에서 후면 침실과 전면 생활 공간으로 갈라지며 공용 코어는 세대 면적에서 제외했습니다.']
@@ -289,9 +289,52 @@ export async function createTour(host, onInteraction, onError) {
     }else if(f.type==='chair'){
       chair(x,z,Math.PI);
     }else if(f.type==='desk'){
-      box(w,.055,d,x,.76,z,oak,apartment,.01);for(const dz of [-d*.38,d*.38])box(w,.72,.04,x,.37,z+dz,dark);
-      const g=new THREE.Group();g.position.set(x-.40,0,z);apartment.add(g);
-      chair(x-.37,z,-Math.PI/2);
+      box(w,.055,d,x,.76,z,oak,apartment,.02);
+      for(const dz of [-d*.38,d*.38])box(w*.85,.72,.035,x,.36,z+dz,dark);
+      box(w*.75,.09,.40,x,.67,z+d*.22,oak,apartment,.01);
+      box(.32,.010,.24,x,.768,z,dark,apartment,.005);
+      box(.24,.008,.18,x,.778,z,white,apartment,.003);
+      cylinder(.045,.012,x+.16,.775,z-.24,brass);
+      cylinder(.006,.35,x+.16,.94,z-.24,brass);
+      box(.08,.018,.14,x+.10,1.10,z-.24,glow);
+      chair(x-.32,z,Math.PI/2);
+    }else if(f.type==='bookshelf'){
+      const bw=w,bd=d;
+      box(bw,2.15,bd,x,1.10,z,oak,apartment,.01);
+      box(bw-.04,2.11,.02,x,1.10,z-bd/2+.015,dark,apartment);
+      const bookColors=[dark,brass,sage,cream,oak,white];
+      for(let s=0;s<5;s++){
+        const sy=0.28+s*0.42;
+        box(bw-.02,.025,bd-.02,x,sy,z,oak,apartment);
+        const bookCount=Math.floor(bd/0.14)+3;
+        let bz=z-bd/2+.12;
+        for(let b=0;b<bookCount;b++){
+          if(bz>z+bd/2-.15)break;
+          const bookWidth=0.028+((b*7)%5)*0.012;
+          const bookHeight=0.22+((b*11)%6)*0.022;
+          const bookDepth=bw-0.08;
+          const bookMat=bookColors[(s*3+b)%bookColors.length];
+          const bk=box(bookDepth,bookHeight,bookWidth,x,sy+bookHeight/2+0.012,bz,bookMat,apartment,.003);
+          if(b%4===3&&b<bookCount-1)bk.rotation.x=0.15;
+          bz+=bookWidth+0.008;
+        }
+      }
+      box(bw-.04,.015,bd-.06,x,2.15,z,glow);
+    }else if(f.type==='armchair'){
+      const ag=new THREE.Group();ag.position.set(x,0,z);ag.rotation.y=.35;apartment.add(ag);
+      cylinder(.58,.008,0,.024,0,rug,ag);
+      for(const px of [-.20,.20])for(const pz of [-.20,.20])cylinder(.014,.26,px,.13,pz,dark,ag);
+      box(.64,.14,.64,0,.33,0,sage,ag,.06);
+      const back=box(.62,.58,.14,0,.68,-.26,sage,ag,.06);back.rotation.x=-0.15;
+      for(const side of [-1,1])box(.12,.24,.60,side*.32,.48,0,sage,ag,.04);
+      const pillow=box(.36,.18,.12,0,.45,-.16,cream,ag,.04);pillow.rotation.x=-0.18;
+      cylinder(.16,.022,.55,.44,-.15,oak,ag);
+      cylinder(.012,.42,.55,.22,-.15,brass,ag);
+      cylinder(.04,.06,.55,.48,-.15,white,ag);
+      cylinder(.10,.015,-.55,.03,-.40,brass,ag);
+      cylinder(.010,1.45,-.55,.75,-.40,brass,ag);
+      cylinder(.010,.45,-.35,1.48,-.30,brass,ag);
+      cylinder(.08,.10,-.18,1.42,-.20,glow,ag);
     }else if(f.type==='counter'){
       box(w-.04,.08,d-.06,x,.04,z,dark,apartment);
       box(w,.76,d,x,.46,z,cream,apartment,.015);
