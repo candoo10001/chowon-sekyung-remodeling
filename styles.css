@@ -498,9 +498,7 @@ input:focus-visible, summary:focus-visible { outline: 3px solid #0284c7; outline
   .value-fields label input, .area-metric { flex-basis: 100%; }
   .value-result dl > div, .value-result p, .value-inputs > p { font-size: 13px; }
   #timeline .white-card p, #timeline .white-card-gold p { font-size: 13px; line-height: 1.8; margin-top: 6px; }
-  #gallery .grid { gap: 20px; }
-  #premiums p.text-xs, #community p.text-xs, #gallery p.text-xs { font-size: 14px; line-height: 1.8; }
-  #gallery [role="button"] { cursor: zoom-in; }
+  #premiums p.text-xs, #community p.text-xs { font-size: 14px; line-height: 1.8; }
   .lightbox-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); padding: 12px; }
   #lightbox-close { position: sticky; top: 0; border-radius: 8px; background: #0f172a; z-index: 1; }
   #modalTitle { font-size: 20px; }

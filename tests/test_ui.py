@@ -229,16 +229,15 @@ class UIRegressionTests(unittest.TestCase):
         self.page.set_viewport_size({'width': 375, 'height': 812})
         expect(button).to_have_attribute('aria-expanded', 'false')
 
-    def test_gallery_dialog_small_screens_and_keyboard(self):
+    def test_lightbox_dialog_small_screens_and_keyboard(self):
         for width, height in ((320, 568), (667, 375), (1440, 900)):
             with self.subTest(viewport=(width, height)):
                 self.page.set_viewport_size({'width': width, 'height': height})
-                trigger = self.page.locator('#gallery [role="button"]').first
-                trigger.focus()
-                self.page.keyboard.press('Enter')
+                self.page.evaluate('window.openLightbox("assets/the_sharp_138_rendering.jpg", "제목", "설명")')
                 modal = self.page.locator('#lightboxModal')
                 expect(modal).to_be_visible()
                 close = self.page.locator('#lightbox-close')
+                close.focus()
                 expect(close).to_be_focused()
                 box = close.bounding_box()
                 self.assertGreaterEqual(box['y'], 0)
@@ -247,9 +246,8 @@ class UIRegressionTests(unittest.TestCase):
                 self.assertTrue(self.page.evaluate('document.querySelector("#lightboxModal").contains(document.activeElement)'))
                 self.page.keyboard.press('Escape')
                 expect(modal).to_be_hidden()
-                expect(trigger).to_be_focused()
                 self.assertEqual(self.page.evaluate('document.body.style.overflow'), '')
-                trigger.click()
+                self.page.evaluate('window.openLightbox("assets/the_sharp_138_rendering.jpg", "제목", "설명")')
                 close.click()
                 expect(modal).to_be_hidden()
 

@@ -95,7 +95,6 @@
       <!-- Desktop Nav with Clean Modern Titles -->
       <nav aria-label="주 메뉴" class="hidden xl:flex items-center gap-4 text-sm font-medium text-slate-600 whitespace-nowrap">
         <a href="#transformation" class="hover:text-slate-950 transition-colors">변화 스토리</a>
-        <a href="#gallery" class="hover:text-slate-950 text-slate-950 font-bold transition-colors">공식 조감도</a>
         <a href="#premiums" class="hover:text-slate-950 transition-colors">6대 프리미엄</a>
         <a href="#community" class="hover:text-slate-950 transition-colors">클럽 더샵</a>
         <a href="#location" class="hover:text-slate-950 transition-colors">입지 환경</a>
@@ -107,9 +106,9 @@
 
       <!-- Action Button -->
       <div class="hidden sm:flex xl:hidden items-center gap-3 ml-auto">
-        <a href="#gallery" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-slate-800 transition-all shadow-md flex items-center gap-2">
-          <i data-lucide="image" class="w-3.5 h-3.5 text-[#e4cf9f]"></i>
-          <span>공식 조감도 갤러리</span>
+        <a href="#apartment-tour" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-slate-800 transition-all shadow-md flex items-center gap-2">
+          <i data-lucide="compass" class="w-3.5 h-3.5 text-[#e4cf9f]"></i>
+          <span>3D 투어 체험</span>
         </a>
       </div>
 
@@ -146,7 +145,6 @@
     <nav id="mobile-menu" aria-label="모바일 메뉴" class="hidden xl:hidden bg-white backdrop-blur-2xl border-b border-slate-200 px-6 py-6 shadow-xl font-medium text-slate-700">
       <div class="flex flex-col gap-4 text-sm">
         <a href="#transformation" class="mobile-nav-link py-1 hover:text-black">변화 스토리 (Before & After)</a>
-        <a href="#gallery" class="mobile-nav-link py-1 text-slate-950 font-bold">공식 조감도 & 실사 갤러리</a>
         <a href="#premiums" class="mobile-nav-link py-1 hover:text-black">6대 프리미엄</a>
         <a href="#community" class="mobile-nav-link py-1 hover:text-black">클럽 더샵 커뮤니티</a>
         <a href="#location" class="mobile-nav-link py-1 hover:text-black">입지 & 생활 인프라</a>
@@ -228,9 +226,9 @@
           <i data-lucide="split-square-vertical" class="w-4 h-4 text-[#e4cf9f]"></i>
           Before & After 전·후 비교
         </a>
-        <a href="#gallery" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
-          <i data-lucide="image" class="w-4 h-4 text-slate-700"></i>
-          공식 조감도 & 단지 둘러보기
+        <a href="#premiums" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
+          <i data-lucide="sparkles" class="w-4 h-4 text-[#80652d]"></i>
+          6대 프리미엄 가치 둘러보기
         </a>
       </div>
 
@@ -365,74 +363,7 @@
     </div>
   </section>
 
-  <!-- ================= SECTION: OFFICIAL RENDERING & REAL VIEW GALLERY ================= -->
-  <section id="gallery" class="py-24 bg-white relative border-t border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-          <span class="section-title-line">포스코이앤씨 조감도 및</span>
-          <span class="section-title-line text-[#80652d]">현장 실사 갤러리</span>
-        </h2>
-        <p class="section-subtitle text-slate-600 text-sm sm:text-base leading-relaxed">
-          인터넷 포털 및 언론에 공개된 포스코이앤씨 공식 조감도와 805·806동 현장 실사를 원본 해상도로 감상하세요.
-        </p>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        
-        <!-- Card 1: Official Rendering -->
-        <div class="white-card rounded-2xl overflow-hidden group cursor-pointer border border-slate-200" 
-             onclick="openLightbox('assets/the_sharp_138_rendering.jpg', '포스코이앤씨 공식 조감도 (더샵 파크에비뉴 138)', '평촌 1기 신도시를 상징하는 최고 25층 랜드마크 외관과 포스맥 스틸아트월 디자인')">
-          <div class="relative h-[280px] sm:h-[350px] overflow-hidden bg-slate-100">
-            <img loading="lazy" decoding="async" src="assets/the_sharp_138_rendering.jpg"
-                 alt="포스코이앤씨 더샵 파크에비뉴 138 공식 조감도" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-            <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5">
-              <i data-lucide="building-2" class="w-3.5 h-3.5 text-[#e4cf9f]"></i> 공식 조감도
-            </div>
-            <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 p-2.5 rounded-full shadow-md group-hover:scale-110 transition-transform">
-              <i data-lucide="zoom-in" class="w-4 h-4"></i>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="text-xs font-semibold text-[#80652d] uppercase tracking-wider mb-1">OFFICIAL RENDERING</div>
-            <h3 class="font-display font-bold text-slate-900 text-lg mb-2">포스코이앤씨 하이엔드 입면 조감도</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              포스코 고유의 고내식 합금도금강판(PosMAC)과 커튼월룩을 입혀 시간이 흘러도 변치 않는 품격을 선사합니다.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 2: Actual Photo -->
-        <div class="white-card rounded-2xl overflow-hidden group cursor-pointer border border-slate-200" 
-             onclick="openLightbox('assets/chowon_before.png', '초원세경 805·806동 현장 전경 실사', '1996년 준공되어 30년간 자리를 지켜온 현재의 초원세경아파트 전경')">
-          <div class="relative h-[280px] sm:h-[350px] overflow-hidden bg-slate-100">
-            <img loading="lazy" decoding="async" src="assets/chowon_before.png"
-                 alt="초원세경 805·806동 현장 전경 실사" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-            <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5">
-              <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i> 단지 실사 (현재)
-            </div>
-            <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 p-2.5 rounded-full shadow-md group-hover:scale-110 transition-transform">
-              <i data-lucide="zoom-in" class="w-4 h-4"></i>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="text-xs font-semibold text-rose-600 uppercase tracking-wider mb-1">ACTUAL COMPLEX VIEW</div>
-            <h3 class="font-display font-bold text-slate-900 text-lg mb-2">초원세경 805·806동 전경 실사</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              평촌 중앙공원과 맞닿은 뛰어난 입지 위에 세워졌던 805·806동이 명품 더샵으로 거듭납니다.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
 
   <!-- ================= SECTION: 6 PILLARS OF EXCELLENCE ================= -->
   <section id="premiums" class="py-8 sm:py-16 bg-slate-50 border-t border-slate-200/80 relative">
@@ -1341,7 +1272,6 @@
         </div>
         <div class="flex flex-wrap items-center gap-4 text-xs">
           <a href="#transformation" class="hover:text-white transition-colors">변화 스토리</a>
-          <a href="#gallery" class="hover:text-white transition-colors">공식 조감도</a>
           <a href="#premiums" class="hover:text-white transition-colors">6대 프리미엄</a>
           <a href="#community" class="hover:text-white transition-colors">클럽 더샵</a>
           <a href="#location" class="hover:text-white transition-colors">입지 환경</a>
