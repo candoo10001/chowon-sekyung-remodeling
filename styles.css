@@ -520,10 +520,13 @@ input:focus-visible, summary:focus-visible { outline: 3px solid #0284c7; outline
 .premium-card-heading { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
 .premium-card-heading > div { flex: 0 0 48px; }
 .premium-card-heading h3 { min-width: 0; margin: 0; line-height: 1.5; }
+#premiums .white-card { border: 1px solid #e2e8f0; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+#premiums .white-card:hover { border-color: #bfa15f; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
 @media (max-width: 767px) {
-  #premiums .white-card.p-8 { padding: 20px; }
-  .premium-card-heading > div { flex-basis: 40px; width: 40px; height: 40px; }
-  .premium-card-heading h3 { font-size: 16px; }
+  #premiums { padding-top: 48px; padding-bottom: 48px; }
+  #premiums .white-card { padding: 18px 16px; }
+  .premium-card-heading > div { flex-basis: 36px; width: 36px; height: 36px; }
+  .premium-card-heading h3 { font-size: 15px; }
 }
 
 /* Break section titles by phrase instead of leaving inline accents to wrap. */

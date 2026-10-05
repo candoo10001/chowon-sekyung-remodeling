@@ -34,7 +34,7 @@
       {type:'counter',x:-2.35,z:.75,w:2.3,d:.62},{type:'fridge',x:-3.19,z:1.8,w:.64,d:.64},
       {type:'chair',x:-2.18,z:3.08,w:.46,d:.46},{type:'chair',x:-1.52,z:3.08,w:.46,d:.46},
       {type:'bed',x:2.43,z:3.72,w:1.5,d:2,angle:-Math.PI/2},{type:'bed',x:-.3,z:-4.83,w:1,d:2},{type:'bookshelf',x:-3.42,z:-4.55,w:.34,d:2.4},{type:'armchair',x:-2.35,z:-5.05,w:.75,d:.75},
-      {type:'desk',x:-1.45,z:-4.25,w:.55,d:1.1},
+      {type:'desk',x:-1.45,z:-4.6,w:.55,d:1.1},
       {type:'wardrobe',x:3.23,z:1.8,w:.55,d:1.15},{type:'wardrobe',x:2.05,z:1.445,w:1.5,d:.55},{type:'wardrobe',x:1.15,z:-4.62,w:.5,d:1.2}
     ]
   };
