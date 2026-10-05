@@ -65,7 +65,7 @@
   const common={badge:'공개 검토도 참고안',ratio:'승인 여부 미확인',specOld:'전용 49.68㎡ · 공급 약 19평',specNew:'최종 전용·공급면적 미확인',specIncrease:'2026.02 공유 도면과 05월 보도 면적 상이',specBalcony:'서비스 면적은 별도 확인 필요',features:['직사각형에 방을 나열하지 않고 공용 코어를 피해 꺾이는 외곽','뒤쪽 침실 2개 → 중간 현관·욕실·주방 → 앞쪽 거실·안방','공용 욕실 + 부부욕실 + 드레스룸 + 다용도 수납','치수·구조·배관은 미검증 · 현재 확정 계획으로 사용 불가']};
   window.APARTMENT_LAYOUT=plan;
   window.floorPlanData={
-    type59A:{...common,layout:'코어를 피한 수평증축',code:'PLAN STUDY / SHARED 2D + 3D',title:'동선과 생활 공간을 나눈 검토안',desc:'초원세경 게시판에 공유된 리모델링 도면의 단계별 공간 구성을 참고했습니다. 기존 좌측 주방·거실과 우측 안방 관계를 살리고, 후면 침실군·중간 서비스 공간·측면 진입을 검토합니다. 가구와 설비는 별도 배치한 가정이며 해당 도면의 승인 여부는 확인되지 않았습니다.',svg:svg('plan')},
+    type59A:{...common,layout:'코어를 피한 수평증축',code:'PLAN STUDY / SHARED 2D + 3D',title:'동선과 생활 공간을 나눈 검토안',desc:'',svg:svg('plan')},
     type59B:{...common,layout:'동선 · 서비스 공간',code:'CIRCULATION / SERVICE ZONES',title:'현관에서 거실까지, 방을 통과하지 않는 길',desc:'현관은 공용 코어 측에서 들어오고, 중앙 연결 공간에서 각 방과 욕실로 분기합니다. 주방을 가로질러 방에 들어가지 않도록 가구를 벽 쪽으로 모았습니다. 깊어진 중앙부의 자연채광 한계와 설비 이동 검토는 여전히 남습니다.',svg:svg('analysis')},
     type49old:{...common,layout:'기존 2침실 배치',code:'EXISTING / PUBLISHED REFERENCE',title:'기존 19평형 · 공개 평면 참고도',desc:'오늘의집 시공사례에 연결된 한샘라임인테리어의 2017년 평면을 단순화했습니다. 뒤쪽 현관·주방·작은방, 오른쪽 중간 욕실, 앞쪽 거실·안방과 발코니 구성입니다. 치수와 내력벽 정보는 확인되지 않았습니다.',svg:svg('old')}
   };

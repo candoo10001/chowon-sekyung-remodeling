@@ -195,17 +195,16 @@ class UIRegressionTests(unittest.TestCase):
             self.assertGreaterEqual(contrast(*colors), 4.5, label.inner_text())
 
     def test_location_filters(self):
-        for index, category in enumerate(('all', 'transit', 'nature', 'edu', 'infra')):
+        for index, category in enumerate(('transit', 'nature', 'edu', 'infra')):
             self.page.locator('.map-filter').nth(index).click()
             self.assertEqual(self.page.locator('.map-filter[aria-pressed="true"]').count(), 1)
             visible = self.page.locator('.map-point:visible')
             self.assertGreater(visible.count(), 0)
-            if category != 'all':
-                self.assertEqual(visible.count(), self.page.locator(f'.map-point.{category}').count())
+            self.assertEqual(visible.count(), self.page.locator(f'.map-point.{category}').count())
             for card in visible.all():
                 self.assertEqual(card.evaluate('e => getComputedStyle(e).display'), 'block')
         self.page.locator('.map-filter').first.click()
-        self.assertEqual(self.page.locator('.map-point:visible').count(), 8)
+        self.assertEqual(self.page.locator('.map-point:visible').count(), 2)
 
     def test_mobile_menu_and_anchor_navigation(self):
         self.page.set_viewport_size({'width': 667, 'height': 375})

@@ -225,7 +225,10 @@ window.switchPlan = function(type) {
   const layoutEl = document.getElementById('plan-layout');
   if (layoutEl) layoutEl.textContent = data.layout;
   if (titleEl) titleEl.textContent = data.title;
-  if (descEl) descEl.textContent = data.desc;
+  if (descEl) {
+    descEl.textContent = data.desc || '';
+    descEl.style.display = data.desc ? '' : 'none';
+  }
   if (specOldEl) specOldEl.textContent = data.specOld;
   if (specNewEl) specNewEl.textContent = data.specNew;
   if (specIncreaseEl) specIncreaseEl.textContent = data.specIncrease;
@@ -248,6 +251,27 @@ window.switchPlan = function(type) {
 };
 
 /* ==========================================================================
+   3B. MOBILE CARD EXPAND / COLLAPSE (PREMIUMS & COMMUNITY)
+   ========================================================================== */
+window.toggleCard = function(btn) {
+  const card = btn.closest('.pillar-card, .community-card');
+  if (!card) return;
+
+  const isExpanded = card.classList.contains('is-expanded');
+  const nextExpanded = !isExpanded;
+
+  btn.setAttribute('aria-expanded', String(nextExpanded));
+  card.classList.toggle('is-expanded', nextExpanded);
+
+  const span = btn.querySelector('span');
+  if (span) {
+    span.textContent = nextExpanded ? '접기' : '상세 정보';
+  }
+};
+window.togglePillarCard = window.toggleCard;
+window.toggleCommunityCard = window.toggleCard;
+
+/* ==========================================================================
    4. INTERACTIVE MAP & LOCATION FILTER (FIXED LAYOUT)
    ========================================================================== */
 window.filterMap = function(category, e) {
@@ -259,7 +283,10 @@ window.filterMap = function(category, e) {
   });
 
   const evt = e || window.event;
-  const activeBtn = evt ? (evt.currentTarget || evt.target) : null;
+  let activeBtn = evt ? (evt.currentTarget || evt.target) : null;
+  if (!activeBtn) {
+    activeBtn = document.querySelector(`.map-filter[onclick*="${category}"]`);
+  }
   if (activeBtn) {
     activeBtn.classList.add('active', 'bg-slate-900', 'text-white');
     activeBtn.classList.remove('bg-slate-100', 'text-slate-600');

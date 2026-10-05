@@ -18,6 +18,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   overflow-x: hidden;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* Elegant Slim Scrollbar */
@@ -36,9 +38,25 @@ body {
 }
 
 /* Typography Enhancements */
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6,
+p, span, li, a, button,
+label, input, summary,
+dt, dd,
+.section-subtitle {
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+
+.section-subtitle {
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: #475569;
+}
+
+@media (min-width: 640px) {
+  .section-subtitle {
+    font-size: 1rem;
+  }
 }
 
 .font-display {
@@ -452,7 +470,10 @@ input:focus-visible, summary:focus-visible { outline: 3px solid #0284c7; outline
   .hero-metrics .white-card > div:last-child { font-size: 11px; line-height: 1.6; }
   #hero .absolute.bottom-6 { display: none; }
   body > section.py-24 { padding-top: 48px; padding-bottom: 48px; }
-  section > div > .text-center.mb-16 { margin-bottom: 28px; text-align: left; }
+  section > div > .text-center,
+  section > div > .section-header-compact { margin-bottom: 24px; text-align: left; }
+  section > div > .text-center p,
+  section > div > .section-header-compact p { margin-left: 0; margin-right: 0; }
   section h2.text-3xl { font-size: clamp(25px, 6vw, 32px); line-height: 1.4; }
   section .white-card.p-6, section .white-card-gold.p-6 { padding: 20px; }
   #floorplans .white-card { padding: 14px; }
@@ -520,13 +541,115 @@ input:focus-visible, summary:focus-visible { outline: 3px solid #0284c7; outline
 .premium-card-heading { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
 .premium-card-heading > div { flex: 0 0 48px; }
 .premium-card-heading h3 { min-width: 0; margin: 0; line-height: 1.5; }
-#premiums .white-card { border: 1px solid #e2e8f0; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-#premiums .white-card:hover { border-color: #bfa15f; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+#premiums .white-card, #community .white-card { border: 1px solid #e2e8f0; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+#premiums .white-card:hover, #community .white-card:hover { border-color: #bfa15f; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+
+/* ==========================================================================
+   PREMIUM ACCORDION EXPANSION ANIMATION (PREMIUMS & COMMUNITY)
+   ========================================================================== */
+.pillar-card,
+.community-card {
+  transition: border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s ease;
+}
+
+.pillar-card.is-expanded,
+.community-card.is-expanded {
+  border-color: #bfa15f !important;
+  box-shadow: 0 10px 25px -4px rgba(191, 161, 95, 0.16), 0 4px 10px -2px rgba(0, 0, 0, 0.03) !important;
+}
+
+.pillar-detail-wrapper,
+.community-detail-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s ease;
+  will-change: grid-template-rows, opacity;
+}
+
+.pillar-detail-inner,
+.community-detail-inner {
+  min-height: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillar-card.is-expanded .pillar-detail-wrapper,
+.community-card.is-expanded .community-detail-wrapper {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.pillar-card.is-expanded .pillar-detail-inner,
+.community-card.is-expanded .community-detail-inner {
+  transform: translateY(0);
+}
+
+.pillar-toggle-btn,
+.community-toggle-btn {
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  min-height: 38px;
+  transition: color 0.25s ease, background-color 0.2s ease;
+  border-radius: 6px;
+}
+
+.pillar-toggle-btn:active,
+.community-toggle-btn:active {
+  transform: scale(0.985);
+}
+
+.pillar-toggle-btn:focus-visible,
+.community-toggle-btn:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+
+.pillar-toggle-btn .chevron-icon,
+.community-toggle-btn .chevron-icon {
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.pillar-card.is-expanded .pillar-toggle-btn,
+.community-card.is-expanded .community-toggle-btn {
+  color: #80652d;
+  font-weight: 600;
+}
+
+.pillar-card.is-expanded .chevron-icon,
+.community-card.is-expanded .chevron-icon {
+  transform: rotate(180deg);
+  color: #80652d;
+}
+
+@media (min-width: 640px) {
+  .pillar-detail-wrapper,
+  .community-detail-wrapper {
+    display: block !important;
+    grid-template-rows: none !important;
+    opacity: 1 !important;
+  }
+  .pillar-detail-inner,
+  .community-detail-inner {
+    overflow: visible !important;
+    transform: none !important;
+  }
+}
+
 @media (max-width: 767px) {
-  #premiums { padding-top: 48px; padding-bottom: 48px; }
-  #premiums .white-card { padding: 18px 16px; }
-  .premium-card-heading > div { flex-basis: 36px; width: 36px; height: 36px; }
-  .premium-card-heading h3 { font-size: 15px; }
+  #premiums, #community { padding-top: 36px; padding-bottom: 36px; }
+  #premiums .section-header-compact, #community .section-header-compact { margin-bottom: 16px; text-align: left; }
+  #premiums h2, #community h2 { font-size: 22px; line-height: 1.35; margin-bottom: 6px; }
+  #premiums .section-subtitle, #community .section-subtitle { margin-left: 0; margin-right: 0; }
+  #premiums .pillar-card, #community .community-card { padding: 14px 12px; }
+  #premiums .pillar-card h3, #community .community-card h4 { font-size: 13.5px; line-height: 1.4; margin-bottom: 6px; }
+  .premium-card-heading > div { flex-basis: 32px; width: 32px; height: 32px; }
+  .premium-card-heading h3 { font-size: 14px; }
 }
 
 /* Break section titles by phrase instead of leaving inline accents to wrap. */
