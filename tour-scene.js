@@ -107,9 +107,15 @@ export async function createTour(host, onInteraction, onError) {
 
   const materials=[];
   function material(color,extra={}) {const m=new THREE.MeshPhysicalMaterial({color,roughness:.5,...extra});materials.push(m);return m;}
-  const oak=material('#ba9e7c',{roughness:.38,clearcoat:.16,clearcoatRoughness:.22});
+  const oakTexture = textures[0].clone();
+  oakTexture.wrapS = oakTexture.wrapT = THREE.RepeatWrapping;
+  oakTexture.repeat.set(2.5, 2.5);
+  const oak=material('#ba9e7c',{map:oakTexture,normalMap:textures[1],roughnessMap:textures[2],normalScale:new THREE.Vector2(.10,.10),roughness:.38,clearcoat:.18,clearcoatRoughness:.22});
   const floor=material('#e8dac0',{map:textures[0],normalMap:textures[1],roughnessMap:textures[2],normalScale:new THREE.Vector2(.14,.14),roughness:.32,metalness:.02,clearcoat:.36,clearcoatRoughness:.20,reflectivity:.55});
-  const plaster=material('#f3f0e8',{roughness:.82}),cream=material('#e5ded0',{roughness:.75,sheen:.4,sheenColor:new THREE.Color('#faf5ea'),sheenRoughness:.3}),white=material('#faf9f5',{roughness:.78});
+  const plaster=material('#f3f0e8',{roughness:.82});
+  const cream=material('#e5ded0',{normalMap:textures[3],normalScale:new THREE.Vector2(.12,.12),roughness:.72,sheen:.75,sheenColor:new THREE.Color('#faf5ea'),sheenRoughness:.35});
+  const white=material('#faf9f5',{roughness:.68,clearcoat:.15});
+  const ceramic=material('#ffffff',{roughness:.06,metalness:.02,clearcoat:1.0,clearcoatRoughness:.03,reflectivity:.92});
   const baseboard=material('#ede8de',{roughness:.5,clearcoat:.15});
   const stone=material('#ede7dc',{...(marbleTexture ? {map:marbleTexture} : {}),roughness:.14,metalness:.02,clearcoat:.88,clearcoatRoughness:.06,reflectivity:.85});
   const dark=material('#1f2220',{metalness:.72,roughness:.26,clearcoat:.18});
@@ -160,7 +166,8 @@ export async function createTour(host, onInteraction, onError) {
     for(const side of [-1,1]){
       const nx=x+side*(w/2+.32),nz=z-.85;
       box(.38,.24,.34,nx,.30,nz,oak,apartment,.02);
-      cylinder(.055,.015,nx,.43,nz,brass);cylinder(.008,.24,nx,.55,nz,brass);cylinder(.085,.13,nx,.63,nz,glow);
+      box(.39,.022,.35,nx,.43,nz,stone,apartment,.01);
+      cylinder(.055,.015,nx,.45,nz,brass);cylinder(.008,.22,nx,.56,nz,brass);cylinder(.085,.13,nx,.64,nz,glow);
     }
     if(angle){const parts=apartment.children.slice(first);const group=new THREE.Group();group.position.set(x,0,z);apartment.add(group);parts.forEach(part=>group.attach(part));group.rotation.y=angle;}
   }
@@ -232,39 +239,42 @@ export async function createTour(host, onInteraction, onError) {
       box(.01,2.08,d+.015,x,1.1,z,oak);continue;
     }
     if(f.type==='sofa'){
-      box(w-.15,.06,d-.12,x,.03,z,dark,apartment);
-      box(w,.22,d,x,.17,z,fabric,apartment,.05);
+      for(const px of [-w/2+.10,w/2-.10])for(const pz of [-d/2+.10,d/2-.10])cylinder(.016,.08,x+px,.04,z+pz,dark);
+      box(w,.14,d,x,.13,z,fabric,apartment,.05);
       box(.22,.64,d+.04,x-.34,.50,z,fabric,apartment,.06);
       for(const dz of [-.73,0,.73]){
-        box(.75,.16,.68,x+.08,.36,z+dz,cream,apartment,.08);
-        const b=box(.16,.38,.66,x-.20,.65,z+dz,cream,apartment,.08);b.rotation.z=.12;
+        box(.76,.16,.70,x+.08,.28,z+dz,cream,apartment,.07);
+        const b=box(.16,.38,.68,x-.20,.58,z+dz,cream,apartment,.08);b.rotation.z=.14;
       }
       for(const side of [-1,1]){
-        box(w,.38,.16,x,.36,z+side*d/2,fabric,apartment,.06);
-        const p=box(.16,.32,.32,x-.12,.56,z+side*.64,sage,apartment,.06);p.rotation.set(-.18,side*.25,-.22);
+        box(w,.34,.18,x,.30,z+side*d/2,fabric,apartment,.06);
+        const p=box(.15,.32,.32,x-.10,.46,z+side*.62,sage,apartment,.07);p.rotation.set(-.18,side*.25,-.22);
       }
-      box(.65,.03,.55,x+.12,.45,z-.65,cream,apartment,.02);
+      box(.55,.025,.50,x+.15,.37,z-.65,cream,apartment,.015);
+      box(.35,.18,.50,x+.42,.29,z-.65,cream,apartment,.015);
     }else if(f.type==='coffee'){
       cylinder(w/2,.035,x,.32,z,stone);
+      cylinder(w/2-.02,.015,x,.295,z,dark);
       for(let a=0;a<3;a++){
         const ang=a*Math.PI*2/3;
-        cylinder(.012,.30,x+Math.cos(ang)*(w/2-.08),.15,z+Math.sin(ang)*(w/2-.08),dark);
+        cylinder(.012,.28,x+Math.cos(ang)*(w/2-.08),.14,z+Math.sin(ang)*(w/2-.08),dark);
       }
-      cylinder(.24,.030,x+.42,.36,z+.18,oak);
-      cylinder(.014,.34,x+.42,.17,z+.18,dark);
+      cylinder(.24,.030,x+.42,.38,z+.18,oak);
+      cylinder(.24,.012,x+.42,.40,z+.18,brass);
+      cylinder(.012,.36,x+.42,.18,z+.18,brass);
       box(.22,.025,.16,x-.10,.35,z-.06,dark,apartment,.005);
-      box(.20,.020,.14,x-.08,.37,z-.06,white,apartment,.005);
-      cylinder(.045,.07,x+.12,.37,z-.08,glass);
-      cylinder(.030,.05,x+.12,.365,z-.08,glow);
-      cylinder(.08,.03,x+.42,.39,z+.18,cream);
+      box(.19,.020,.14,x-.08,.37,z-.06,white,apartment,.005);
+      cylinder(.045,.065,x+.12,.37,z-.08,glass);
+      cylinder(.030,.045,x+.12,.36,z-.08,glow);
+      cylinder(.09,.025,x+.42,.41,z+.18,cream);
     }else if(f.type==='media'){
-      box(w,.28,d,x,.30,z,oak,apartment,.02);
-      for(let dz=-d/2+.08;dz<d/2;dz+=.08)box(.006,.26,.012,x+.11,.30,z+dz,dark);
-      box(.025,.78,1.40,x+.10,1.25,z,dark,apartment,.01);
-      box(.010,.74,1.36,x+.085,1.25,z,mirror,apartment);
-      box(.04,.045,.82,x+.09,.82,z,dark,apartment,.01);
-      cylinder(.05,.16,x,.52,z+.45,cream);
-      cylinder(.04,.10,x,.49,z-.45,stone);
+      for(let dz=-.75;dz<=.75;dz+=.06)box(.012,1.25,.035,x+.105,1.30,z+dz,oak);
+      box(w,.28,d,x,.28,z,oak,apartment,.02);
+      box(.025,.78,1.40,x+.085,1.30,z,dark,apartment,.01);
+      box(.008,.74,1.36,x+.072,1.30,z,mirror,apartment);
+      box(.04,.045,.82,x+.075,.85,z,dark,apartment,.01);
+      cylinder(.05,.16,x,1.44,z+.45,cream);
+      cylinder(.04,.10,x,1.41,z-.45,stone);
     }else if(f.type==='dining'){
       box(w,.055,d,x,.76,z,oak,apartment,.04);
       for(const dx of [-w/2+.14,w/2-.14]){
@@ -287,13 +297,14 @@ export async function createTour(host, onInteraction, onError) {
       box(w,.76,d,x,.46,z,cream,apartment,.015);
       box(w+.04,.05,d+.05,x,.87,z,stone,apartment,.015);
       box(.05,.84,d+.05,x-w/2-.02,.45,z,stone,apartment,.01);
+      box(w,.55,.025,x,1.35,z-.29,stone);
       box(w,.60,.32,x,1.95,z-.15,plaster);
       box(w-.08,.018,.08,x,1.64,z-.15,glow);
       for(let dx=-w/2+.45;dx<w/2;dx+=.45)box(.006,.68,.012,x+dx,.46,z+d/2+.01,brass);
       box(.52,.010,.42,x-.55,.90,z,dark,apartment,.01);
       cylinder(.08,.012,x-.65,.906,z,glow);cylinder(.06,.012,x-.45,.906,z,glow);
       box(.54,.020,.40,x+.55,.895,z,dark,apartment,.02);
-      box(.46,.015,.34,x+.55,.905,z,white,apartment,.03);tap(x+.55,z);
+      box(.46,.015,.34,x+.55,.905,z,ceramic,apartment,.03);tap(x+.55,z);
     }else if(f.type==='fridge'){
       box(w,2.13,d,x,1.08,z,cream,apartment,.025);box(.025,.56,.025,x+w/2+.015,1.42,z+.20,brass);
     }
@@ -305,18 +316,18 @@ export async function createTour(host, onInteraction, onError) {
   for(const y of [.52,1.36]){const m=cylinder(.21,.025,-2.807,y,-.13,dark);m.rotation.z=Math.PI/2;}
   box(.30,2,.65,-2.40,1.02,-.13,oak);
   // Main bathroom: wet zone at rear, vanity and WC clear of the side door.
-  box(1.45,.035,.65,-2.75,.045,-2.5,white,apartment,.02);
+  box(1.45,.035,.65,-2.75,.045,-2.5,ceramic,apartment,.02);
   box(.44,.40,.50,-3.24,.62,-1.1,oak,apartment,.015);
-  box(.49,.07,.55,-3.24,.86,-1.1,stone,apartment,.025);box(.32,.075,.44,-3.24,.925,-1.1,white,apartment,.09);
-  box(.026,.77,.52,-3.515,1.48,-1.10,mirror,apartment,.06);
-  box(.57,.32,.38,-3.12,.22,-1.84,white,apartment,.12);box(.13,.56,.38,-3.4,.38,-1.84,white,apartment,.025);
+  box(.49,.07,.55,-3.24,.86,-1.1,stone,apartment,.025);box(.32,.075,.44,-3.24,.925,-1.1,ceramic,apartment,.09);
+  box(.015,.82,.56,-3.52,1.48,-1.10,glow,apartment);box(.026,.77,.52,-3.515,1.48,-1.10,mirror,apartment,.06);
+  box(.57,.32,.38,-3.12,.22,-1.84,ceramic,apartment,.12);box(.13,.56,.38,-3.4,.38,-1.84,ceramic,apartment,.025);
   box(.75,1.96,.018,-3.14,1.03,-2.17,glass,windows);
   cylinder(.015,1.3,-3.4,1.3,-2.62,brass);cylinder(.11,.02,-3.24,1.98,-2.62,brass);
   // Ensuite is accessed through the dressing room, never through the kitchen.
-  box(1.23,.03,.60,.95,.045,-.75,white,apartment,.025);
+  box(1.23,.03,.60,.95,.045,-.75,ceramic,apartment,.025);
   box(.40,.44,.45,1.40,.6,.55,oak,apartment,.018);box(.44,.06,.49,1.40,.85,.55,stone,apartment,.015);
-  box(.30,.07,.38,1.40,.91,.55,white,apartment,.07);box(.018,.70,.43,1.62,1.43,.55,mirror);
-  box(.58,.33,.37,1.30,.22,-.20,white,apartment,.10);box(.12,.56,.37,1.56,.38,-.20,white,apartment,.015);
+  box(.30,.07,.38,1.40,.91,.55,ceramic,apartment,.07);box(.012,.74,.47,1.625,1.43,.55,glow);box(.018,.70,.43,1.62,1.43,.55,mirror);
+  box(.58,.33,.37,1.30,.22,-.20,ceramic,apartment,.10);box(.12,.56,.37,1.56,.38,-.20,ceramic,apartment,.015);
   box(.70,1.96,.018,1.20,1.03,-.43,glass,windows);
   cylinder(.015,1.25,.48,1.30,-1.05,brass);cylinder(.11,.02,.48,1.94,-.87,brass);
   // A narrow shoe cabinet sits outside the clear route between entry and bedrooms.
@@ -500,6 +511,7 @@ export async function createTour(host, onInteraction, onError) {
       const geometries = new Set(); scene.traverse(object => { if (object.geometry) geometries.add(object.geometry); });
       geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());
       if (marbleTexture) marbleTexture.dispose();
+      if (oakTexture) oakTexture.dispose();
       renderer.dispose(); canvas.remove();
       renderPass.dispose(); ambientOcclusion.dispose(); outputPass.dispose(); composer.dispose();
     }

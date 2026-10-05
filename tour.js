@@ -104,13 +104,13 @@
     if (timer) { stopGuide(); return; }
     mode = 'interior'; room = roomOrder[0]; updateView(); showStage();
     byId('tour-guide').setAttribute('aria-pressed', 'true'); byId('tour-guide').textContent = 'Ⅱ 자동 투어 멈추기';
-    const showProgress = () => { byId('tour-guide-status').textContent = `${roomOrder.indexOf(room) + 1} / ${roomOrder.length} · ${tour.rooms[room].name} · 7초마다 다음 공간으로 이동`; };
+    const showProgress = () => { byId('tour-guide-status').textContent = `${roomOrder.indexOf(room) + 1} / ${roomOrder.length} · ${tour.rooms[room].name} · 2초마다 다음 공간으로 이동`; };
     showProgress();
     timer = setInterval(() => {
       const next = roomOrder.indexOf(room) + 1;
       if (next === roomOrder.length) { stopGuide(); byId('tour-guide-status').textContent = '모든 공간을 둘러보았습니다. 원하는 방을 다시 선택해 보세요.'; return; }
       room = roomOrder[next]; updateView(); showProgress();
-    }, 7000);
+    }, 2000);
   });
   function visibility() {
     const active = inView && !document.hidden;

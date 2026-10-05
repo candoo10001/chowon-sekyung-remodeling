@@ -88,7 +88,7 @@ class ApartmentTourTests(unittest.TestCase):
         self.page.clock.install()
         self.page.locator('#tour-guide').click()
         expect(self.page.locator('#tour-guide')).to_have_attribute('aria-pressed', 'true')
-        self.page.clock.run_for(7100)
+        self.page.clock.run_for(2100)
         expect(canvas).to_have_attribute('data-current-room', 'kitchen')
         self.page.locator('#tour-left').click()
         expect(self.page.locator('#tour-guide')).to_have_attribute('aria-pressed', 'false')
