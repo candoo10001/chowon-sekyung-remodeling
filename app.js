@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Init Components
   initMobileMenu();
   initQuickNavigation();
+  initJourneyIndicator();
+  initCounterAnimations();
+  initHeroParallax();
   initHeaderScroll();
   initComparisonSlider();
   initFloorPlans();
@@ -441,3 +444,115 @@ function initQuickNavigation() {
   });
   update();
 }
+
+/* ==========================================================================
+   8. PERSISTENT JOURNEY INDICATOR (Story → Plan → Tour → Value)
+   ========================================================================== */
+function initJourneyIndicator() {
+  const indicator = document.getElementById('journey-indicator');
+  if (!indicator) return;
+
+  const steps = [...indicator.querySelectorAll('.journey-step')];
+  const sectionIds = ['transformation', 'floorplans', 'apartment-tour', 'calculator'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  let scheduled = false;
+  function update() {
+    scheduled = false;
+    const header = document.getElementById('main-header');
+    const line = (header ? header.getBoundingClientRect().bottom : 80) + 120;
+    let currentId = null;
+
+    for (const section of sections) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= line && rect.bottom > line) {
+        currentId = section.id;
+      }
+    }
+
+    steps.forEach(step => {
+      const target = step.getAttribute('data-step');
+      const isActive = target === currentId;
+      step.classList.toggle('active', isActive);
+      step.setAttribute('aria-current', isActive ? 'step' : 'false');
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+/* ==========================================================================
+   9. ANIMATED NUMBER COUNTERS
+   ========================================================================== */
+function initCounterAnimations() {
+  const counters = document.querySelectorAll('[data-counter]');
+  if (!counters.length) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        obs.unobserve(el);
+        const target = parseFloat(el.getAttribute('data-counter'));
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        if (isNaN(target)) return;
+
+        if (reducedMotion) {
+          el.textContent = target.toFixed(decimals);
+          return;
+        }
+
+        const duration = 1200;
+        const start = performance.now();
+        function frame(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          // Ease-out expo
+          const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          const current = target * ease;
+          el.textContent = current.toFixed(decimals);
+          if (progress < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            el.textContent = target.toFixed(decimals);
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  counters.forEach(c => observer.observe(c));
+}
+
+/* ==========================================================================
+   10. SLOW CINEMATIC HERO PARALLAX
+   ========================================================================== */
+function initHeroParallax() {
+  const heroImg = document.querySelector('#hero img');
+  if (!heroImg) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let scheduled = false;
+  window.addEventListener('scroll', () => {
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(() => {
+        scheduled = false;
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+          heroImg.style.transform = `translate3d(0, ${scrolled * 0.15}px, 0)`;
+        }
+      });
+    }
+  }, { passive: true });
+}
+

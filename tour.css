@@ -66,6 +66,13 @@
 .tour-swatch { width: 15px; height: 15px; border-radius: 50%; border: 1px solid #0002; }
 .tour-swatch.warm { background: #bf9669; }
 .tour-swatch.cool { background: #a09f97; }
+.tour-daylight-control { padding-top: 14px; border-top: 1px dashed #e1e5db; margin-top: 14px; }
+.tour-daylight-control > span { font-size: 11px; font-weight: 700; color: #1e293b; }
+.tour-daylight-control small { color: #737c70; font-size: 10px; font-weight: 400; margin-left: 5px; }
+.tour-daylight-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tour-daylight-buttons button { display: inline-flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #d5dbd0; border-radius: 6px; padding: 6px 8px; min-height: 44px; font-size: 11px; font-weight: 600; color: #445543; background: #ffffff; cursor: pointer; flex: 1; min-width: 70px; }
+.tour-daylight-buttons button[aria-pressed="true"] { border-color: #bfa15f; background: #fbf8f1; color: #80652d; box-shadow: inset 0 0 0 1px #bfa15f; }
+.tour-daylight-buttons .daylight-icon { font-size: 13px; }
 .tour-guide { width: 100%; background: #243b34; color: white; border-radius: 8px; min-height: 46px; font-size: 12px; font-weight: 700; margin-top: 20px; }
 .tour-guide[aria-pressed="true"] { background: #4c614c; }
 .tour-guide-status { font-size: 10px; color: #5a675b; text-align: center; margin-top: 8px; line-height: 1.7; }

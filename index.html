@@ -119,6 +119,29 @@
       </button>
     </div>
 
+    <!-- Persistent Journey Indicator (Story → Plan → Tour → Value) -->
+    <nav id="journey-indicator" aria-label="둘러보기 여정" class="hidden md:flex border-t border-slate-100 bg-white/70 backdrop-blur-md px-4 sm:px-6 lg:px-8 py-2 justify-center items-center gap-6 lg:gap-8 text-xs font-medium text-slate-500">
+      <a href="#transformation" class="journey-step inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors" data-step="transformation">
+        <span class="step-badge">1</span>
+        <span>Story (변화)</span>
+      </a>
+      <span class="text-slate-300 text-[10px]" aria-hidden="true">→</span>
+      <a href="#floorplans" class="journey-step inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors" data-step="floorplans">
+        <span class="step-badge">2</span>
+        <span>Plan (평면)</span>
+      </a>
+      <span class="text-slate-300 text-[10px]" aria-hidden="true">→</span>
+      <a href="#apartment-tour" class="journey-step inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors" data-step="apartment-tour">
+        <span class="step-badge">3</span>
+        <span>Tour (3D 투어)</span>
+      </a>
+      <span class="text-slate-300 text-[10px]" aria-hidden="true">→</span>
+      <a href="#calculator" class="journey-step inline-flex items-center gap-1.5 hover:text-slate-900 transition-colors" data-step="calculator">
+        <span class="step-badge">4</span>
+        <span>Value (가치)</span>
+      </a>
+    </nav>
+
     <!-- Mobile Nav Dropdown -->
     <nav id="mobile-menu" aria-label="모바일 메뉴" class="hidden xl:hidden bg-white backdrop-blur-2xl border-b border-slate-200 px-6 py-6 shadow-xl font-medium text-slate-700">
       <div class="flex flex-col gap-4 text-sm">
@@ -179,12 +202,12 @@
       <div class="hero-metrics grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
         <div class="white-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">단지 규모 혁신</div>
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">775 <span class="text-xs font-normal text-slate-500">세대</span></div>
+          <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900"><span data-counter="775">775</span> <span class="text-xs font-normal text-slate-500">세대</span></div>
           <div class="text-[11px] text-slate-500 mt-1">기존 709세대 → +66세대 일반분양</div>
         </div>
         <div class="white-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">주차대수 대확충</div>
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">1.31 <span class="text-xs font-normal text-slate-500">대/세대</span></div>
+          <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900"><span data-counter="1.31" data-decimals="2">1.31</span> <span class="text-xs font-normal text-slate-500">대/세대</span></div>
           <div class="text-[11px] text-slate-500 mt-1">기존 0.58대 → 총 1,019대 (지하4층)</div>
         </div>
         <div class="white-card rounded-2xl p-5 text-center">
@@ -194,7 +217,7 @@
         </div>
         <div class="white-card rounded-2xl p-5 text-center">
           <div class="text-xs text-slate-500 font-medium mb-1">최고 랜드마크</div>
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">25 <span class="text-xs font-normal text-slate-500">층</span></div>
+          <div class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900"><span data-counter="25">25</span> <span class="text-xs font-normal text-slate-500">층</span></div>
           <div class="text-[11px] text-slate-500 mt-1">포스맥 커튼월룩 & 지상공원화</div>
         </div>
       </div>
@@ -1049,11 +1072,76 @@
               <span>마감 분위기 <small>가상 옵션</small></span>
               <div><button type="button" data-palette="warm" aria-pressed="true" data-tour-control disabled><i class="tour-swatch warm" aria-hidden="true"></i>내추럴 오크</button><button type="button" data-palette="cool" aria-pressed="false" data-tour-control disabled><i class="tour-swatch cool" aria-hidden="true"></i>모던 그레이지</button></div>
             </div>
+            <div class="tour-daylight-control" role="group" aria-label="채광 시간대 선택">
+              <span>자연 채광 <small>시간대별 연출</small></span>
+              <div class="tour-daylight-buttons">
+                <button type="button" data-daylight="morning" aria-pressed="false" data-tour-control disabled>
+                  <span class="daylight-icon">🌅</span> 아침 햇살
+                </button>
+                <button type="button" data-daylight="afternoon" aria-pressed="true" data-tour-control disabled>
+                  <span class="daylight-icon">☀️</span> 한낮 채광
+                </button>
+                <button type="button" data-daylight="evening" aria-pressed="false" data-tour-control disabled>
+                  <span class="daylight-icon">🌇</span> 은은한 석양
+                </button>
+              </div>
+            </div>
             <button id="tour-guide" class="tour-guide" type="button" aria-pressed="false" data-tour-control disabled><span aria-hidden="true">▷</span> 자동으로 둘러보기</button>
             <p id="tour-guide-status" class="tour-guide-status" role="status">공간을 선택하면 해당 위치로 이동합니다.</p>
           </aside>
         </div>
         <div class="tour-bottom-note"><span>DESIGN EXPLORATION, NOT A PROMISE.</span><span>본 투어는 분양·시공 사양을 보장하지 않습니다.</span></div>
+      </div>
+
+      <!-- ================= ARCHITECTURAL MATERIAL FINISHES ================= -->
+      <div id="material-library" class="mt-12 max-w-5xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="text-[#80652d] text-xs font-bold tracking-widest uppercase mb-1 block">MATERIAL PALETTE</span>
+          <h3 class="font-display text-2xl font-bold text-slate-900">하이엔드 감성의 프리미엄 마감재 셀렉션</h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">자연 채광과 어우러지는 따뜻하고 정제된 건축 마감재 조합을 제안합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Material 1 -->
+          <div class="white-card rounded-2xl p-5 hover:border-[#bfa15f] transition-all group">
+            <div class="w-full h-24 rounded-xl bg-gradient-to-br from-[#ebe6de] to-[#cfc8bd] mb-4 flex items-center justify-center border border-slate-200 shadow-inner group-hover:scale-[1.02] transition-transform">
+              <span class="text-xs font-display font-extrabold tracking-wider text-slate-700/80 uppercase">Porcelain Stone</span>
+            </div>
+            <div class="text-xs font-bold text-[#80652d] uppercase tracking-wider mb-1">WALL & ISLAND</div>
+            <h4 class="font-display font-bold text-slate-900 text-base mb-1">내추럴 세라믹 스톤</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">이탈리아산 대형 포세린 타일로 구현한 우아한 아트월과 주방 상판 질감.</p>
+          </div>
+
+          <!-- Material 2 -->
+          <div class="white-card rounded-2xl p-5 hover:border-[#bfa15f] transition-all group">
+            <div class="w-full h-24 rounded-xl bg-gradient-to-br from-[#dfcfba] to-[#ba9e7d] mb-4 flex items-center justify-center border border-slate-200 shadow-inner group-hover:scale-[1.02] transition-transform">
+              <span class="text-xs font-display font-extrabold tracking-wider text-slate-800/80 uppercase">White Oak</span>
+            </div>
+            <div class="text-xs font-bold text-[#80652d] uppercase tracking-wider mb-1">FLOORING</div>
+            <h4 class="font-display font-bold text-slate-900 text-base mb-1">광폭 화이트 오크</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">자연스러운 브러쉬 질감과 보행감을 선사하는 친환경 최고급 광폭 원목 마루.</p>
+          </div>
+
+          <!-- Material 3 -->
+          <div class="white-card rounded-2xl p-5 hover:border-[#bfa15f] transition-all group">
+            <div class="w-full h-24 rounded-xl bg-gradient-to-br from-[#e4cf9f] to-[#bfa15f] mb-4 flex items-center justify-center border border-slate-200 shadow-inner group-hover:scale-[1.02] transition-transform">
+              <span class="text-xs font-display font-extrabold tracking-wider text-slate-900/80 uppercase">Champagne Brass</span>
+            </div>
+            <div class="text-xs font-bold text-[#80652d] uppercase tracking-wider mb-1">HARDWARE & ACCENT</div>
+            <h4 class="font-display font-bold text-slate-900 text-base mb-1">샴페인 골드 브라스</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">정교한 PVD 표면 처리로 지문을 방지하고 은은한 골드 광택을 완성하는 금속 마감.</p>
+          </div>
+
+          <!-- Material 4 -->
+          <div class="white-card rounded-2xl p-5 hover:border-[#bfa15f] transition-all group">
+            <div class="w-full h-24 rounded-xl bg-gradient-to-br from-[#fff7ed] to-[#fed7aa] mb-4 flex items-center justify-center border border-slate-200 shadow-inner group-hover:scale-[1.02] transition-transform">
+              <span class="text-xs font-display font-extrabold tracking-wider text-amber-900/80 uppercase">3000K Lighting</span>
+            </div>
+            <div class="text-xs font-bold text-[#80652d] uppercase tracking-wider mb-1">ARCHITECTURAL LIGHT</div>
+            <h4 class="font-display font-bold text-slate-900 text-base mb-1">3000K 간접 리니어 조명</h4>
+            <p class="text-xs text-slate-500 leading-relaxed">눈부심 없는 매립형 마그네틱 트랙과 아늑한 무드를 연출하는 간접 코브 조명.</p>
+          </div>
+        </div>
       </div>
       <noscript><p class="tour-disclaimer">3D 투어는 JavaScript가 필요합니다. 위 콘셉트 이미지 또는 <a href="#floorplans">2D 평면</a>으로 공간 아이디어를 확인하세요.</p></noscript>
     </div>

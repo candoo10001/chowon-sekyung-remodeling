@@ -577,3 +577,45 @@ h2 .section-title-line { display: block; text-wrap: balance; }
   #calculator .value-caveat { font-size: 11px; margin: 0; line-height: 1.7; }
   #calculator .price-market { margin-top: 12px; border-bottom: 1px solid #e2e8f0; }
 }
+
+/* ==========================================================================
+   JOURNEY INDICATOR (Story → Plan → Tour → Value)
+   ========================================================================== */
+#journey-indicator {
+  user-select: none;
+}
+.journey-step {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9999px;
+  padding: 3px 10px;
+}
+.journey-step .step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.journey-step:hover {
+  color: #0f172a;
+  background: #f8fafc;
+}
+.journey-step.active {
+  color: #0f172a;
+  font-weight: 700;
+  background: #fdfbf7;
+}
+.journey-step.active .step-badge {
+  background: #bfa15f;
+  border-color: #bfa15f;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(191, 161, 95, 0.4);
+}
+

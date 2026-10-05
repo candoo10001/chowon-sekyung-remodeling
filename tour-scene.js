@@ -301,6 +301,37 @@ export async function createTour(host, onInteraction, onError) {
       fabric.color.set(cool ? '#aeb7b4' : '#c8c0b1'); sage.color.set(cool ? '#667e88' : '#899282');
       plaster.color.set(cool ? '#e7e9e6' : '#eeeae2'); invalidate();
     },
+    setDaylight(timeOfDay) {
+      if (timeOfDay === 'morning') {
+        sun.color.set('#ffdda6');
+        sun.intensity = 2.4;
+        sun.position.set(-8, 5, 6);
+        fill.color.set('#e8efff');
+        fill.intensity = 0.7;
+        bounce.color.set('#ffe1b3');
+        bounce.intensity = 8.0;
+        renderer.toneMappingExposure = 0.90;
+      } else if (timeOfDay === 'evening') {
+        sun.color.set('#ff9f68');
+        sun.intensity = 2.0;
+        sun.position.set(-9, 3, 4);
+        fill.color.set('#b4c2e6');
+        fill.intensity = 0.5;
+        bounce.color.set('#ffaa6b');
+        bounce.intensity = 9.5;
+        renderer.toneMappingExposure = 0.88;
+      } else {
+        sun.color.set('#fff1d7');
+        sun.intensity = 2.6;
+        sun.position.set(-3, 7, 9);
+        fill.color.set('#e4ecff');
+        fill.intensity = 0.8;
+        bounce.color.set('#ffdfac');
+        bounce.intensity = 7.0;
+        renderer.toneMappingExposure = 0.92;
+      }
+      invalidate();
+    },
     setActive(value) { active = value; if (value) invalidate(); else if (frame) { cancelAnimationFrame(frame); frame = 0; } },
     dispose() {
       disposed = true; cancelAnimationFrame(frame); observer.disconnect(); controls.dispose();

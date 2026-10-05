@@ -2,7 +2,7 @@
   const shell = document.getElementById('tour-shell');
   if (!shell) return;
   const byId = id => document.getElementById(id);
-  let tour = null, loading = false, mode = 'overview', room = 'living', palette = 'warm';
+  let tour = null, loading = false, mode = 'overview', room = 'living', palette = 'warm', daylight = 'afternoon';
   let timer = null, inView = true, attempts = 0;
   const touchDevice = window.matchMedia('(pointer: coarse)');
   const touchToggle = byId('tour-touch-toggle');
@@ -67,7 +67,9 @@
     try {
       const module = await import(`./tour-scene.js?attempt=${attempts++}`);
       tour = await module.createTour(byId('tour-canvas-host'), stopGuide, fail);
-      tour.setPalette(palette); mode = 'overview'; updateView();
+      tour.setPalette(palette);
+      if (tour.setDaylight) tour.setDaylight(daylight);
+      mode = 'overview'; updateView();
       shell.dataset.state = 'ready'; loading = false;
       byId('tour-start-overlay').hidden = true; byId('tour-poster').hidden = true; byId('tour-view-caption').hidden = false;
       shell.querySelectorAll('[data-tour-control]').forEach(button => { button.disabled = false; });
@@ -84,6 +86,11 @@
     if (!tour) return; palette = button.dataset.palette;
     shell.querySelectorAll('[data-palette]').forEach(option => option.setAttribute('aria-pressed', String(option === button)));
     tour.setPalette(palette);
+  }));
+  shell.querySelectorAll('[data-daylight]').forEach(button => button.addEventListener('click', () => {
+    if (!tour) return; daylight = button.dataset.daylight;
+    shell.querySelectorAll('[data-daylight]').forEach(option => option.setAttribute('aria-pressed', String(option === button)));
+    if (tour.setDaylight) tour.setDaylight(daylight);
   }));
   for (const [id, action] of Object.entries({
     'tour-left': () => tour.rotate(-.25), 'tour-right': () => tour.rotate(.25),
