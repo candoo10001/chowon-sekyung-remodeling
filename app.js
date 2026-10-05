@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initQuickNavigation();
   initJourneyIndicator();
+  initSmoothScroll();
   initCounterAnimations();
   initHeroParallax();
   initHeaderScroll();
@@ -555,4 +556,41 @@ function initHeroParallax() {
     }
   }, { passive: true });
 }
+
+/* ==========================================================================
+   11. LUXURY SMOOTH SCROLL NAVIGATION
+   ========================================================================== */
+function initSmoothScroll() {
+  document.addEventListener('click', event => {
+    const anchor = event.target.closest('a[href^="#"]');
+    if (!anchor) return;
+
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#' || href.length <= 1) return;
+
+    const targetId = href.slice(1);
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+
+    const header = document.getElementById('main-header');
+    const headerHeight = header ? header.getBoundingClientRect().height : 80;
+    const offset = Math.max(headerHeight + 16, 96);
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: reducedMotion ? 'auto' : 'smooth'
+    });
+
+    if (history.pushState) {
+      history.pushState(null, '', href);
+    }
+  });
+}
+
 
