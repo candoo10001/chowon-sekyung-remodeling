@@ -384,8 +384,8 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 }
 /* Research and editable valuation assumptions. */
 .research-note { margin-top: 36px; padding: 28px; border: 1px solid #dce1d7; border-radius: 16px; background: #f8f9f5; }
-.research-note h3,.value-inputs h3 { font-size: 21px; font-weight: 800; margin-bottom: 18px; color: #243b34; }
-.research-grid,.market-evidence { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.research-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.market-evidence { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
 .research-grid article { min-width: 0; }
 .research-grid small,.market-evidence small { font-size: 10px; color: #536655; line-height: 1.7; display: block; }
 .research-grid h4,.market-evidence h3 { font-size: 15px; font-weight: 800; margin: 8px 0; color: #263e32; }
@@ -742,4 +742,104 @@ h2 .section-title-line { display: block; text-wrap: balance; }
   color: #ffffff;
   box-shadow: 0 0 10px rgba(191, 161, 95, 0.4);
 }
+
+/* ==========================================================================
+   FLOATING SHARE BUTTON & TOAST NOTIFICATION
+   ========================================================================== */
+.floating-share-wrapper {
+  position: fixed;
+  right: 24px;
+  bottom: 32px;
+  z-index: 45;
+}
+
+.floating-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
+}
+
+.floating-share-btn:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -4px rgba(15, 23, 42, 0.4);
+}
+
+.floating-share-btn:active {
+  transform: translateY(0);
+}
+
+.header-share-btn {
+  min-height: 36px;
+  cursor: pointer;
+}
+
+.share-toast {
+  position: fixed;
+  bottom: 88px;
+  left: 50%;
+  transform: translate(-50%, 16px);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 55;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
+}
+
+.share-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.share-toast[hidden] {
+  display: none !important;
+}
+
+.safety-margin-box {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 767px) {
+  .floating-share-wrapper {
+    right: 16px;
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+  .floating-share-btn {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .share-toast {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+}
+
 

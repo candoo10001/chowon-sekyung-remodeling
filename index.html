@@ -7,6 +7,24 @@
   <title>더샵 파크에비뉴 138 | 평촌 초원세경 리모델링 정보 안내</title>
   <meta name="description" content="평촌의 중심, 중앙공원을 품은 25층 하이엔드 랜드마크. 평촌 초원세경아파트 리모델링(더샵 파크에비뉴 138) 사업 정보 안내. 최고 25층, 775세대, 수평증축 검토 평면, 100% 지상공원화." />
   
+  <!-- Open Graph / KakaoTalk / Social Media Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chowon-sekyung.surge.sh/" />
+  <meta property="og:title" content="더샵 파크에비뉴 138 | 평촌 중앙공원 앞 25층 랜드마크" />
+  <meta property="og:description" content="초원세경 리모델링 정보 안내: 최고 25층 775세대, 포스코이앤씨 시공, 용적률 301.49% 건축심의 통과, 100% 지상공원화 및 3D 투어" />
+  <meta property="og:image" content="https://chowon-sekyung.surge.sh/assets/the_sharp_138_rendering.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="더샵 파크에비뉴 138 (초원세경 리모델링)" />
+  <meta property="og:locale" content="ko_KR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://chowon-sekyung.surge.sh/" />
+  <meta name="twitter:title" content="더샵 파크에비뉴 138 | 평촌 중앙공원 앞 25층 랜드마크" />
+  <meta name="twitter:description" content="초원세경 리모델링 정보 안내: 최고 25층 775세대, 포스코이앤씨 시공, 용적률 301.49% 건축심의 통과, 100% 지상공원화 및 3D 투어" />
+  <meta name="twitter:image" content="https://chowon-sekyung.surge.sh/assets/the_sharp_138_rendering.jpg" />
+
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
 
@@ -104,6 +122,14 @@
         <a href="#calculator" class="hover:text-slate-950 transition-colors">가치 계산기</a>
       </nav>
 
+      <!-- Desktop Share Action -->
+      <div class="hidden xl:flex items-center ml-2">
+        <button type="button" onclick="shareProject()" class="header-share-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-xs font-semibold border border-slate-200/80 transition-colors" aria-label="단지 리모델링 정보 공유하기">
+          <i data-lucide="share-2" class="w-3.5 h-3.5 text-[#80652d]"></i>
+          <span>공유하기</span>
+        </button>
+      </div>
+
       <!-- Action Button -->
       <div class="hidden sm:flex xl:hidden items-center gap-3 ml-auto">
         <a href="#apartment-tour" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-medium text-xs hover:bg-slate-800 transition-all shadow-md flex items-center gap-2">
@@ -112,10 +138,15 @@
         </a>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" type="button" aria-label="메뉴 열기" aria-controls="mobile-menu" aria-expanded="false" class="xl:hidden shrink-0 p-2 text-slate-700 hover:text-black">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
+      <!-- Mobile Share & Menu Buttons -->
+      <div class="xl:hidden flex items-center gap-1 ml-auto sm:ml-0">
+        <button type="button" onclick="shareProject()" aria-label="링크 공유하기" class="shrink-0 p-2 text-slate-700 hover:text-black min-h-[44px] min-w-[44px] inline-flex items-center justify-center">
+          <i data-lucide="share-2" class="w-5 h-5"></i>
+        </button>
+        <button id="mobile-menu-btn" type="button" aria-label="메뉴 열기" aria-controls="mobile-menu" aria-expanded="false" class="shrink-0 p-2 text-slate-700 hover:text-black min-h-[44px] min-w-[44px] inline-flex items-center justify-center">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Persistent Journey Indicator (Story → Plan → Tour → Value) -->
@@ -173,10 +204,13 @@
       
       <!-- Luxury Status Badge -->
       <div class="inline-flex flex-wrap justify-center items-center gap-2 p-1.5 px-4 rounded-2xl sm:rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-[#bfa15f]"></span>
-        <span class="text-slate-900 font-bold">THE SHARP 138</span>
+        <span class="inline-flex items-center gap-1 text-[#80652d] font-bold">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#bfa15f]"></i> 안양시 건축심의 통과
+        </span>
         <span class="text-slate-300">|</span>
-        <span class="text-slate-600">포스코이앤씨 하이엔드 리모델링</span>
+        <span class="text-slate-900 font-bold">용적률 301.49% 완화</span>
+        <span class="text-slate-300">|</span>
+        <span class="text-slate-600">포스코이앤씨 25층 랜드마크</span>
       </div>
 
       <!-- Main Headline -->
@@ -221,15 +255,19 @@
       </div>
 
       <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#transformation" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-slate-800 hover:scale-105 transition-all text-sm">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="#transformation" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg hover:bg-slate-800 hover:scale-105 transition-all text-sm">
           <i data-lucide="split-square-vertical" class="w-4 h-4 text-[#e4cf9f]"></i>
           Before & After 전·후 비교
         </a>
-        <a href="#premiums" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all text-sm">
+        <a href="#premiums" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-semibold px-7 py-3.5 rounded-xl shadow-sm transition-all text-sm">
           <i data-lucide="sparkles" class="w-4 h-4 text-[#80652d]"></i>
-          6대 프리미엄 가치 둘러보기
+          6대 프리미엄 둘러보기
         </a>
+        <button type="button" onclick="shareProject()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-50 hover:bg-amber-100/80 border border-amber-200/80 text-[#80652d] font-semibold px-5 py-3.5 rounded-xl shadow-sm transition-all text-sm">
+          <i data-lucide="share-2" class="w-4 h-4 text-[#bfa15f]"></i>
+          단지 소식 공유
+        </button>
       </div>
 
     </div>
@@ -1172,7 +1210,12 @@
   <section id="calculator" class="py-24 bg-white border-t border-slate-200">
     <div class="max-w-6xl mx-auto px-6 sm:px-8">
       <div class="price-heading text-center max-w-3xl mx-auto mb-12">
-        <span class="text-[#80652d] text-xs font-bold tracking-widest block mb-3">PRICE CONTEXT</span>
+        <span class="text-[#80652d] text-xs font-bold tracking-widest block mb-2">PRICE CONTEXT</span>
+        <div class="price-heading-long mb-3">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-[#80652d] text-xs font-semibold">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 안양시 건축심의 의결 완료 (평촌 최초 용적률 301.49% 완화)
+          </span>
+        </div>
         <h2 class="text-3xl sm:text-4xl font-extrabold mb-4"><span class="price-heading-long"><span class="section-title-line">실거래를 출발점으로,</span><span class="section-title-line text-[#80652d]">준공 후 가치를 가정해 봅니다.</span></span><span class="price-heading-short">준공 후 가치 계산</span></h2>
         <p class="section-subtitle price-intro text-slate-600 text-sm sm:text-base leading-relaxed">사용자 제공 거래 9.5억원·공급 19평을 기준으로 계산합니다.</p>
       </div>
@@ -1210,12 +1253,63 @@
         </div>
       </div>
       <details class="price-disclosure price-market" data-price-disclosure>
-        <summary>비교 거래·출처 보기 <span>2026.10.04 기준</span></summary>
+        <summary>비교 거래·안전마진 분석 보기 <span>2026.10 기준</span></summary>
         <div class="market-evidence">
-        <article><small>사용자 확인 거래 · 계약일/층 미제공</small><h3>초원세경 · 기존 19평</h3><strong>9.50 <span>억원</span></strong><p>9.5억 ÷ 공급 19평 = 약 5,000만원/평<br/>해당 거래는 공적 원장으로 별도 대조하지 못했습니다.</p></article>
-        <article><small>공개 실거래 재집계 · 2026.09.11 · 23층</small><h3>평촌센텀퍼스트 · 전용 59.8㎡</h3><strong>12.30 <span>억원</span></strong><p>출처 표기 공급 25평 기준 약 4,920만원/평.<br/>입지·연식·사업 방식이 다른 비교 사례입니다.</p><a href="https://aptsonpoom.com/danji/A10022907" target="_blank" rel="noopener">아파트손품 거래 내역 ↗</a></article>
-        <article><small>공개 실거래 재집계 · 2026.08.31 · 7층</small><h3>평촌더샵아이파크 · 전용 59.8㎡</h3><strong>11.10 <span>억원</span></strong><p>전용면적이 비슷한 인근 거래의 가격 수준.<br/>초원세경의 준공 후 가격을 보장하지 않습니다.</p><a href="https://apt.zaritalk.com/complex/호계동-평촌더샵아이파크-5394" target="_blank" rel="noopener">자리톡 거래 내역 ↗</a></article>
-      </div>
+          <article>
+            <small>사용자 확인 거래 · 계약일/층 미제공</small>
+            <h3>초원세경 · 기존 19평 (출발점)</h3>
+            <strong>9.50 <span>억원</span></strong>
+            <p>9.5억 ÷ 공급 19평 = 약 5,000만원/평<br/>해당 거래는 공적 원장으로 별도 대조하지 못했습니다.</p>
+          </article>
+          <article>
+            <small>스마트스퀘어 대장주 · 2026 실거래</small>
+            <h3>평촌더샵센트럴시티 · 전용 59.8㎡</h3>
+            <strong>11.20 <span>억원</span></strong>
+            <p>평촌 포스코 더샵 하이엔드 기준선.<br/>전용 84㎡는 14.5억~15.2억원 실거래 형성.</p>
+            <a href="https://aptsonpoom.com/danji/A10018501" target="_blank" rel="noopener">더샵 거래 내역 ↗</a>
+          </article>
+          <article>
+            <small>공개 실거래 재집계 · 2026.09.11 · 23층</small>
+            <h3>평촌센텀퍼스트 · 전용 59.8㎡</h3>
+            <strong>12.30 <span>억원</span></strong>
+            <p>출처 표기 공급 25평 기준 약 4,920만원/평.<br/>평촌 덕현지구 신축 대단지 시세 벤치마크.</p>
+            <a href="https://aptsonpoom.com/danji/A10022907" target="_blank" rel="noopener">센텀퍼스트 내역 ↗</a>
+          </article>
+          <article>
+            <small>공개 실거래 재집계 · 2026.08.31 · 7층</small>
+            <h3>평촌더샵아이파크 · 전용 59.8㎡</h3>
+            <strong>11.10 <span>억원</span></strong>
+            <p>인근 신축 브랜드 대단지의 실거래 수준.<br/>더샵 브랜드 선호도와 시세 견인력 확인.</p>
+            <a href="https://apt.zaritalk.com/complex/호계동-평촌더샵아이파크-5394" target="_blank" rel="noopener">더샵아이파크 내역 ↗</a>
+          </article>
+        </div>
+
+        <!-- Safety Margin & Central Park Advantage Box -->
+        <div class="safety-margin-box mt-6 p-5 rounded-2xl bg-[#fdfbf7] border border-[#f1e5cb] text-slate-800">
+          <div class="flex items-center gap-2 mb-2 font-bold text-sm text-[#80652d]">
+            <i data-lucide="trending-up" class="w-4 h-4"></i>
+            <span>중앙공원 독점 입지 &amp; 안전마진(Safety Margin) 시나리오</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed mb-3">
+            더샵 파크에비뉴 138은 <strong>평촌 중앙공원을 영구 조망하는 유일한 신축 25층 포스코 더샵</strong> 단지로 재탄생합니다.
+            인근 평촌 신축 59㎡ 벤치마크(11.2억~12.3억원) 및 대형 평형 시세(14.5억~15.2억원)를 감안할 때, <strong>건축심의(용적률 301.49%) 통과</strong>로 인허가 불확실성이 해소되어 사업 안정성과 탄탄한 하방 경직성(안전마진)을 확보하고 있습니다.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div class="bg-white p-3 rounded-xl border border-[#eedfc0] shadow-sm">
+              <span class="text-slate-500 block text-[11px] mb-0.5">공식 건축심의 완료</span>
+              <strong class="text-slate-900 font-bold text-sm">용적률 301.49% 완화</strong>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-[#eedfc0] shadow-sm">
+              <span class="text-slate-500 block text-[11px] mb-0.5">평촌 신축 59㎡ 시세선</span>
+              <strong class="text-slate-900 font-bold text-sm">11.2억 ~ 12.3억원</strong>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-[#eedfc0] shadow-sm">
+              <span class="text-slate-500 block text-[11px] mb-0.5">중앙공원 바로 앞</span>
+              <strong class="text-[#80652d] font-bold text-sm">영구 파크뷰 프리미엄</strong>
+            </div>
+          </div>
+        </div>
+
         <p class="research-footnote">민간 재집계 자료로, 거래 정정·해제 여부는 <a href="https://rt.molit.go.kr/" target="_blank" rel="noopener">국토교통부 실거래가 공개시스템</a>에서 확인하세요. 인근 거래가 준공 후 가격을 보장하지 않습니다.</p>
       </details>
     </div>
@@ -1249,6 +1343,20 @@
       </div>
     </div>
   </dialog>
+
+  <!-- ================= FLOATING SHARE BUTTON ================= -->
+  <div id="floating-share-container" role="region" aria-label="페이지 공유" class="floating-share-wrapper">
+    <button type="button" id="floating-share-btn" onclick="shareProject()" aria-label="입주민 및 지인에게 단지 소식 공유하기" class="floating-share-btn">
+      <i data-lucide="share-2" class="w-4 h-4 text-[#e4cf9f]"></i>
+      <span class="floating-share-text">단지 알리기</span>
+    </button>
+  </div>
+
+  <!-- ================= SHARE TOAST NOTIFICATION ================= -->
+  <div id="share-toast" role="status" aria-live="polite" class="share-toast" hidden>
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+    <span id="share-toast-msg">링크가 클립보드에 복사되었습니다. 이웃에게 공유해 보세요!</span>
+  </div>
 
   <!-- ================= FOOTER ================= -->
   <nav class="mobile-quick-nav" aria-label="자주 찾는 정보">

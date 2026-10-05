@@ -299,6 +299,26 @@ class UIRegressionTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_share_functionality_and_calculator_benchmarks(self):
+        share_btn = self.page.locator('#floating-share-btn')
+        expect(share_btn).to_be_visible()
+        self.assertEqual(share_btn.get_attribute('aria-label'), '입주민 및 지인에게 단지 소식 공유하기')
+
+        share_btn.click()
+        toast = self.page.locator('#share-toast')
+        expect(toast).to_be_visible()
+        expect(self.page.locator('#share-toast-msg')).to_contain_text('복사')
+
+        calc_market = self.page.locator('#calculator .price-market')
+        expect(calc_market).to_contain_text('평촌더샵센트럴시티')
+        expect(calc_market).to_contain_text('11.20')
+        expect(calc_market).to_contain_text('안전마진')
+
+        hero = self.page.locator('#hero')
+        expect(hero).to_contain_text('건축심의 통과')
+        expect(hero).to_contain_text('301.49%')
+
 
 if __name__ == '__main__':
     unittest.main()
+

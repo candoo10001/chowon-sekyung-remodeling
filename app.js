@@ -620,4 +620,80 @@ function initSmoothScroll() {
   });
 }
 
+/* ==========================================================================
+   12. VIRAL PROJECT SHARING SUITE
+   ========================================================================== */
+function shareProject() {
+  const shareData = {
+    title: '더샵 파크에비뉴 138 | 평촌 중앙공원 앞 25층 랜드마크',
+    text: '초원세경 리모델링 정보 안내: 최고 25층 775세대, 포스코이앤씨 시공, 평촌 최초 용적률 301.49% 완화 건축심의 통과 완료!',
+    url: window.location.origin + window.location.pathname
+  };
+
+  // If mobile and Web Share API is available
+  if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent.toLowerCase())) {
+    navigator.share(shareData).catch(err => {
+      if (err.name !== 'AbortError') {
+        copyToClipboard(shareData.url);
+      }
+    });
+  } else {
+    copyToClipboard(shareData.url);
+  }
+}
+
+function copyToClipboard(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showShareToast('링크가 복사되었습니다. 이웃에게 공유해 보세요!');
+    }).catch(() => {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const input = document.createElement('input');
+  input.value = text;
+  input.style.position = 'fixed';
+  input.style.opacity = '0';
+  document.body.appendChild(input);
+  input.select();
+  try {
+    document.execCommand('copy');
+    showShareToast('링크가 복사되었습니다. 이웃에게 공유해 보세요!');
+  } catch (e) {
+    showShareToast('링크 복사에 실패했습니다. 브라우저 주소를 직접 복사해 주세요.');
+  }
+  document.body.removeChild(input);
+}
+
+let toastTimer = null;
+function showShareToast(message) {
+  const toast = document.getElementById('share-toast');
+  const toastMsg = document.getElementById('share-toast-msg');
+  if (!toast) return;
+  if (toastMsg && message) {
+    toastMsg.textContent = message;
+  }
+
+  toast.removeAttribute('hidden');
+  // force reflow
+  void toast.offsetWidth;
+  toast.classList.add('show');
+
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => {
+      toast.setAttribute('hidden', '');
+    }, 260);
+  }, 3000);
+}
+
+window.shareProject = shareProject;
+window.showShareToast = showShareToast;
+
 
