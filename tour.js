@@ -23,7 +23,8 @@
     stopGuide();
     setTouchInteraction(!shell.classList.contains('touch-interactive'));
   });
-  touchDevice.addEventListener('change', () => setTouchInteraction(false));
+  touchDevice.addEventListener('change', () => setTouchInteraction(true));
+  setTouchInteraction(true);
   updateInstructions();
   const roomOrder = [...shell.querySelectorAll('[data-room]')].map(button => button.dataset.room);
   function showStage() {
@@ -71,6 +72,7 @@
       if (tour.setDaylight) tour.setDaylight(daylight);
       mode = 'overview'; updateView();
       shell.dataset.state = 'ready'; loading = false;
+      setTouchInteraction(true);
       byId('tour-start-overlay').hidden = true; byId('tour-poster').hidden = true; byId('tour-view-caption').hidden = false;
       shell.querySelectorAll('[data-tour-control]').forEach(button => { button.disabled = false; });
       byId('tour-mode-overview').focus({ preventScroll: true });

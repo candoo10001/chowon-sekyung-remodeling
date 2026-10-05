@@ -118,12 +118,21 @@ class ApartmentTourTests(unittest.TestCase):
             toggle = page.locator('#tour-touch-toggle')
             expect(toggle).to_be_visible()
             canvas = page.locator('#tour-canvas-host canvas')
+            # 3D touch interaction is enabled by default
+            expect(toggle).to_have_attribute('aria-pressed', 'true')
+            self.assertNotEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
+            # Tapping toggle switches to page-scroll mode
+            toggle.tap()
+            expect(toggle).to_have_attribute('aria-pressed', 'false')
             self.assertEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
+            # Tapping toggle again restores 3D touch interaction
             toggle.tap()
             expect(toggle).to_have_attribute('aria-pressed', 'true')
             self.assertNotEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
+            # Switch back to page-scroll mode to verify touch viewer does not trap page scroll
             toggle.tap()
             expect(toggle).to_have_attribute('aria-pressed', 'false')
+            self.assertEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
             page.locator('.tour-room[data-room="master"]').tap()
             expect(canvas).to_have_attribute('data-current-room', 'master')
             self.assertEqual(canvas.evaluate('(e) => getComputedStyle(e).pointerEvents'), 'none')
