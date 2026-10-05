@@ -24,10 +24,10 @@
 .tour-poster { object-fit: cover; }
 .tour-canvas-host canvas { display: block; width: 100%; height: 100%; outline-offset: -4px; cursor: grab; }
 .tour-canvas-host canvas:active { cursor: grabbing; }
-.tour-stage-label { position: absolute; top: 20px; left: 20px; right: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; pointer-events: none; font: 700 9px 'Montserrat', sans-serif; letter-spacing: .1em; color: #344e40; }
+.tour-stage-label { position: absolute; top: 16px; left: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; pointer-events: none; font: 700 9px 'Montserrat', sans-serif; letter-spacing: .1em; color: #344e40; z-index: 4; }
 .tour-stage-label > span:last-child { font-family: 'Pretendard', sans-serif; font-weight: 600; font-size: 10px; padding: 4px 8px; border-radius: 5px; background: #fffffff2; letter-spacing: 0; }
 .tour-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #53735a; }
-.tour-start-overlay { position: absolute; inset: 0; display: grid; align-items: end; justify-items: center; padding: 24px; background: linear-gradient(transparent 20%, #e9e6dd20 45%, #e9e6ddd9); }
+.tour-start-overlay { position: absolute; inset: 0; display: grid; align-items: end; justify-items: center; padding: 24px; background: linear-gradient(transparent 20%, #e9e6dd20 45%, #e9e6ddd9); z-index: 10; }
 .tour-start-overlay[hidden], .tour-poster[hidden], .tour-view-caption[hidden] { display: none; }
 .tour-start-card { width: min(100%, 390px); text-align: center; padding: 24px; border: 1px solid #ffffffbf; border-radius: 18px; background: #fffffff2; box-shadow: 0 10px 40px #243b3414; }
 .tour-start-card .tour-eyebrow { font-size: 9px; margin-bottom: 10px; }
@@ -36,7 +36,7 @@
 #tour-start { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 48px; margin-top: 18px; padding: 12px 18px; background: #243b34; color: #fff; border-radius: 8px; font-size: 13px; font-weight: 700; }
 #tour-start:hover { background: #385448; }
 .tour-fallback-link { display: inline-block; color: #526053; margin-top: 12px; font-size: 11px; text-decoration: underline; text-underline-offset: 3px; }
-.tour-view-caption { position: absolute; bottom: 20px; left: 20px; right: 20px; width: fit-content; max-width: calc(100% - 40px); display: flex; flex-direction: column; gap: 5px; padding: 12px 16px; border-radius: 10px; background: #fffffff0; color: #243b34; pointer-events: none; }
+.tour-view-caption { position: absolute; bottom: 20px; left: 20px; right: 20px; width: fit-content; max-width: calc(100% - 40px); display: flex; flex-direction: column; gap: 5px; padding: 12px 16px; border-radius: 10px; background: #fffffff0; color: #243b34; pointer-events: none; z-index: 4; }
 #tour-view-name { font-size: 14px; font-weight: 800; }
 #tour-view-detail { font-size: 11px; line-height: 1.5; color: #5c685f; }
 .tour-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #f8f9f5; border-top: 1px solid #dde1d8; flex: none; }
@@ -57,22 +57,20 @@
 #tour-room-kicker { font: 600 9px 'Montserrat', sans-serif; letter-spacing: .14em; color: #80652d; }
 .tour-room-story h3 { font-size: 18px; font-weight: 800; margin: 7px 0; }
 .tour-room-story p { font-size: 11px; line-height: 1.9; color: #5f6b60; }
-.tour-material-control { padding-top: 18px; }
-.tour-material-control > span { font-size: 11px; font-weight: 700; }
-.tour-material-control small { color: #737c70; font-size: 10px; font-weight: 400; margin-left: 5px; }
-.tour-material-control > div { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.tour-material-control button { display: flex; align-items: center; gap: 6px; border: 1px solid #d5dbd0; border-radius: 6px; padding: 8px; min-height: 44px; font-size: 10px; color: #445543; }
-.tour-material-control button[aria-pressed="true"] { border-color: #53694f; box-shadow: inset 0 0 0 1px #53694f; }
-.tour-swatch { width: 15px; height: 15px; border-radius: 50%; border: 1px solid #0002; }
-.tour-swatch.warm { background: #bf9669; }
-.tour-swatch.cool { background: #a09f97; }
-.tour-daylight-control { padding-top: 14px; border-top: 1px dashed #e1e5db; margin-top: 14px; }
-.tour-daylight-control > span { font-size: 11px; font-weight: 700; color: #1e293b; }
-.tour-daylight-control small { color: #737c70; font-size: 10px; font-weight: 400; margin-left: 5px; }
-.tour-daylight-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.tour-daylight-buttons button { display: inline-flex; align-items: center; justify-content: center; gap: 4px; border: 1px solid #d5dbd0; border-radius: 6px; padding: 6px 8px; min-height: 44px; font-size: 11px; font-weight: 600; color: #445543; background: #ffffff; cursor: pointer; flex: 1; min-width: 70px; }
-.tour-daylight-buttons button[aria-pressed="true"] { border-color: #bfa15f; background: #fbf8f1; color: #80652d; box-shadow: inset 0 0 0 1px #bfa15f; }
-.tour-daylight-buttons .daylight-icon { font-size: 13px; }
+
+/* 3D Viewport Controls HUD */
+.tour-stage-controls { position: absolute; top: 14px; right: 14px; z-index: 5; display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(220, 226, 218, 0.9); border-radius: 12px; padding: 5px 8px; box-shadow: 0 4px 16px rgba(36, 59, 52, 0.08); }
+.tour-stage-control-divider { width: 1px; height: 20px; background: #d6ded3; margin: 0 2px; }
+.tour-stage-controls .tour-material-control, .tour-stage-controls .tour-daylight-control { display: flex; align-items: center; gap: 6px; padding: 0; margin: 0; border: 0; }
+.tour-overlay-icon { display: inline-flex; align-items: center; justify-content: center; color: #556758; font-size: 13px; line-height: 1; }
+.tour-overlay-btns { display: flex; align-items: center; gap: 4px; margin: 0 !important; }
+.tour-stage-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 5px 8px; min-height: 32px; border: 1px solid #dbe2d8; border-radius: 6px; background: #ffffff; color: #435446; font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s ease; }
+.tour-stage-controls button:hover:not(:disabled) { border-color: #9ab09b; background: #fbfdfa; }
+.tour-stage-controls button[aria-pressed="true"] { border-color: #80652d; background: #fbf8f1; color: #80652d; box-shadow: inset 0 0 0 1px #bfa15f; }
+.tour-stage-controls .tour-swatch { width: 11px; height: 11px; border-radius: 50%; border: 1px solid #0002; display: inline-block; flex-shrink: 0; }
+.tour-stage-controls .tour-swatch.warm { background: #bf9669; }
+.tour-stage-controls .tour-swatch.cool { background: #a09f97; }
+.tour-stage-controls .daylight-icon { font-size: 12px; line-height: 1; }
 .tour-guide { width: 100%; background: #243b34; color: white; border-radius: 8px; min-height: 46px; font-size: 12px; font-weight: 700; margin-top: 20px; }
 .tour-guide[aria-pressed="true"] { background: #4c614c; }
 .tour-guide-status { font-size: 10px; color: #5a675b; text-align: center; margin-top: 8px; line-height: 1.7; }
@@ -101,7 +99,10 @@
   .tour-mode-switch { width: 100%; }
   .tour-mode-switch button { flex: 1; min-height: 44px; }
   .tour-stage { height: 400px; min-height: 400px; }
-  .tour-stage-label { top: 14px; left: 14px; right: 14px; }
+  .tour-stage-label { top: 12px; left: 12px; font-size: 8px; }
+  .tour-stage-controls { top: 38px; right: 10px; flex-direction: column; align-items: flex-end; gap: 4px; background: rgba(255, 255, 255, 0.94); padding: 4px 6px; border-radius: 10px; max-width: calc(100% - 20px); }
+  .tour-stage-control-divider { display: none; }
+  .tour-stage-controls button { padding: 3px 6px; min-height: 28px; font-size: 10px; }
   .tour-start-overlay { padding: 14px; }
   .tour-start-card { padding: 18px 14px; }
   .tour-start-card h3 { font-size: 19px; }
@@ -136,6 +137,5 @@
   .tour-room { justify-content: center; padding: 8px 2px; min-height: 48px; border-color: #dce1d7; text-align: center; }
   .tour-room > span:first-child { display: none; }
   .tour-room > span:nth-child(2) { font-size: 12px; }
-  .tour-material-control button { font-size: 12px; }
   .tour-guide-status, .tour-bottom-note { font-size: 12px; }
 }

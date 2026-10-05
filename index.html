@@ -1027,6 +1027,48 @@
               <img id="tour-poster" class="tour-poster" src="assets/apartment-tour-preview.png" alt="가구와 공간 배치를 상상해 제작한 아파트 3D 콘셉트 모형" width="1200" height="800" loading="lazy" />
               <div id="tour-canvas-host" class="tour-canvas-host"></div>
               <div class="tour-stage-label"><span class="tour-status-dot"></span> PREDICTED DESIGN <span>미확정 콘셉트</span></div>
+              
+              <!-- 3D Viewport Controls HUD -->
+              <div class="tour-stage-controls" role="toolbar" aria-label="3D 뷰어 환경 설정">
+                <div class="tour-material-control" role="group" aria-label="마감 분위기 선택">
+                  <span class="tour-overlay-icon" aria-hidden="true" title="마감 분위기">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                  </span>
+                  <div class="tour-overlay-btns">
+                    <button type="button" data-palette="warm" aria-pressed="true" data-tour-control disabled title="내추럴 오크">
+                      <i class="tour-swatch warm" aria-hidden="true"></i>
+                      <span>오크</span>
+                    </button>
+                    <button type="button" data-palette="cool" aria-pressed="false" data-tour-control disabled title="모던 그레이지">
+                      <i class="tour-swatch cool" aria-hidden="true"></i>
+                      <span>그레이지</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="tour-stage-control-divider" aria-hidden="true"></div>
+
+                <div class="tour-daylight-control" role="group" aria-label="채광 시간대 선택">
+                  <span class="tour-overlay-icon" aria-hidden="true" title="자연 채광">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                  </span>
+                  <div class="tour-daylight-buttons tour-overlay-btns">
+                    <button type="button" data-daylight="morning" aria-pressed="false" data-tour-control disabled title="아침 햇살">
+                      <span class="daylight-icon" aria-hidden="true">🌅</span>
+                      <span>아침</span>
+                    </button>
+                    <button type="button" data-daylight="afternoon" aria-pressed="true" data-tour-control disabled title="한낮 채광">
+                      <span class="daylight-icon" aria-hidden="true">☀️</span>
+                      <span>한낮</span>
+                    </button>
+                    <button type="button" data-daylight="evening" aria-pressed="false" data-tour-control disabled title="은은한 석양">
+                      <span class="daylight-icon" aria-hidden="true">🌇</span>
+                      <span>석양</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div id="tour-start-overlay" class="tour-start-overlay">
                 <div class="tour-start-card">
                   <span class="tour-eyebrow">YOUR NEXT CHAPTER</span>
@@ -1067,24 +1109,6 @@
               <span id="tour-room-kicker">LIVING ROOM</span>
               <h3 id="tour-room-title">빛을 담은 거실</h3>
               <p id="tour-room-description">밝은 오크 바닥과 낮은 패브릭 소파, 큰 창가를 조합한 거실 콘셉트입니다. 가구와 창호 위치는 이해를 돕기 위한 가상 배치입니다.</p>
-            </div>
-            <div class="tour-material-control" role="group" aria-label="마감 분위기 선택">
-              <span>마감 분위기 <small>가상 옵션</small></span>
-              <div><button type="button" data-palette="warm" aria-pressed="true" data-tour-control disabled><i class="tour-swatch warm" aria-hidden="true"></i>내추럴 오크</button><button type="button" data-palette="cool" aria-pressed="false" data-tour-control disabled><i class="tour-swatch cool" aria-hidden="true"></i>모던 그레이지</button></div>
-            </div>
-            <div class="tour-daylight-control" role="group" aria-label="채광 시간대 선택">
-              <span>자연 채광 <small>시간대별 연출</small></span>
-              <div class="tour-daylight-buttons">
-                <button type="button" data-daylight="morning" aria-pressed="false" data-tour-control disabled>
-                  <span class="daylight-icon">🌅</span> 아침 햇살
-                </button>
-                <button type="button" data-daylight="afternoon" aria-pressed="true" data-tour-control disabled>
-                  <span class="daylight-icon">☀️</span> 한낮 채광
-                </button>
-                <button type="button" data-daylight="evening" aria-pressed="false" data-tour-control disabled>
-                  <span class="daylight-icon">🌇</span> 은은한 석양
-                </button>
-              </div>
             </div>
             <button id="tour-guide" class="tour-guide" type="button" aria-pressed="false" data-tour-control disabled><span aria-hidden="true">▷</span> 자동으로 둘러보기</button>
             <p id="tour-guide-status" class="tour-guide-status" role="status">공간을 선택하면 해당 위치로 이동합니다.</p>

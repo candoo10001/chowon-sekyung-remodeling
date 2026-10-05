@@ -34,38 +34,80 @@ export async function createTour(host, onInteraction, onError) {
   const mobileRendering = window.matchMedia('(pointer: coarse)').matches;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, mobileRendering ? 1.25 : 1.75));
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=.92;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.02;
   const canvas=renderer.domElement; canvas.tabIndex=0;
   canvas.setAttribute('aria-label','가상 아파트 3D 뷰어. 드래그로 둘러보기. 아래 버튼으로도 조작할 수 있습니다.');
   host.append(canvas);
   const scene=new THREE.Scene();scene.background=new THREE.Color('#e7e9e6');
-  hdr.mapping=THREE.EquirectangularReflectionMapping;scene.environment=hdr;scene.environmentIntensity=.65;
+  hdr.mapping=THREE.EquirectangularReflectionMapping;scene.environment=hdr;scene.environmentIntensity=1.15;
   const camera=new THREE.PerspectiveCamera(42,1,.05,150);
   const composer=new EffectComposer(renderer);
   const renderPass=new RenderPass(scene,camera);
   const ambientOcclusion=new SSAOPass(scene,camera,1,1,16);
   ambientOcclusion.enabled = !mobileRendering;
-  ambientOcclusion.kernelRadius=.35;
-  ambientOcclusion.minDistance=.0003;
-  ambientOcclusion.maxDistance=.045;
+  ambientOcclusion.kernelRadius=0.80;
+  ambientOcclusion.minDistance=0.004;
+  ambientOcclusion.maxDistance=0.28;
   const outputPass=new OutputPass();
   composer.addPass(renderPass);composer.addPass(ambientOcclusion);composer.addPass(outputPass);
   const controls=new OrbitControls(camera,canvas);
   controls.enableDamping=false;controls.enablePan=false;controls.minDistance=9;controls.maxDistance=27;
   controls.minPolarAngle=.15;controls.maxPolarAngle=Math.PI/2.35;controls.zoomSpeed=.7;
+
+  function createMarbleTexture() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 512;
+    const ctx = c.getContext('2d');
+    if (!ctx) return null;
+    ctx.fillStyle = '#f6f3ed'; ctx.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 40; i++) {
+      const x = (i * 73) % 512, y = (i * 97) % 512, r = 40 + (i % 5) * 20;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, 'rgba(232, 226, 215, 0.45)');
+      g.addColorStop(1, 'rgba(246, 243, 237, 0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    }
+    const veins = [
+      { color: 'rgba(150, 142, 132, 0.28)', w: 4 },
+      { color: 'rgba(185, 160, 125, 0.22)', w: 2.5 },
+      { color: 'rgba(130, 122, 114, 0.20)', w: 2 }
+    ];
+    veins.forEach((v, vi) => {
+      for (let j = 0; j < 3; j++) {
+        ctx.strokeStyle = v.color; ctx.lineWidth = v.w; ctx.beginPath();
+        let x = (vi * 160 + j * 120 + 30) % 512, y = 0;
+        ctx.moveTo(x, y);
+        while (y < 512) {
+          y += 25;
+          x += Math.sin(y * 0.05 + j) * 18 + ((j % 2) ? 6 : -6);
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    });
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(1.5, 1.5);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  const marbleTexture = createMarbleTexture();
+
   const materials=[];
-  function material(color,extra={}) {const m=new THREE.MeshStandardMaterial({color,roughness:.75,...extra});materials.push(m);return m;}
-  const oak=material('#b99c76',{roughness:.48});
-  const floor=material('#e2d2b6',{map:textures[0],normalMap:textures[1],roughnessMap:textures[2],normalScale:new THREE.Vector2(.22,.22),roughness:.75});
-  const plaster=material('#eeeae2'),cream=material('#ddd3c4'),white=material('#f3f1e9');
-  const stone=material('#bdb6a8',{roughness:.42}),dark=material('#292d2a',{roughness:.34});
-  const brass=material('#ad9470',{metalness:.85,roughness:.3});
-  const fabric=material('#c8c0b1',{normalMap:textures[3],normalScale:new THREE.Vector2(.2,.2),roughness:1});
-  const sage=material('#899282',{normalMap:textures[3],normalScale:new THREE.Vector2(.12,.12)});
-  const rug=material('#cfc6b5',{normalMap:textures[3],normalScale:new THREE.Vector2(.4,.4),roughness:1});
-  const glass=material('#eef5f3',{transparent:true,opacity:.10,roughness:.08,depthWrite:false});
-  const mirror=material('#ced4cf',{metalness:1,roughness:.12});
-  const glow=material('#fff2dc',{emissive:'#ffdb9c',emissiveIntensity:1.3});
+  function material(color,extra={}) {const m=new THREE.MeshPhysicalMaterial({color,roughness:.5,...extra});materials.push(m);return m;}
+  const oak=material('#ba9e7c',{roughness:.38,clearcoat:.16,clearcoatRoughness:.22});
+  const floor=material('#e8dac0',{map:textures[0],normalMap:textures[1],roughnessMap:textures[2],normalScale:new THREE.Vector2(.28,.28),roughness:.32,metalness:.02,clearcoat:.36,clearcoatRoughness:.20,reflectivity:.55});
+  const plaster=material('#f3f0e8',{roughness:.82}),cream=material('#e5ded0',{roughness:.75,sheen:.4,sheenColor:new THREE.Color('#faf5ea'),sheenRoughness:.3}),white=material('#faf9f5',{roughness:.78});
+  const baseboard=material('#ede8de',{roughness:.5,clearcoat:.15});
+  const stone=material('#ede7dc',{...(marbleTexture ? {map:marbleTexture} : {}),roughness:.14,metalness:.02,clearcoat:.88,clearcoatRoughness:.06,reflectivity:.85});
+  const dark=material('#1f2220',{metalness:.72,roughness:.26,clearcoat:.18});
+  const brass=material('#cca562',{metalness:.94,roughness:.20,clearcoat:.35,clearcoatRoughness:.12});
+  const fabric=material('#cec6b8',{normalMap:textures[3],normalScale:new THREE.Vector2(.26,.26),roughness:.82,sheen:.92,sheenRoughness:.35,sheenColor:new THREE.Color('#f4f0e6')});
+  const sage=material('#7e8c7c',{normalMap:textures[3],normalScale:new THREE.Vector2(.16,.16),roughness:.76,sheen:.65,sheenRoughness:.40,sheenColor:new THREE.Color('#9eb09b')});
+  const rug=material('#d4cbba',{normalMap:textures[3],normalScale:new THREE.Vector2(.48,.48),roughness:.94,sheen:.85,sheenRoughness:.50,sheenColor:new THREE.Color('#eee9dd')});
+  const glass=material('#eef6f5',{transmission:.90,opacity:1,transparent:true,ior:1.52,roughness:.04,metalness:.02,depthWrite:false});
+  const mirror=material('#e4e8e5',{metalness:.98,roughness:.04,clearcoat:1,clearcoatRoughness:.02});
+  const glow=material('#fff4e2',{emissive:new THREE.Color('#ffdfa6'),emissiveIntensity:2.2,roughness:.2});
   const apartment=new THREE.Group(),walls=new THREE.Group(),windows=new THREE.Group(),outdoors=new THREE.Group();
   scene.add(apartment,outdoors);apartment.add(walls,windows);
   const unitBox=new THREE.BoxGeometry(1,1,1);
@@ -121,7 +163,7 @@ export async function createTour(host, onInteraction, onError) {
     if(z===b&&Math.abs(z)===6)return;
     const w=Math.max(.13,Math.abs(a-x)),d=Math.max(.13,Math.abs(b-z));
     box(w,layout.height,d,(x+a)/2,layout.height/2,(z+b)/2,plaster,walls);
-    box(w+.012,.07,d+.012,(x+a)/2,.045,(z+b)/2,cream,walls);
+    box(w+.016,.075,d+.016,(x+a)/2,.038,(z+b)/2,baseboard,walls);
   });
   for(const z of [-6,6]){
     const min=-3.6,max=z<0?1.5:3.6;
@@ -208,11 +250,32 @@ export async function createTour(host, onInteraction, onError) {
   for(const [x,z]of [[-1.8,4.5],[1.8,3.5],[-.7,-.1],[-2.6,-1.5],[-2.3,-4.5],[.3,-4.5],[.95,.3]])cylinder(.043,.012,x,2.345,z,glow,windows);
 
   const ground=box(200,.1,200,0,-.34,0,material('#e7e9e6'),scene);ground.castShadow=false;
-  scene.add(new THREE.HemisphereLight('#eef3ff','#b8a589',.65));
-  const sun=new THREE.DirectionalLight('#fff1d7',2.6);sun.position.set(-3,7,9);sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-7;sun.shadow.camera.right=7;sun.shadow.camera.top=7;sun.shadow.camera.bottom=-7;sun.shadow.normalBias=.018;sun.shadow.bias=-.0002;sun.shadow.radius=3;scene.add(sun);
-  const fill=new THREE.DirectionalLight('#e4ecff',.8);fill.position.set(0,5,-8);scene.add(fill);
-  const bounce=new THREE.PointLight('#ffdfac',7,8,2);bounce.position.set(-1.5,2.15,.6);scene.add(bounce);
+  const hemi=new THREE.HemisphereLight('#f2f7ff','#cfbea7',.85);scene.add(hemi);
+  const sun=new THREE.DirectionalLight('#fff3df',2.8);sun.position.set(-3.5,7.5,8.5);sun.castShadow=true;
+  sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-7.5;sun.shadow.camera.right=7.5;sun.shadow.camera.top=7.5;sun.shadow.camera.bottom=-7.5;sun.shadow.camera.near=1;sun.shadow.camera.far=28;sun.shadow.normalBias=.020;sun.shadow.bias=-.0002;sun.shadow.radius=2.8;scene.add(sun);
+  const fill=new THREE.DirectionalLight('#dce6fa',.85);fill.position.set(2,6,-7);scene.add(fill);
+
+  const interiorLights = [
+    new THREE.PointLight('#ffe4be', 3.0, 7.0, 2),
+    new THREE.PointLight('#ffdea2', 3.2, 5.5, 2),
+    new THREE.PointLight('#ffd69c', 2.4, 4.5, 2),
+    new THREE.PointLight('#ffe2bc', 2.0, 4.2, 2),
+    new THREE.PointLight('#ffdfb0', 2.0, 4.2, 2),
+    new THREE.PointLight('#fff1da', 1.8, 3.5, 2)
+  ];
+  const interiorPositions = [
+    [-1.8, 2.2, 4.2],
+    [-0.6, 2.0, 0.4],
+    [2.0, 1.6, 3.8],
+    [-2.0, 1.8, -3.8],
+    [-0.6, 2.1, -1.8],
+    [-3.2, 1.7, -1.1]
+  ];
+  interiorLights.forEach((light, i) => {
+    light.position.set(...interiorPositions[i]);
+    light.castShadow = false;
+    apartment.add(light);
+  });
 
   let mode = 'overview', room = 'living', active = true, disposed = false;
   let frame = 0, transition = null, yaw = 0, pitch = 0, pointer = null;
@@ -297,38 +360,60 @@ export async function createTour(host, onInteraction, onError) {
     rooms, setView, rotate, zoom,
     setPalette(palette) {
       const cool = palette === 'cool';
-      oak.color.set(cool ? '#a9a79e' : '#b99c76'); floor.color.set(cool ? '#c7cdd0' : '#e2d2b6');
-      fabric.color.set(cool ? '#aeb7b4' : '#c8c0b1'); sage.color.set(cool ? '#667e88' : '#899282');
-      plaster.color.set(cool ? '#e7e9e6' : '#eeeae2'); invalidate();
+      oak.color.set(cool ? '#9e9c93' : '#ba9e7c');
+      floor.color.set(cool ? '#c0c6c8' : '#e8dac0');
+      fabric.color.set(cool ? '#a8b0ae' : '#cec6b8');
+      sage.color.set(cool ? '#5e757d' : '#7e8c7c');
+      plaster.color.set(cool ? '#e6e8e5' : '#f3f0e8');
+      baseboard.color.set(cool ? '#e2e4e1' : '#ede8de');
+      invalidate();
     },
     setDaylight(timeOfDay) {
       if (timeOfDay === 'morning') {
-        sun.color.set('#ffdda6');
-        sun.intensity = 2.4;
+        sun.color.set('#ffdda8');
+        sun.intensity = 2.5;
         sun.position.set(-8, 5, 6);
-        fill.color.set('#e8efff');
-        fill.intensity = 0.7;
-        bounce.color.set('#ffe1b3');
-        bounce.intensity = 8.0;
-        renderer.toneMappingExposure = 0.90;
+        fill.color.set('#e5eeff');
+        fill.intensity = 0.75;
+        hemi.color.set('#f4f8ff');
+        hemi.groundColor.set('#c4b49d');
+        interiorLights[0].intensity = 2.0;
+        interiorLights[1].intensity = 2.2;
+        interiorLights[2].intensity = 1.6;
+        interiorLights[3].intensity = 1.4;
+        interiorLights[4].intensity = 1.4;
+        interiorLights[5].intensity = 1.2;
+        renderer.toneMappingExposure = 0.98;
       } else if (timeOfDay === 'evening') {
-        sun.color.set('#ff9f68');
-        sun.intensity = 2.0;
+        sun.color.set('#ff8840');
+        sun.intensity = 2.2;
         sun.position.set(-9, 3, 4);
-        fill.color.set('#b4c2e6');
-        fill.intensity = 0.5;
-        bounce.color.set('#ffaa6b');
-        bounce.intensity = 9.5;
-        renderer.toneMappingExposure = 0.88;
+        fill.color.set('#a0b4db');
+        fill.intensity = 0.55;
+        hemi.color.set('#ffd1a8');
+        hemi.groundColor.set('#8c7662');
+        interiorLights[0].intensity = 3.8;
+        interiorLights[1].intensity = 4.0;
+        interiorLights[2].intensity = 3.2;
+        interiorLights[3].intensity = 2.8;
+        interiorLights[4].intensity = 2.8;
+        interiorLights[5].intensity = 2.5;
+        renderer.toneMappingExposure = 0.94;
       } else {
-        sun.color.set('#fff1d7');
-        sun.intensity = 2.6;
-        sun.position.set(-3, 7, 9);
-        fill.color.set('#e4ecff');
-        fill.intensity = 0.8;
-        bounce.color.set('#ffdfac');
-        bounce.intensity = 7.0;
-        renderer.toneMappingExposure = 0.92;
+        sun.color.set('#fff3df');
+        sun.intensity = 2.8;
+        sun.position.set(-3.5, 7.5, 8.5);
+        fill.color.set('#dce6fa');
+        fill.intensity = 0.85;
+        hemi.color.set('#f2f7ff');
+        hemi.groundColor.set('#cfbea7');
+        interiorLights[0].intensity = 3.0;
+        interiorLights[1].intensity = 3.2;
+        interiorLights[2].intensity = 2.4;
+        interiorLights[3].intensity = 2.0;
+        interiorLights[4].intensity = 2.0;
+        interiorLights[5].intensity = 1.8;
+        renderer.toneMappingExposure = 1.02;
       }
       invalidate();
     },
@@ -337,6 +422,7 @@ export async function createTour(host, onInteraction, onError) {
       disposed = true; cancelAnimationFrame(frame); observer.disconnect(); controls.dispose();
       const geometries = new Set(); scene.traverse(object => { if (object.geometry) geometries.add(object.geometry); });
       geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());
+      if (marbleTexture) marbleTexture.dispose();
       renderer.dispose(); canvas.remove();
       renderPass.dispose(); ambientOcclusion.dispose(); outputPass.dispose(); composer.dispose();
     }
